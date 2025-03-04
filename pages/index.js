@@ -1,14 +1,17 @@
 import React from "react";
-import DemandeTickets from "../components/DemandeTickets.js";
-import HeaderUser from "../components/HeaderTechnicien";
+import DemandeTickets from "../components/DemandeTickets";
+import LastTickets from "../components/LastTickets";
+import HeaderUser from "../components/HeaderUser";
+import styles from "../styles/Home.module.css"; // Import des styles
 
-function Index() {
+export default function Index() {
   return (
-    <div>
+    <div className={styles.main}>
       <HeaderUser />
-      <DemandeTickets />
+      <div className={styles.container}>
+        <DemandeTickets />
+        <LastTickets />
+      </div>
     </div>
   );
 }
-
-export default Index;

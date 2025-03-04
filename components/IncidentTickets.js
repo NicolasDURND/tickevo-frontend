@@ -7,6 +7,9 @@ const Incident = () => {
       <button className={styles.button}>Incident matériel</button>
       <button className={styles.button}>Incident logiciel</button>
       <button className={styles.button}>Incident autre</button>
+      <div>
+        <button className={styles.buttonback}>Prédédent</button>
+      </div>
     </div>
   );
 };

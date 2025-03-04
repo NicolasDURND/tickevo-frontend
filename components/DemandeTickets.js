@@ -40,6 +40,9 @@ const DemandeTickets = () => {
             Actions à Réaliser sur un logiciel
           </button>
           <button className={styles.button}>Demande Matériel</button>
+          <div>
+            <button className={styles.buttonback}>Prédédent</button>
+          </div>
         </div>
       ) : (
         <Incident /> // Remplacement par le composant Incident
