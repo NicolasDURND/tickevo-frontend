@@ -1,8 +1,14 @@
-import Login from "../components/Login";
-import styles from "../styles/Home.module.css";
+import React from "react";
+import DemandeTickets from "../components/DemandeTickets.js";
+import HeaderUser from "../components/HeaderTechnicien";
 
 function Index() {
-  return <Login />;
+  return (
+    <div>
+      <HeaderUser />
+      <DemandeTickets />
+    </div>
+  );
 }
 
 export default Index;
