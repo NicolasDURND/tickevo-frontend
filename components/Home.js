@@ -1,10 +1,10 @@
-import HeaderAdministrateur from './HeaderAdministrateur';
+import HeaderTechnicien from './HeaderTechnicien';
 import styles from '../styles/Home.module.css';
 
 function Home() {
   return (
     <div>
-      <HeaderAdministrateur/>
+      <HeaderTechnicien/>
       <main className={styles.main}>
         <h1 className={styles.title}>
           Welcome to Tickevo !

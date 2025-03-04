@@ -1,27 +1,71 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
 
+/* Conteneur principal du header */
 .header {
     background-color: #5474B4; /* Fond bleu */
     color: white; /* Texte en blanc */
-    padding: 15px 15px; /* Espacement interne */
-    display: flex; /* Aligner en ligne */
-    justify-content: space-between; /* Espacer les éléments */
+    padding: 15px 20px; /* Espacement interne */
+    display: flex; /* Aligner les éléments en ligne */
+    justify-content: space-between; /* Espacement entre les groupes */
     align-items: center; /* Centrer verticalement */
-  }
-  
-  .logo {
+}
+
+/* Conteneur pour le logo et la barre de recherche */
+.logoSearchContainer {
     display: flex;
     align-items: center;
+    gap: 50px; /* Espacement entre le logo et la barre de recherche */
+}
+
+/* Style du logo */
+.logo {
     font-size: 40px;
     font-weight: bold;
     font-family: 'Roboto', sans-serif;
-  }
-  
-  .nav {
+}
+
+/* Conteneur de la barre de recherche */
+.searchContainer {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    position: relative;
+    left: -20px; /* Ajuste cette valeur pour un meilleur alignement */
+}
+
+/* Style de l'input de recherche */
+.searchInput {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+    width: 250px; /* Largeur ajustable */
+    font-size: 14px;
+    border: 2px solid black;
+}
+
+/* Bouton de recherche */
+.searchButton {
+    background-color: #5474B4;
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.searchButton:hover {
+    background-color: #405a8d;
+}
+
+/* Navigation des icônes */
+.nav {
     display: flex;
     gap: 15px;
-  }
-  
+}
+
+/* Style des boutons d'icônes */
 .button {
     background-color: white;
     color: #5474B4;
@@ -34,14 +78,13 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    border-color: black
 }
 
 .button:hover {
     background-color: lightgray;
 }
 
+/* Style des icônes */
 .icon {
     color: #000000;
 }
-  
