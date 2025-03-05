@@ -1,13 +1,19 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 import Incident from "./IncidentTickets";
 import styles from "../styles/DemandeTickets.module.css";
 
 const DemandeTickets = () => {
-  const [activeTab, setActiveTab] = useState("demandes"); // État pour gérer l'onglet actif
+  const [activeTab, setActiveTab] = useState("demandes");
+  const router = useRouter();
+
+  // Fonction pour rediriger vers la page de création de ticket avec l'objet sélectionné
+  const handleCreateTicket = (category) => {
+    router.push(`/tickets/new?category=${encodeURIComponent(category)}`);
+  };
 
   return (
     <div className={styles.card}>
-      {/* Onglets */}
       <div className={styles.tabs}>
         <button
           className={`${styles.tab} ${
@@ -27,25 +33,49 @@ const DemandeTickets = () => {
         </button>
       </div>
 
-      {/* Contenu de l'onglet sélectionné */}
       {activeTab === "demandes" ? (
         <div className={styles.buttonContainer}>
-          <button className={styles.button}>
+          <button
+            className={styles.button}
+            onClick={() =>
+              handleCreateTicket("Demande Activation Habilitation")
+            }
+          >
             Demande Activation Habilitation
           </button>
-          <button className={styles.button}>
+          <button
+            className={styles.button}
+            onClick={() =>
+              handleCreateTicket("Demande Désactivation Habilitation")
+            }
+          >
             Demande Désactivation Habilitation
           </button>
-          <button className={styles.button}>
+          <button
+            className={styles.button}
+            onClick={() =>
+              handleCreateTicket("Actions à Réaliser sur un logiciel")
+            }
+          >
             Actions à Réaliser sur un logiciel
           </button>
-          <button className={styles.button}>Demande Matériel</button>
+          <button
+            className={styles.button}
+            onClick={() => handleCreateTicket("Demande Matériel")}
+          >
+            Demande Matériel
+          </button>
           <div>
-            <button className={styles.buttonback}>Prédédent</button>
+            <button
+              className={styles.buttonback}
+              onClick={() => router.push("/home")}
+            >
+              Précédent
+            </button>
           </div>
         </div>
       ) : (
-        <Incident /> // Remplacement par le composant Incident
+        <Incident />
       )}
     </div>
   );
