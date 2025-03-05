@@ -8,7 +8,7 @@ const LastTickets = () => {
   useEffect(() => {
     const fetchTickets = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/tickets/last"); // Appel vers ton backend
+        const response = await fetch("http://localhost:3000/api/tickets/last"); // Appel vers ton backend
         if (!response.ok) {
           throw new Error("Erreur lors de la récupération des tickets");
         }
