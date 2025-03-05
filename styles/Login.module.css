@@ -46,19 +46,23 @@
     
   }
   .username{
-    width: 313px;
-    height: 40px;
-    border-radius: 10px;    
-    color: black;
-    font-weight: 500 ;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+    width: 250px; /* Largeur ajustable */
+    font-size: 14px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
 
   }
   .password{
-    width: 313px;
-    height: 40px;
-    border-radius: 10px;
-    color: black;
-    font-weight: 500 ;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+    width: 250px; /* Largeur ajustable */
+    font-size: 14px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
 
   } 
     

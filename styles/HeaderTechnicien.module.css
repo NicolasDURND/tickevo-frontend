@@ -4,17 +4,10 @@
 .header {
     background-color: #5474B4; /* Fond bleu */
     color: white; /* Texte en blanc */
-    padding: 15px 20px; /* Espacement interne */
+    padding: 10px 20px; /* Espacement interne */
     display: flex; /* Aligner les éléments en ligne */
     justify-content: space-between; /* Espacement entre les groupes */
     align-items: center; /* Centrer verticalement */
-}
-
-/* Conteneur pour le logo et la barre de recherche */
-.logoSearchContainer {
-    display: flex;
-    align-items: center;
-    gap: 50px; /* Espacement entre le logo et la barre de recherche */
 }
 
 /* Style du logo */
@@ -22,6 +15,44 @@
     font-size: 40px;
     font-weight: bold;
     font-family: 'Roboto', sans-serif;
+}
+
+/* Navigation des icônes */
+.nav {
+    display: flex;
+    gap: 15px;
+}
+
+/* Style des boutons d'icônes */
+.button {
+    background-color: white;
+    color: #5474B4;
+    border:none;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-color: black;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+.button:hover {
+    background-color: lightgray;
+}
+
+/* Style des icônes */
+.icon {
+    color: #000000;
+}
+/* Conteneur pour le logo et la barre de recherche */
+.logoSearchContainer {
+    display: flex;
+    align-items: center;
+    gap: 50px; /* Espacement entre le logo et la barre de recherche */
 }
 
 /* Conteneur de la barre de recherche */
@@ -41,7 +72,7 @@
     outline: none;
     width: 250px; /* Largeur ajustable */
     font-size: 14px;
-    border: 2px solid black;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
 }
 
 /* Bouton de recherche */
@@ -57,34 +88,4 @@
 
 .searchButton:hover {
     background-color: #405a8d;
-}
-
-/* Navigation des icônes */
-.nav {
-    display: flex;
-    gap: 15px;
-}
-
-/* Style des boutons d'icônes */
-.button {
-    background-color: white;
-    color: #5474B4;
-    border: 2px solid black;
-    padding: 10px 15px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 50px;
-    transition: 0.3s;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.button:hover {
-    background-color: lightgray;
-}
-
-/* Style des icônes */
-.icon {
-    color: #000000;
 }

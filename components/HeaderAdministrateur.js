@@ -1,15 +1,6 @@
 import { useState } from "react";
 import styles from "../styles/HeaderAdministrateur.module.css";
-import {
-  IconHome,
-  IconTicket,
-  IconBell,
-  IconLogout,
-  IconSettings,
-  IconArchive,
-  IconFiles,
-  IconSearch,
-} from "@tabler/icons-react";
+import { IconHome, IconTicket, IconBell, IconLogout, IconSettings, IconArchive, IconFiles, IconSearch } from "@tabler/icons-react";
 
 function HeaderAdmin() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -31,31 +22,17 @@ function HeaderAdmin() {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <button className={styles.searchButton} onClick={handleSearch}>
-            <IconSearch size={20} />
-          </button>
+          <button className={styles.searchButton} onClick={handleSearch}><IconSearch size={20} /></button>
         </div>
       </div>
 
       <nav className={styles.nav}>
-        <button className={styles.button}>
-          <IconHome size={25} className={styles.icon} />
-        </button>
-        <button className={styles.button}>
-          <IconArchive size={25} className={styles.icon} />
-        </button>
-        <button className={styles.button}>
-          <IconFiles size={25} className={styles.icon} />
-        </button>
-        <button className={styles.button}>
-          <IconBell size={25} className={styles.icon} />
-        </button>
-        <button className={styles.button}>
-          <IconSettings size={25} className={styles.icon} />
-        </button>
-        <button className={styles.button}>
-          <IconLogout size={25} className={styles.icon} />
-        </button>
+        <button className={styles.button}><IconHome size={25} className={styles.icon} /></button>
+        <button className={styles.button}><IconArchive size={25} className={styles.icon} /></button>
+        <button className={styles.button}><IconFiles size={25} className={styles.icon} /></button>
+        <button className={styles.button}><IconBell size={25} className={styles.icon} /></button>
+        <button className={styles.button}><IconSettings size={25} className={styles.icon} /></button>
+        <button className={styles.button}><IconLogout size={25} className={styles.icon} /></button>
       </nav>
     </div>
   );
