@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import HeaderAdministrateur from "../components/HeaderAdministrateur";
+import UserManagement from "../components/UserManagement"; // ✅ Import du composant
 import styles from "../styles/Admin.module.css";
 import { IconSearch } from "@tabler/icons-react";
 
@@ -15,7 +16,6 @@ export default function Admin() {
       <HeaderAdministrateur />
 
       <div className={styles.pageContainer}>
-        {/* ✅ Section avec Recherche et Modification alignées côte à côte */}
         <div className={styles.container}>
           {/* ✅ Recherche */}
           <div className={styles.card}>
@@ -58,31 +58,8 @@ export default function Admin() {
             </table>
           </div>
 
-          {/* ✅ Modification */}
-          <div className={styles.card}>
-            <h2>Modifier (reprendre le nom de l'utilisateur recherché)</h2>
-            <div className={styles.modifierBox}>
-              <input type="text" placeholder="Nom Utilisateur" />
-              <input type="password" placeholder="Mot de passe" />
-              <input type="text" placeholder="Rôle" />
-              <input type="text" placeholder="Groupe" />
-              <button className={styles.button}>Modifier</button>
-            </div>
-          </div>
-        </div>
-
-        {/* ✅ Création en dessous et centrée */}
-        <div className={styles.createContainer}>
-          <div className={styles.card}>
-            <h2>Créer un utilisateur</h2>
-            <div className={styles.createBox}>
-              <input type="text" placeholder="Nom Utilisateur" />
-              <input type="password" placeholder="Mot de passe" />
-              <input type="text" placeholder="Rôle" />
-              <input type="text" placeholder="Groupe" />
-              <button className={styles.button}>Créer</button>
-            </div>
-          </div>
+          {/* ✅ Gestion des utilisateurs (Modifier / Créer) */}
+          <UserManagement />
         </div>
       </div>
     </>
