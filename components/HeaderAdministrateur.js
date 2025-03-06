@@ -15,7 +15,7 @@ function HeaderAdministrateur() {
   };
 
   const handleLogout = () => {
-    dispatch(logout()); // ✅ Déconnexion
+    dispatch(logout()); // ✅ Déclenche le logout
     router.push("/"); // ✅ Redirige vers la page d’accueil (index.js)
   };
 
