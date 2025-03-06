@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useRouter } from "next/router"; // Import Next.js router
-import {
-  loginStart,
-  loginSuccess,
-  loginFailure,
-} from "../reducers/authentification";
+import { useRouter } from "next/router"; // Import du router Next.js
+import { loginStart, loginSuccess, loginFailure } from "../reducers/authentification";
 import styles from "../styles/Login.module.css";
 
 const Login = () => {

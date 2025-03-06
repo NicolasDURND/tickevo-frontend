@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+/* ✅ Conteneur principal */
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding-top: 20px;
+  justify-content: center;
+}
+
+/* ✅ Conteneur du contenu principal (Recherche + Modification) */
+.container {
+  display: flex;
+  justify-content: center; /* ✅ Centre horizontalement */
+  align-items: center; /* ✅ Centre verticalement */
+  width: 90%;
+  gap: 20px;
+}
+
+/* ✅ Conteneur spécifique pour la création d'utilisateur */
+.createContainer {
+  display: flex;
+  justify-content: center; /* ✅ Centre horizontalement */
+  margin-top: 20px;
+  width: 100%;
+}
+
+/* ✅ Cartes */
+.card {
+  width: 48%;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  text-align: center;
+}
+
+/* ✅ Barre de recherche */
+.searchContainer {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.searchInput {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  outline: none;
+  width: 500px;
+  font-size: 14px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* ✅ Bouton de recherche */
+.searchButton {
+  background-color: #5474B4;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.searchButton:hover {
+  background-color: #405a8d;
+}
+
+/* ✅ Tableau des utilisateurs */
+.userTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.userTable th, .userTable td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+/* ✅ Bouton Détail */
+.detailButton {
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.detailButton:hover {
+  text-decoration: underline;
+}
+
+/* ✅ Formulaire de création */
+.createBox {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+/* ✅ Formulaire de modification */
+.modifierBox {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+/* ✅ Style général des inputs */
+.createBox input, .modifierBox input {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  outline: none;
+  width: 500px;
+  font-size: 14px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* ✅ Bouton général */
+.button {
+  width: 40%;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #5474B4;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s;
+}
+
+.button:hover {
+  background-color: #0056b3;
+  color: white;
+}

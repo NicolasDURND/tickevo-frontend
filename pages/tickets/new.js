@@ -16,33 +16,47 @@ const NewTicket = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:3000/api/tickets", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ title: ticketType, description }),
-    });
 
-    if (response.ok) {
+    const userId = localStorage.getItem("userId"); // ✅ Récupère l'ID de l'utilisateur connecté
+
+    const ticketData = {
+      title: ticketType,
+      description,
+      category: ticketType, // ✅ Correspond à "Demande" ou "Incident"
+      userId, // ✅ Ajout de userId obligatoire
+    };
+    console.log("Ticket envoyé:", ticketData);
+
+    try {
+      const response = await fetch("http://localhost:3000/tickets", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(ticketData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Erreur lors de la création du ticket");
+      }
+
       alert("Ticket créé avec succès !");
       router.push("/home");
-    } else {
-      alert("Erreur lors de la création du ticket");
+    } catch (error) {
+      console.error("Erreur :", error);
+      alert("Une erreur est survenue, veuillez réessayer.");
     }
   };
 
   return (
     <div className={styles.pageContainer}>
       <HeaderUser />
-
       <div className={styles.content}>
-        <h2 className={styles.title}>Ma demande</h2>
+        <h2 className={styles.title}>Créer une demande</h2>
 
         <div className={styles.card}>
           <h3 className={styles.object}>
             <strong>Objet :</strong> {ticketType}
           </h3>
 
-          {/* ✅ Simple textarea au lieu du Rich Text Editor */}
           <textarea
             className={styles.textarea}
             placeholder="Expliquez votre demande..."
