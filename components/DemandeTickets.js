@@ -75,7 +75,7 @@ const DemandeTickets = () => {
           </div>
         </div>
       ) : (
-        <Incident />
+        <Incident /> // ✅ L'onglet incidents affiche `IncidentTickets.js`
       )}
     </div>
   );

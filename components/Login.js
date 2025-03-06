@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router"; // Import du router Next.js
-import { loginStart, loginSuccess, loginFailure } from "../reducers/authentification";
+import {
+  loginStart,
+  loginSuccess,
+  loginFailure,
+} from "../reducers/authentification";
 import styles from "../styles/Login.module.css";
 
 const Login = () => {
@@ -60,7 +64,11 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <br />
-        <button className={styles.loginButton} onClick={handleLogin} disabled={loading}>
+        <button
+          className={styles.loginButton}
+          onClick={handleLogin}
+          disabled={loading}
+        >
           {loading ? "Connexion en cours..." : "Connexion"}
         </button>
         {error && <p className={styles.error}>{error}</p>}
