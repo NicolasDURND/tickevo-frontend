@@ -23,8 +23,7 @@ function HeaderTechnicien() {
 
   const handleLogout = () => {
     dispatch(logout()); // :white_check_mark: Déclenche le logout
-
-    window.location.href = "/"; // :white_check_mark: Redirige vers la page d’accueil (index.js)
+    router.replace("/");
   };
 
   return (
