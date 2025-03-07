@@ -1,16 +1,28 @@
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router"; // ✅ Import du router Next.js
 import { logout } from "../reducers/authentification";
-import styles from '../styles/HeaderUser.module.css';
-import { IconHome, IconTicket, IconBell, IconLogout } from '@tabler/icons-react';
+import styles from "../styles/HeaderUser.module.css";
+import {
+  IconHome,
+  IconTicket,
+  IconBell,
+  IconLogout,
+} from "@tabler/icons-react";
+import { persistor } from "../store";
 
-function HeaderUser() {
+function HeaderAdministrateur() {
+  const [searchTerm, setSearchTerm] = useState("");
   const dispatch = useDispatch();
-  const router = useRouter(); // ✅ Initialisation du router
+  const router = useRouter();
+
+  const handleSearch = () => {
+    console.log("Recherche : ", searchTerm);
+  };
 
   const handleLogout = () => {
-    dispatch(logout()); // ✅ Déclenche le logout
-    router.push('/'); // ✅ Redirige vers la page d’accueil (index.js)
+    dispatch(logout()); // :white_check_mark: Déclenche le logout
+
+    window.location.href = "/"; // :white_check_mark: Redirige vers la page d’accueil (index.js)
   };
 
   return (
@@ -35,4 +47,3 @@ function HeaderUser() {
 }
 
 export default HeaderUser;
-

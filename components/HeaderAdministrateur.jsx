@@ -4,6 +4,7 @@ import { useRouter } from "next/router"; // ✅ Hook de navigation Next.js
 import { logout } from "../reducers/authentification";
 import styles from "../styles/HeaderAdministrateur.module.css";
 import { IconHome, IconArchive, IconFiles, IconBell, IconSettings, IconLogout, IconSearch } from "@tabler/icons-react";
+import { persistor } from '../store';
 
 function HeaderAdministrateur() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -15,8 +16,9 @@ function HeaderAdministrateur() {
   };
 
   const handleLogout = () => {
-    dispatch(logout());
-    router.push("/");
+    dispatch(logout()); // :white_check_mark: Déclenche le logout
+
+    window.location.href = '/'; // :white_check_mark: Redirige vers la page d’accueil (index.js)
   };
 
   return (
