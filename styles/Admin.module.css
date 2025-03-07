@@ -13,18 +13,11 @@
 /* ✅ Conteneur du contenu principal (Recherche + Modification) */
 .container {
   display: flex;
-  justify-content: center; /* ✅ Centre horizontalement */
-  align-items: center; /* ✅ Centre verticalement */
+  justify-content: center;
+  align-items: flex-start; /* ✅ Assure l'alignement en haut */
   width: 90%;
   gap: 20px;
-}
-
-/* ✅ Conteneur spécifique pour la création d'utilisateur */
-.createContainer {
-  display: flex;
-  justify-content: center; /* ✅ Centre horizontalement */
-  margin-top: 20px;
-  width: 100%;
+  min-height: 500px; /* ✅ Optionnel : définit une hauteur minimale */
 }
 
 /* ✅ Cartes */
@@ -62,7 +55,7 @@
   padding: 8px 12px;
   border-radius: 20px;
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.3s;
 }
 
 .searchButton:hover {
@@ -95,24 +88,16 @@
   text-decoration: underline;
 }
 
-/* ✅ Formulaire de création */
-.createBox {
+/* ✅ Formulaire de création et de modification */
+.createBox, .modifierBox {
   display: flex;
   flex-direction: column;
   gap: 10px;
   align-items: center;
 }
 
-/* ✅ Formulaire de modification */
-.modifierBox {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  align-items: center;
-}
-
-/* ✅ Style général des inputs */
-.createBox input, .modifierBox input {
+/* ✅ Style général des inputs et selects */
+.createBox input, .modifierBox input, .createBox select, .modifierBox select {
   padding: 8px 12px;
   border: 1px solid #ccc;
   border-radius: 20px;
@@ -120,11 +105,39 @@
   width: 500px;
   font-size: 14px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+  background-color: white;
+  appearance: none; /* Supprime l'affichage par défaut du select */
+  cursor: pointer;
 }
+
+/* ✅ Ajout d'un style pour la flèche des selects */
+.createBox select, .modifierBox select {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='20' height='20'><path fill='gray' d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 20px;
+}
+
+/* ✅ Effet au focus */
+.createBox select:focus, .modifierBox select:focus {
+  border-color: #5474B4;
+  box-shadow: 0px 0px 8px rgba(84, 116, 180, 0.5);
+}
+
+/* ✅ Alignement des boutons dans Modifier */
+.buttonRow {
+  display: flex;
+  justify-content: space-between; /* Aligne les boutons horizontalement */
+  width: 50%;
+  gap: 20px; /* Espacement entre les boutons */
+  max-width: 500px; /* Aligné avec les inputs */
+  margin-top: 10px; /* Espacement avec les champs */
+}
+
 
 /* ✅ Bouton général */
 .button {
-  width: 40%;
+  width: 50%;
   padding: 10px 15px;
   border: none;
   border-radius: 5px;
@@ -136,32 +149,77 @@
 }
 
 .button:hover {
-  background-color: #0056b3;
+  background-color: #405a8d;
+}
+
+/* ✅ Bouton secondaire (Désactiver) */
+.buttonSecondary {
+  width: 50%;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ff0000;
   color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s;
+}
+
+.buttonSecondary:hover {
+  background-color: #cc0000;
 }
 
 /* ✅ Conteneur des onglets */
 .tabs {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 15px;
-  }
-  
-  /* ✅ Style des onglets */
-  .tab {
-    flex: 1;
-    padding: 10px;
-    border: none;
-    background: #f1f1f1;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: bold;
-    transition: background 0.3s;
-    border-bottom: 2px solid transparent;
-  }
-  
-  .activeTab {
-    background: white;
-    border-bottom: 2px solid #5474B4;
-    color: #5474B4;
-  }
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+/* ✅ Style des onglets */
+.tab {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background: #f1f1f1;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background 0.3s;
+  border-bottom: 2px solid transparent;
+}
+
+.activeTab {
+  background: white;
+  border-bottom: 2px solid #5474B4;
+  color: #5474B4;
+}
+
+/* ✅ Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  gap: 10px;
+}
+
+.pageButton {
+  background-color: #5474B4;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s;
+}
+
+.pageButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pageButton:hover:not(:disabled) {
+  background-color: #405a8d;
+}
