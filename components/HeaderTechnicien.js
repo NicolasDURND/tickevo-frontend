@@ -11,9 +11,8 @@ import {
   IconLogout,
   IconSearch,
 } from "@tabler/icons-react";
-import { persistor } from "../store";
 
-function HeaderAdministrateur() {
+function HeaderTechnicien() {
   const [searchTerm, setSearchTerm] = useState("");
   const dispatch = useDispatch();
   const router = useRouter();
