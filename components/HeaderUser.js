@@ -8,16 +8,10 @@ import {
   IconBell,
   IconLogout,
 } from "@tabler/icons-react";
-import { persistor } from "../store";
 
-function HeaderAdministrateur() {
-  const [searchTerm, setSearchTerm] = useState("");
+function HeaderUser() {
   const dispatch = useDispatch();
   const router = useRouter();
-
-  const handleSearch = () => {
-    console.log("Recherche : ", searchTerm);
-  };
 
   const handleLogout = () => {
     dispatch(logout()); // :white_check_mark: Déclenche le logout
