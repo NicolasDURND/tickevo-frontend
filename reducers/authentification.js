@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// État initial de l'authentification
+// État initial
 const initialState = {
   user: null,
   token: null,
@@ -8,7 +8,8 @@ const initialState = {
   error: null,
 };
 
-const loginSlice = createSlice({
+// Création du slice Redux
+const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
@@ -20,11 +21,7 @@ const loginSlice = createSlice({
       state.user = action.payload.user;
       state.token = action.payload.token;
       state.loading = false;
-
-      if (typeof window !== "undefined") {
-        localStorage.setItem("token", action.payload.token); // Sauvegarde du token après login
-        localStorage.setItem("user", JSON.stringify(action.payload.user)); // Sauvegarde du user
-      }
+      state.error = null;
     },
     loginFailure: (state, action) => {
       state.error = action.payload;
@@ -33,20 +30,16 @@ const loginSlice = createSlice({
     logout: (state) => {
       state.user = null;
       state.token = null;
-
-      if (typeof window !== "undefined") {
-        localStorage.removeItem("token"); // Nettoyage
-        localStorage.removeItem("user");
-      }
+      state.error = null;
     },
     setUser: (state, action) => {
-      state.user = action.payload.user; // Recharge le user
-      state.token = action.payload.token; // Recharge le token
+      state.user = action.payload.user;
+      state.token = action.payload.token;
     },
   },
 });
 
+// ✅ Exportation des actions et du reducer
 export const { loginStart, loginSuccess, loginFailure, logout, setUser } =
-  loginSlice.actions;
-
-export default loginSlice.reducer;
+  authSlice.actions;
+export default authSlice.reducer; // 🔥 C'est bien ce reducer qui doit être utilisé dans `store.js`
