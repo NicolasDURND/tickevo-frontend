@@ -29,12 +29,14 @@
 .container {
   display: flex;
   flex-wrap: nowrap;
-  justify-content: space-around; /* Permet de bien répartir les cartes */
-  align-items: flex-start; /* Aligne en haut */
-  gap: 200px;
+  justify-content: center; /* ✅ Centre les deux cartes */
+  align-items: flex-start;
+  gap: 50px; /* ✅ Ajoute un espace entre les deux cards sans changer leurs dimensions */
   width: 100%;
   padding: 80px;
-  max-width: 1200px; /* Ajuste selon la taille voulue */
-  margin: 0 auto; /* Centre le contenu sans l'écraser */
+  max-width: 1200px;
+  margin: 0 auto;
 }
+
+
 

@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* ✅ Boutons de filtre */
+.filterButtons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filterButton {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  background: #ccc;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.filterButton:hover {
+  background: #999;
+}
+
+.active {
+  background: #007bff;
+  color: white;
+}
+
+.ticketContainer {
+  width: 80%;
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background: #f9f9f9;
+}
+
+.ticketHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  background: #e6e6e6;
+  border-radius: 5px;
+}
+
+.status {
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+/* ✅ Différencier les statuts */
+.en-cours {
+  background-color: #ffcc00;
+  color: black;
+}
+
+.en-attente {
+  background-color: #ff6600;
+  color: white;
+}
+
+.clôturé {
+  background-color: #28a745;
+  color: white;
+}
+
+.arrowButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.ticketDetails {
+  padding: 10px;
+  background: #ffffff;
+  border-top: 1px solid #ccc;
+}
+
+.noTickets {
+  color: #777;
+  font-style: italic;
+}
