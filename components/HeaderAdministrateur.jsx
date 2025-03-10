@@ -5,7 +5,6 @@ import { logout } from "../reducers/authentification";
 import styles from "../styles/HeaderAdministrateur.module.css";
 import { IconHome, IconArchive, IconFiles, IconBell, IconSettings, IconLogout, IconSearch } from "@tabler/icons-react";
 
-
 function HeaderAdministrateur() {
   const [searchTerm, setSearchTerm] = useState("");
   const dispatch = useDispatch();
@@ -46,9 +45,7 @@ function HeaderAdministrateur() {
         <button className={styles.button}><IconFiles size={25} className={styles.icon} /></button>
         <button className={styles.button}><IconBell size={25} className={styles.icon} /></button>
         <button className={styles.button} onClick={() => router.push("/admin")}><IconSettings size={25} className={styles.icon} /></button>
-        <button className={styles.button} onClick={handleLogout}>
-<IconLogout size={25} className={styles.icon} />
-        </button>
+        <button className={styles.button} onClick={handleLogout}><IconLogout size={25} className={styles.icon} /></button>
       </nav>
     </div>
   );
