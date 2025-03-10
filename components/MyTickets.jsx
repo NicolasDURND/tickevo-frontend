@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "../styles/MyTickets.module.css"; // ✅ On crée ce fichier après
 import { useRouter } from "next/router";
+import Footer from "./Footer";
 
 const MyTickets = () => {
   const [tickets, setTickets] = useState([]);
@@ -137,6 +138,7 @@ const MyTickets = () => {
       ) : (
         <p className={styles.noTickets}>Aucun ticket trouvé</p>
       )}
+      <Footer />
     </div>
   );
 };

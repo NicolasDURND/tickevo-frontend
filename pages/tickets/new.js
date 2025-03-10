@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { logout } from "../../reducers/authentification"; // ✅ Vérifie le chemin exact !
 import HeaderUser from "../../components/HeaderUser";
 import styles from "../../styles/NewTicket.module.css";
+import Footer from "../../components/Footer";
 
 const NewTicket = () => {
   const router = useRouter();
@@ -74,6 +75,7 @@ const NewTicket = () => {
           : [],
       createdBy: user.id,
       userId: user.id,
+      status: "En cours", // ✅ Statut initial
       ticketNumber: Math.floor(100000 + Math.random() * 900000), // ✅ Numéro unique
     };
 
@@ -149,6 +151,7 @@ const NewTicket = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

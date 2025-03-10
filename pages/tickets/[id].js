@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import styles from "../../styles/TicketDetails.module.css"; // ✅ On crée le CSS après
+import Footer from "../../components/Footer";
 
 const TicketDetails = () => {
   const router = useRouter();
@@ -86,6 +87,7 @@ const TicketDetails = () => {
       >
         ← Retour à l'accueil
       </button>
+      <Footer />
     </div>
   );
 };
