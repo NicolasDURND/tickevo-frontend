@@ -1,19 +1,29 @@
 import { useEffect, useState } from "react";
-import styles from "../styles/ViewTickets.module.css"; // ✅ Import du style
+import HeaderTechnicien from "../components/HeaderTechnicien";
+import HeaderAdministrateur from "../components/HeaderAdministrateur";
+import styles from "../styles/ViewTickets.module.css";
 
 const ViewTickets = () => {
   const [tickets, setTickets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [userRole, setUserRole] = useState(null);
 
   useEffect(() => {
+    // ✅ Récupère le rôle de l'utilisateur stocké dans localStorage
+    const storedRole = localStorage.getItem("role");
+    if (storedRole) {
+      setUserRole(storedRole);
+    }
+
+    // ✅ Requête fetch vers le backend sur localhost:3000
     const fetchTickets = async () => {
       try {
         const response = await fetch("http://localhost:3000/tickets", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`, // ✅ Authentification
+            Authorization: `Bearer ${localStorage.getItem("token")}`, // ✅ Vérifie l'authentification
           },
         });
 
@@ -39,31 +49,63 @@ const ViewTickets = () => {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>Liste des Tickets</h2>
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            <th className={styles.th}>Numéro</th>
-            <th className={styles.th}>Titre</th>
-            <th className={styles.th}>Description</th>
-            <th className={styles.th}>Statut</th>
-            <th className={styles.th}>Créé par</th>
-          </tr>
-        </thead>
-        <tbody>
-          {tickets.map((ticket) => (
-            <tr key={ticket._id} className={styles.tr}>
-              <td className={styles.td}>{ticket.ticketNumber}</td>
-              <td className={styles.td}>{ticket.title}</td>
-              <td className={styles.td}>{ticket.description}</td>
-              <td className={styles.td}>{ticket.status}</td>
-              <td className={styles.td}>{ticket.userId?.username || "Inconnu"}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      {/* ✅ Affichage dynamique du bon Header */}
+      {userRole === "Administrateur" ? (
+        <HeaderAdministrateur />
+      ) : userRole === "Technicien" ? (
+        <HeaderTechnicien />
+      ) : (
+        <p className={styles.error}>Accès refusé</p>
+      )}
+
+      {/* ✅ Contenu principal */}
+      {userRole === "Administrateur" || userRole === "Technicien" ? (
+        <div className={styles.content}>
+          <h2 className={styles.title}>Liste des Tickets</h2>
+
+          <div className={styles.ticketsContainer}>
+            <table className={styles.ticketsTable}>
+              <thead>
+                <tr>
+                  <th>Numéro</th>
+                  <th>Titre</th>
+                  <th>Description</th>
+                  <th>Statut</th>
+                  <th>Créé par</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {tickets.map((ticket) => (
+                  <tr key={ticket._id}>
+                    <td>{ticket.ticketNumber}</td>
+                    <td>{ticket.title}</td>
+                    <td>{ticket.description}</td>
+                    <td>
+                      {ticket.status === "clôturé" ? (
+                        <span className={styles.closedLabel}>Clôturé</span>
+                      ) : (
+                        ticket.status
+                      )}
+                    </td>
+                    <td>{ticket.userId?.username || "Inconnu"}</td>
+                    <td>
+                      <button className={styles.viewButton}>Voir</button>
+                      {userRole === "Administrateur" && (
+                        <button className={styles.assignButton}>Assigner</button>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 };
 
 export default ViewTickets;
+
+
