@@ -39,10 +39,10 @@ const LastTickets = () => {
   // ✅ Gestion de la pagination
   const totalPages = Math.ceil(tickets.length / ticketsPerPage);
   const startIndex = currentPage * ticketsPerPage;
-  const displayedTickets = tickets.slice(
-    startIndex,
-    startIndex + ticketsPerPage
-  );
+  const displayedTickets = tickets
+  .filter((ticket) => ticket.status.toLowerCase() !== "clôturé") // ✅ Filtre les tickets clôturés
+  .slice(startIndex, startIndex + ticketsPerPage);
+
 
   return (
     <div className={styles.card}>
