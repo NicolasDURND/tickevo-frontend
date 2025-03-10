@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* ✅ Messages de chargement et erreurs */
+.loading, .error {
+  font-size: 18px;
+  color: #ff0000;
+  margin-top: 20px;
+}
+
+.noTickets {
+  font-size: 16px;
+  color: #777;
+  margin-top: 10px;
+}
+
+/* ✅ Table */
+.table {
+  width: 90%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.tr {
+  border-bottom: 1px solid #ddd;
+}
+
+.th, .td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.th {
+  background-color: #f1f1f1;
+  font-weight: bold;
+}
+
+/* ✅ Boutons */
+.button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  background-color: #5474B4;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s;
+}
+
+.button:hover {
+  background-color: #405a8d;
+}
+
+.buttonSecondary {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ff6600;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s;
+}
+
+.buttonSecondary:hover {
+  background-color: #cc5500;
+}
