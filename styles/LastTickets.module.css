@@ -15,6 +15,15 @@
   border: 1px solid #ddd;
   margin: auto;
 }
+.card {
+    width: 800px; /* Ajuste la largeur */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    text-align: center;
+  }
+  
 
 
 /* ✅ Titre de la section */
