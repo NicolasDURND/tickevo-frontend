@@ -30,6 +30,7 @@ const Login = () => {
 
       const data = await response.json();
       localStorage.setItem("token", data.user.token);
+      localStorage.setItem("role", data.user.roleId); // ✅ Stocke le rôle séparément
       localStorage.setItem("user", JSON.stringify(data.user));
 
       dispatch(loginSuccess({ user: data.user, token: data.user.token }));

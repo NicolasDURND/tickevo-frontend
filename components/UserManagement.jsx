@@ -6,9 +6,9 @@ const UserManagement = ({ selectedUser }) => {
 
   // ✅ Liste des rôles et services
   const roles = [
-    { _id: "67c5cfc16f453c87fb23c607", roleName: "Administrateur" },
-    { _id: "67c5cfc16f453c87fb23c609", roleName: "Technicien" },
-    { _id: "67c5cfc16f453c87fb23c60b", roleName: "Utilisateur" }
+    { _id: "67ce260d68a51411a303d0c5", roleName: "Administrateur" },
+    { _id: "67ce260d68a51411a303d0c6", roleName: "Technicien" },
+    { _id: "67ce260d68a51411a303d0c7", roleName: "Utilisateur" }
   ];
   const services = [{ _id: "67caf5c2ed8b68e141a90e71", serviceName: "Support IT" }];
 
