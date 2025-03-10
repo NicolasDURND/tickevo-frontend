@@ -1,0 +1,382 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #f5f7fa;
+}
+
+.content {
+  padding: 20px;
+  margin-top: 60px; /* Espace pour le header */
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  color: #333;
+  border-bottom: 2px solid #5474B4;
+  padding-bottom: 15px;
+  text-align: center;
+}
+
+/* Messages de chargement et erreurs */
+.loading, .error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 18px;
+  color: #ff0000;
+}
+
+.noTickets {
+  font-size: 16px;
+  color: #777;
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* Table des tickets */
+.ticketsContainer {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow-x: auto; /* Permet le défilement horizontal sur petits écrans */
+  margin-top: 20px;
+}
+
+.ticketsTable {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px; /* Garantit que la table ne devient pas trop étroite */
+}
+
+.ticketsTable th {
+  background-color: #5474B4;
+  color: white;
+  font-weight: 500;
+  text-align: left;
+  padding: 12px 15px;
+}
+
+.ticketsTable td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.ticketsTable tr:last-child td {
+  border-bottom: none;
+}
+
+.ticketsTable tr:hover {
+  background-color: #f9f9f9;
+}
+
+/* Bouton d'action */
+.viewButton, .assignButton {
+  padding: 6px 12px;
+  background-color: #5474B4;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+  margin-right: 8px;
+  white-space: nowrap; /* Empêche le texte du bouton de se couper */
+}
+
+.viewButton:hover, .assignButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.closedLabel {
+  display: inline-block;
+  padding: 6px 12px;
+  background-color: #28a745;
+  color: white;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  margin-left: 0;
+  margin-right: 8px;
+  white-space: nowrap;
+}
+
+/* Media queries pour la responsivité */
+@media screen and (max-width: 768px) {
+  .content {
+    padding: 15px 10px;
+    box-sizing: border-box;
+  }
+  
+  .title {
+    font-size: 22px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .ticketsTable th, 
+  .ticketsTable td {
+    padding: 8px 6px;
+    font-size: 13px;
+    word-break: break-word;
+  }
+  
+  .viewButton, .assignButton {
+    padding: 4px 8px;
+    font-size: 12px;
+    margin-bottom: 3px;
+  }
+  
+  .closedLabel {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .content {
+    padding: 8px 4px;
+    margin-top: 40px;
+  }
+  
+  .title {
+    font-size: 16px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+  }
+  
+  .ticketsTable {
+    min-width: 400px; /* Réduit davantage */
+  }
+  
+  .ticketsTable th, 
+  .ticketsTable td {
+    padding: 5px 3px;
+    font-size: 10px;
+    word-break: break-word;
+    max-width: 90px; /* Limite encore plus la largeur des cellules */
+  }
+  
+  .viewButton, .assignButton {
+    padding: 2px 4px;
+    font-size: 9px;
+    margin-right: 2px;
+    margin-bottom: 2px;
+    line-height: 1;
+  }
+  
+  .closedLabel {
+    padding: 2px 4px;
+    font-size: 9px;
+    line-height: 1;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .content {
+    padding: 5px 2px;
+    margin-top: 35px;
+  }
+  
+  .title {
+    font-size: 14px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    padding-bottom: 4px;
+  }
+  
+  .ticketsTable {
+    min-width: 340px; /* Encore plus petit */
+  }
+  
+  .ticketsTable th, 
+  .ticketsTable td {
+    padding: 3px 2px;
+    font-size: 8px;
+    max-width: 70px;
+  }
+  
+  .viewButton, .assignButton {
+    padding: 1px 3px;
+    font-size: 8px;
+    margin-right: 1px;
+    margin-bottom: 1px;
+  }
+  
+  .closedLabel {
+    padding: 1px 3px;
+    font-size: 8px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .ticketsTable {
+    min-width: 300px; /* Minimum pour les plus petits téléphones */
+  }
+  
+  .ticketsTable th, 
+  .ticketsTable td {
+    padding: 2px 1px;
+    font-size: 7px;
+    max-width: 60px;
+  }
+  
+  .viewButton, .assignButton {
+    padding: 1px 2px;
+    font-size: 7px;
+  }
+  
+  .closedLabel {
+    padding: 1px 2px;
+    font-size: 7px;
+  }
+}
+
+/* Styles pour le modal personnalisé */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.modal {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  width: 280px; /* Plus compact */
+  max-width: 90%;
+  overflow: hidden;
+  animation: slideIn 0.3s ease-out;
+}
+
+.modalHeader {
+  background-color: #5474B4;
+  color: white;
+  padding: 0.5rem;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modalTitle {
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.modalContent {
+  padding: 0.7rem;
+  font-size: 0.85rem;
+}
+
+.modalFooter {
+  padding: 0.5rem;
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid #e0e0e0;
+}
+
+.modalButton {
+  background-color: #5474B4;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.modalButton:hover {
+  background-color: #405a8d;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Version ultra-compacte pour tablettes */
+@media screen and (max-width: 768px) {
+  .modal {
+    width: 220px;
+  }
+  
+  .modalHeader {
+    padding: 0.25rem;
+  }
+  
+  .modalTitle {
+    font-size: 0.75rem;
+  }
+  
+  .modalContent {
+    padding: 0.35rem;
+    font-size: 0.7rem;
+  }
+  
+  .modalFooter {
+    padding: 0.25rem;
+  }
+  
+  .modalButton {
+    padding: 0.2rem 0.5rem;
+    font-size: 0.7rem;
+  }
+}
+
+/* Version ultra-compacte pour smartphones */
+@media screen and (max-width: 480px) {
+  .modal {
+    width: 200px;
+  }
+  
+  .modalHeader {
+    padding: 0.15rem;
+  }
+  
+  .modalTitle {
+    font-size: 0.6rem;
+  }
+  
+  .modalContent {
+    padding: 0.15rem;
+    font-size: 0.5rem;
+  }
+  
+  .modalFooter {
+    padding: 0.15rem;
+  }
+  
+  .modalButton {
+    padding: 0.15rem 0.3rem;
+    font-size: 0.5rem;
+  }
+}
