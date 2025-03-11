@@ -42,7 +42,7 @@ function HeaderTechnicien() {
       <nav className={styles.nav}>
         <button className={styles.button} onClick={() => router.push("/home")}><IconHome size={25} className={styles.icon} /></button>
         <button className={styles.button} onClick={() => router.push("/ViewTickets")}><IconArchive size={25} className={styles.icon} /></button>
-        <button className={styles.button}><IconFiles size={25} className={styles.icon} /></button>
+        <button className={styles.button} onClick={() => router.push("/ticketsAccepter")}><IconFiles size={25} className={styles.icon} /></button>
         <button className={styles.button}><IconBell size={25} className={styles.icon} /></button>
         <button className={styles.button} onClick={handleLogout}><IconLogout size={25} className={styles.icon} /></button>
       </nav>

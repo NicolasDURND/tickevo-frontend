@@ -1,0 +1,194 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #f5f7fa;
+}
+
+.content {
+  padding: 20px;
+  margin-top: 60px;
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  color: #333;
+  border-bottom: 2px solid #5474B4;
+  padding-bottom: 15px;
+  text-align: center;
+}
+
+/* Messages de chargement et erreurs */
+.loading, .error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 18px;
+}
+
+.error {
+  color: #ff0000;
+}
+
+.noTickets {
+  font-size: 16px;
+  color: #777;
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* Table des tickets */
+.ticketsContainer {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+.ticketsTable {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+.ticketsTable th {
+  background-color: #5474B4;
+  color: white;
+  font-weight: 500;
+  text-align: left;
+  padding: 12px 15px;
+}
+
+.ticketsTable td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.ticketsTable tr:last-child td {
+  border-bottom: none;
+}
+
+.ticketsTable tr:hover {
+  background-color: #f9f9f9;
+}
+
+/* États des tickets */
+.closedLabel {
+  display: inline-block;
+  padding: 6px 12px;
+  background-color: #28a745;
+  color: white;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  margin-left: 0;
+  margin-right: 8px;
+  white-space: nowrap;
+}
+
+.inProgressLabel {
+  display: inline-block;
+  padding: 6px 12px;
+  background-color: #17a2b8;
+  color: white;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  margin-left: 0;
+  margin-right: 8px;
+  white-space: nowrap;
+}
+
+.pendingLabel {
+  display: inline-block;
+  padding: 6px 12px;
+  background-color: #ffc107;
+  color: #212529;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  margin-left: 0;
+  margin-right: 8px;
+  white-space: nowrap;
+}
+
+/* Bouton d'action */
+.viewButton {
+  padding: 6px 12px;
+  background-color: #5474B4;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+}
+
+.viewButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Media queries pour la responsivité */
+@media screen and (max-width: 768px) {
+  .content {
+    padding: 15px 10px;
+    box-sizing: border-box;
+  }
+  
+  .title {
+    font-size: 22px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .ticketsTable th, 
+  .ticketsTable td {
+    padding: 8px 6px;
+    font-size: 13px;
+    word-break: break-word;
+  }
+  
+  .viewButton {
+    padding: 4px 8px;
+    font-size: 12px;
+    margin-bottom: 3px;
+  }
+  
+  .closedLabel, .pendingLabel, .inProgressLabel {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .content {
+    padding: 10px 5px;
+  }
+  
+  .title {
+    font-size: 18px;
+  }
+  
+  .ticketsTable th, 
+  .ticketsTable td {
+    padding: 5px 3px;
+    font-size: 11px;
+  }
+}

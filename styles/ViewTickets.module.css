@@ -65,12 +65,15 @@
   color: white;
   font-weight: 500;
   text-align: left;
-  padding: 12px 15px;
+  padding: 12px 10px;
+  font-size: 14px;
+  white-space: nowrap;
 }
 
 .ticketsTable td {
-  padding: 12px 15px;
+  padding: 12px 10px;
   border-bottom: 1px solid #eee;
+  font-size: 14px;
 }
 
 .ticketsTable tr:last-child td {
@@ -84,20 +87,35 @@
 /* Bouton d'action */
 .viewButton, .assignButton {
   padding: 6px 12px;
-  background-color: #5474B4;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-size: 14px;
   transition: background-color 0.2s;
-  margin-right: 8px;
   white-space: nowrap; /* Empêche le texte du bouton de se couper */
+}
+
+.viewButton {
+  background-color: #5474B4;
+}
+
+.assignButton {
+  background-color: #28a745;
 }
 
 .viewButton:hover, .assignButton:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Container pour les boutons d'action */
+.actionButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 6px;
 }
 
 .closedLabel {
@@ -112,6 +130,41 @@
   margin-left: 0;
   margin-right: 8px;
   white-space: nowrap;
+}
+
+/* Styles pour les tickets en cours */
+.inProgressLabel {
+  display: inline-block;
+  padding: 6px 12px;
+  background-color: #17a2b8;
+  color: white;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  margin-left: 0;
+  margin-right: 8px;
+  white-space: nowrap;
+}
+
+/* Styles pour les tickets en attente */
+.pendingLabel {
+  display: inline-block;
+  padding: 6px 12px;
+  background-color: #ffc107;
+  color: #212529;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  margin-left: 0;
+  margin-right: 8px;
+  white-space: nowrap;
+}
+
+/* Style pour les tickets clôturés */
+.closedTicket {
+  background-color: rgba(40, 167, 69, 0.05);
 }
 
 /* Media queries pour la responsivité */
@@ -141,6 +194,16 @@
   }
   
   .closedLabel {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+  
+  .inProgressLabel {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+  
+  .pendingLabel {
     padding: 4px 8px;
     font-size: 12px;
   }
@@ -184,6 +247,18 @@
     font-size: 9px;
     line-height: 1;
   }
+  
+  .inProgressLabel {
+    padding: 2px 4px;
+    font-size: 9px;
+    line-height: 1;
+  }
+  
+  .pendingLabel {
+    padding: 2px 4px;
+    font-size: 9px;
+    line-height: 1;
+  }
 }
 
 @media screen and (max-width: 400px) {
@@ -221,6 +296,16 @@
     padding: 1px 3px;
     font-size: 8px;
   }
+  
+  .inProgressLabel {
+    padding: 1px 3px;
+    font-size: 8px;
+  }
+  
+  .pendingLabel {
+    padding: 1px 3px;
+    font-size: 8px;
+  }
 }
 
 @media screen and (max-width: 320px) {
@@ -241,6 +326,16 @@
   }
   
   .closedLabel {
+    padding: 1px 2px;
+    font-size: 7px;
+  }
+  
+  .inProgressLabel {
+    padding: 1px 2px;
+    font-size: 7px;
+  }
+  
+  .pendingLabel {
     padding: 1px 2px;
     font-size: 7px;
   }

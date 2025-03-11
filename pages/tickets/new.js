@@ -74,6 +74,7 @@ const NewTicket = () => {
           : [],
       createdBy: user.id,
       userId: user.id,
+      status: "en cours", // ✅ Définir le statut initial à "en cours"
       ticketNumber: Math.floor(100000 + Math.random() * 900000), // ✅ Numéro unique
     };
 

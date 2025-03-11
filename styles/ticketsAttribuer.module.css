@@ -1,0 +1,342 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f5f7fb;
+  font-family: 'Roboto', sans-serif;
+}
+
+.container {
+  padding: 20px;
+  margin: 20px;
+  max-width: 1200px;
+  margin: 20px auto;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.ticketHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e1e4e8;
+}
+
+.title {
+  color: #2c3e50;
+  font-size: 24px;
+  margin: 0;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 18px;
+  color: #5474B4;
+}
+
+.error {
+  color: #e74c3c;
+  text-align: center;
+  padding: 15px;
+  font-size: 16px;
+  background-color: #fdedec;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.noTickets {
+  text-align: center;
+  padding: 30px;
+  color: #7f8c8d;
+  font-size: 16px;
+}
+
+.backButtonContainer {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+.backButton {
+  padding: 8px 16px;
+  background-color: #f1f3f5;
+  color: #343a40;
+  border: 1px solid #dfe3e8;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.backButton:hover {
+  background-color: #e9ecef;
+}
+
+/* Styling for ticket information box */
+.ticketInfoBox {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.ticketInfoGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+.infoItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.infoLabel {
+  font-size: 14px;
+  color: #6c757d;
+  margin-bottom: 5px;
+}
+
+.infoValue {
+  font-size: 16px;
+  font-weight: 500;
+  color: #212529;
+}
+
+/* Section styling */
+.sectionBox {
+  margin-bottom: 30px;
+  border: 1px solid #e1e4e8;
+  border-radius: 8px;
+}
+
+.sectionTitle {
+  background-color: #f1f3f5;
+  color: #343a40;
+  font-size: 18px;
+  padding: 12px 15px;
+  margin: 0;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom: 1px solid #e1e4e8;
+  font-weight: 500;
+}
+
+.descriptionBox {
+  padding: 15px;
+  min-height: 60px;
+}
+
+/* Actions styling */
+.actionsContainer {
+  padding: 15px;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 10px;
+  border: 1px solid #dfe3e8;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  font-family: 'Roboto', sans-serif;
+  resize: vertical;
+}
+
+.actionButtons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.reassignButton {
+  padding: 10px 20px;
+  background-color: #4b6bab;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.reassignButton:hover {
+  background-color: #3c5a96;
+}
+
+.pendingButton {
+  padding: 10px 20px;
+  background-color: #ff9800;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.pendingButton:hover {
+  background-color: #e68a00;
+}
+
+.closeButton {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.closeButton:hover {
+  background-color: #218838;
+}
+
+.closedMessage {
+  padding: 15px;
+  color: #6c757d;
+  font-style: italic;
+}
+
+/* History styling */
+.historyContainer {
+  padding: 10px 15px;
+}
+
+.historyItem {
+  padding: 12px 0;
+  border-bottom: 1px solid #e1e4e8;
+}
+
+.historyItem:last-child {
+  border-bottom: none;
+}
+
+.commentHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.commentDate {
+  color: #6c757d;
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+.commentAuthor {
+  font-weight: 500;
+  color: #212529;
+  margin-right: 10px;
+}
+
+.commentLabel {
+  font-size: 12px;
+  color: #fff;
+  background-color: #6c757d;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.commentContent {
+  color: #212529;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.noComments {
+  color: #6c757d;
+  font-style: italic;
+  padding: 10px 0;
+}
+
+/* Comment form */
+.commentForm {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.commentTextarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 10px;
+  border: 1px solid #dfe3e8;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  font-family: 'Roboto', sans-serif;
+  resize: vertical;
+}
+
+.commentButton {
+  align-self: flex-end;
+  padding: 8px 20px;
+  background-color: #4b6bab;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.commentButton:hover {
+  background-color: #3c5a96;
+}
+
+/* Status specific styles */
+.statusSelect {
+  padding: 6px 10px;
+  border: 1px solid #dfe3e8;
+  border-radius: 4px;
+  background-color: white;
+}
+
+/* Table styles for compatibility with previous version */
+.ticketsTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.headerRow {
+  background-color: #f1f3f5;
+}
+
+.ticketsTable th {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 2px solid #dfe3e8;
+  color: #343a40;
+  font-weight: 500;
+}
+
+.ticketsTable td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #dfe3e8;
+  color: #495057;
+}
+
+.viewButton, .commentButton {
+  padding: 6px 12px;
+  background-color: #4b6bab;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  margin-right: 5px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.viewButton:hover, .commentButton:hover {
+  background-color: #3c5a96;
+}
