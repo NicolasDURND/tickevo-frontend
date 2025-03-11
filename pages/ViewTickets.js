@@ -110,7 +110,8 @@ const ViewTickets = () => {
       }
 
       // ✅ Rediriger vers la page des tickets attribués avec l'ID du ticket
-      router.push(`/ticketsAttribuer?ticketId=${ticketId}`);
+      // router.push(`/ticketsAttribuer?ticketId=${ticketId}`);
+      router.push(`/ticketsAccepter`);
     } catch (err) {
       setError(err.message);
     }
@@ -125,7 +126,7 @@ const ViewTickets = () => {
 
   if (loading) return <p className={styles.loading}>Chargement des tickets...</p>;
   if (error) return <p className={styles.error}>Erreur : {error}</p>;
-  if (tickets.length === 0) return <p className={styles.noTickets}>Aucun ticket trouvé.</p>;
+  // if (tickets.length === 0) return <p className={styles.noTickets}>Aucun ticket trouvé.</p>;
 
   return (
     <div className={styles.container}>
@@ -144,10 +145,14 @@ const ViewTickets = () => {
           <h2 className={styles.title}>Liste des Tickets</h2>
 
           <div className={styles.ticketsContainer}>
+            {tickets.length === 0 ? (
+                        <p className={styles.noTickets}>Aucun tickets.</p>
+                      ) : (
             <table className={styles.ticketsTable}>
               <thead>
                 <tr>
                   <th>Numéro</th>
+                  <th>Date</th>
                   <th>Titre</th>
                   <th>Description</th>
                   <th>Statut</th>
@@ -160,6 +165,9 @@ const ViewTickets = () => {
                 {sortedTickets.map((ticket) => (
                   <tr key={ticket._id} className={ticket.status === "clôturé" ? styles.closedTicket : ""}>
                     <td>{ticket.ticketNumber}</td>
+                    <td>
+                      {new Date(ticket.createdAt).toLocaleDateString("fr-FR")}
+                    </td>
                     <td>{ticket.title}</td>
                     <td>{ticket.description}</td>
                     <td>
@@ -172,7 +180,7 @@ const ViewTickets = () => {
                       )}
                     </td>
                     <td>{ticket.userId?.username || "Inconnu"}</td>
-                    <td>{ticket.assignedTo?.username || ""}</td>
+                    <td>{ticket.assignedTo ? ticket.assignedTo.username : "Non assigné"}</td>
                     <td>
                       <div className={styles.actionButtons}>
                         <button 
@@ -186,7 +194,7 @@ const ViewTickets = () => {
                             className={styles.assignButton}
                             onClick={() => handleAssignTicket(ticket._id)}
                           >
-                            S'assigner
+                            Traiter
                           </button>
                         )}
                       </div>
@@ -195,6 +203,7 @@ const ViewTickets = () => {
                 ))}
               </tbody>
             </table>
+                      )}
           </div>
         </div>
       ) : null}
