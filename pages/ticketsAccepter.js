@@ -127,10 +127,11 @@ const TicketsAccepter = () => {
                 <tr>
                   <th>Numéro</th>
                   <th>Date</th>
+                  <th>Catégorie</th>
                   <th>Titre</th>
                   <th>Créé par</th>
-                  <th>Catégorie</th>
                   <th>Statut</th>
+                  <th>Assigné à</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -139,9 +140,9 @@ const TicketsAccepter = () => {
                   <tr key={ticket._id}>
                     <td>{ticket.ticketNumber}</td>
                     <td>{new Date(ticket.createdAt).toLocaleDateString("fr-FR")}</td>
+                    <td>{ticket.category || "Demande"}</td>
                     <td>{ticket.title}</td>
                     <td>{ticket.userId?.username || "Inconnu"}</td>
-                    <td>{ticket.category || "Demande"}</td>
                     <td>
                       {ticket.status === "clôturé" ? (
                         <span className={styles.closedLabel}>clôturé</span>
@@ -151,6 +152,7 @@ const TicketsAccepter = () => {
                         <span className={styles.pendingLabel}>en attente</span>
                       )}
                     </td>
+                    <td>{ticket.assignedTo ? ticket.assignedTo.username : "Non assigné"}</td>
                     <td>
                       <button
                         className={styles.viewButton}

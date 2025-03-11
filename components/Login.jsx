@@ -18,28 +18,31 @@ const Login = () => {
 
   const handleLogin = async () => {
     dispatch(loginStart());
+  
     try {
       const response = await fetch("http://localhost:3000/users/signin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
       });
-
-      if (!response.ok)
-        throw new Error("Nom d'utilisateur ou mot de passe incorrect");
-
-      const data = await response.json();
+  
+      const data = await response.json(); // ✅ Récupère la réponse JSON
+  
+      if (!response.ok) {
+        throw new Error(data.error); // ✅ Affiche exactement le message du backend
+      }
+  
       localStorage.setItem("token", data.user.token);
-      localStorage.setItem("role", data.user.roleId); // ✅ Stocke le rôle séparément
+      localStorage.setItem("role", data.user.roleId);
       localStorage.setItem("user", JSON.stringify(data.user));
-
+  
       dispatch(loginSuccess({ user: data.user, token: data.user.token }));
       router.push("/home");
     } catch (error) {
-      dispatch(loginFailure(error.message));
+      dispatch(loginFailure(error.message)); // ✅ Affiche le message du backend
     }
   };
-
+  
   return (
     <div className={styles.container}>
       <div className={styles.logo}>
