@@ -7,9 +7,19 @@ const UserManagement = ({ selectedUser }) => {
   const [services, setServices] = useState([]);
 
   // ✅ États des formulaires
-  const [modifyFormData, setModifyFormData] = useState({  username: "",  password: "",  roleId: "",  serviceId: "", });
-
-  const [createFormData, setCreateFormData] = useState({ username: "", email: "", password: "", roleId: "", serviceId: "", });
+  const [modifyFormData, setModifyFormData] = useState({
+    username: "",
+    password: "",
+    roleId: "",
+    serviceId: "",
+  });
+  const [createFormData, setCreateFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+    roleId: "",
+    serviceId: "",
+  });
 
   // ✅ Récupérer les rôles et services depuis le backend
   useEffect(() => {
@@ -82,12 +92,9 @@ const UserManagement = ({ selectedUser }) => {
   // ✅ Gestion des changements de champs
   const handleModifyChange = (e) => {
     let value = e.target.value;
-
-    // ✅ Si l'utilisateur ne sélectionne aucun service, on envoie `null`
     if (e.target.name === "serviceId" && value === "") {
       value = null;
     }
-
     setModifyFormData({ ...modifyFormData, [e.target.name]: value });
   };
 
@@ -95,10 +102,42 @@ const UserManagement = ({ selectedUser }) => {
     setCreateFormData({ ...createFormData, [e.target.name]: e.target.value });
   };
 
+  // ✅ Fonction pour soumettre la création d'un utilisateur (POST - signupAdmin)
+  const handleCreateSubmit = async (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("Vous devez être connecté pour créer un utilisateur.");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:3000/users/signupAdmin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(createFormData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert("Utilisateur créé avec succès !");
+        window.location.reload(); // ✅ Recharge la page après création
+      } else {
+        alert(data.error || "Erreur lors de la création de l'utilisateur.");
+      }
+    } catch (error) {
+      console.error("Erreur lors de la création de l'utilisateur:", error);
+      alert("Erreur serveur");
+    }
+  };
+
   // ✅ Fonction pour modifier un utilisateur (PATCH)
   const handleModifySubmit = async (e) => {
     e.preventDefault();
-
     if (!selectedUser) {
       alert("Aucun utilisateur sélectionné.");
       return;
@@ -119,7 +158,7 @@ const UserManagement = ({ selectedUser }) => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify(modifyFormData), // Envoie uniquement les champs modifiés
+          body: JSON.stringify(modifyFormData),
         }
       );
 
@@ -132,8 +171,65 @@ const UserManagement = ({ selectedUser }) => {
       }
 
       alert("Utilisateur mis à jour avec succès !");
+      window.location.reload(); // ✅ Recharge la page après modification
     } catch (error) {
       console.error("Erreur mise à jour utilisateur:", error);
+      alert(error.message);
+    }
+  };
+
+  // ✅ Fonction pour désactiver/activer un utilisateur (PATCH - toggle-status)
+  const handleToggleStatus = async () => {
+    if (!selectedUser) {
+      alert("Aucun utilisateur sélectionné.");
+      return;
+    }
+
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        alert(
+          "Vous devez être connecté pour modifier le statut d'un utilisateur."
+        );
+        return;
+      }
+
+      const response = await fetch(
+        `http://localhost:3000/users/toggle-status/${selectedUser._id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          data.message ||
+            "Erreur lors de la mise à jour du statut de l'utilisateur"
+        );
+      }
+
+      alert(
+        `Utilisateur ${
+          selectedUser.isActive ? "désactivé" : "activé"
+        } avec succès !`
+      );
+
+      // ✅ Met à jour localement selectedUser pour rafraîchir l'UI
+      setModifyFormData((prevData) => ({
+        ...prevData,
+        isActive: !prevData.isActive, // Inverse localement l'état
+      }));
+
+      // ✅ Met à jour selectedUser pour rafraîchir le bouton sans recharger la page
+      selectedUser.isActive = !selectedUser.isActive;
+    } catch (error) {
+      console.error("Erreur lors du changement de statut utilisateur:", error);
       alert(error.message);
     }
   };
@@ -141,13 +237,29 @@ const UserManagement = ({ selectedUser }) => {
   return (
     <div className={styles.card}>
       <div className={styles.tabs}>
-        <button className={`${styles.tab} ${activeTab === "modify" ? styles.activeTab : ""}`} onClick={() => setActiveTab("modify")}>Modifier</button>
-        <button className={`${styles.tab} ${activeTab === "create" ? styles.activeTab : ""}`} onClick={() => setActiveTab("create")}>Créer</button>
+        <button
+          className={`${styles.tab} ${
+            activeTab === "modify" ? styles.activeTab : ""
+          }`}
+          onClick={() => setActiveTab("modify")}
+        >
+          Modifier
+        </button>
+        <button
+          className={`${styles.tab} ${
+            activeTab === "create" ? styles.activeTab : ""
+          }`}
+          onClick={() => setActiveTab("create")}
+        >
+          Créer
+        </button>
       </div>
 
       {activeTab === "modify" ? (
         <div className={styles.modifierBox}>
-          <h2> {selectedUser ? `Détails ${selectedUser.username}`
+          <h2>
+            {selectedUser
+              ? `Détails ${selectedUser.username}`
               : "Modifier un utilisateur"}
           </h2>
           <input
@@ -166,8 +278,6 @@ const UserManagement = ({ selectedUser }) => {
             onChange={handleModifyChange}
             className={styles.input}
           />
-
-          {/* ✅ Sélection dynamique des rôles */}
           <select
             name="roleId"
             value={modifyFormData.roleId}
@@ -181,32 +291,51 @@ const UserManagement = ({ selectedUser }) => {
               </option>
             ))}
           </select>
-
-          {/* ✅ Sélection dynamique des services avec option "Aucun service" */}
           <select
             name="serviceId"
             value={modifyFormData.serviceId || ""}
             onChange={handleModifyChange}
             className={styles.input}
           >
-            <option value="">Aucun service</option>{" "}
-            {/* 🔥 Ajout de cette option */}
+            <option value="">Aucun service</option>
             {services.map((service) => (
               <option key={service._id} value={service._id}>
                 {service.serviceName}
               </option>
             ))}
           </select>
-
           <div className={styles.buttonRow}>
-            <button className={styles.button} onClick={handleModifySubmit}>
+            <button
+              className={styles.button}
+              onClick={handleModifySubmit}
+              disabled={!selectedUser} // ✅ Désactive le bouton si aucun utilisateur sélectionné
+              style={{
+                opacity: !selectedUser ? 0.5 : 1, // ✅ Grise le bouton quand il est désactivé
+                cursor: !selectedUser ? "not-allowed" : "pointer", // ✅ Change le pointeur en fonction de l'état du bouton
+              }}
+            >
               Sauvegarder
             </button>
-            <button className={styles.buttonSecondary}>Désactiver</button>
+
+            <button
+              className={styles.buttonSecondary}
+              onClick={handleToggleStatus}
+              disabled={!selectedUser} // ✅ Désactive le bouton si aucun utilisateur sélectionné
+              style={{
+                opacity: !selectedUser ? 0.5 : 1, // ✅ Grise le bouton quand il est désactivé
+                cursor: !selectedUser ? "not-allowed" : "pointer", // ✅ Change le pointeur en fonction de l'état du bouton
+              }}
+            >
+              {selectedUser
+                ? selectedUser.isActive
+                  ? "Désactiver"
+                  : "Activer"
+                : "Désactiver/Activer"}
+            </button>
           </div>
         </div>
       ) : (
-        <form className={styles.createBox}>
+        <form className={styles.createBox} onSubmit={handleCreateSubmit}>
           <h2>Créer un utilisateur</h2>
           <input
             type="text"
@@ -235,8 +364,6 @@ const UserManagement = ({ selectedUser }) => {
             className={styles.input}
             required
           />
-
-          {/* ✅ Sélection dynamique des rôles */}
           <select
             name="roleId"
             value={createFormData.roleId}
@@ -251,8 +378,6 @@ const UserManagement = ({ selectedUser }) => {
               </option>
             ))}
           </select>
-
-          {/* ✅ Sélection dynamique des services */}
           <select
             name="serviceId"
             value={createFormData.serviceId}
@@ -266,7 +391,6 @@ const UserManagement = ({ selectedUser }) => {
               </option>
             ))}
           </select>
-
           <button className={styles.button} type="submit">
             Créer
           </button>
