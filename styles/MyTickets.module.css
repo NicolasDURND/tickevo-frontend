@@ -51,13 +51,36 @@
 }
 
 .ticketHeader {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr 1fr auto; /* ✅ Fixe la largeur des colonnes */
   align-items: center;
+  gap: 10px; /* ✅ Ajoute un espacement uniforme */
   padding: 5px;
   background: #e6e6e6;
   border-radius: 5px;
 }
+
+.ticketHeader span {
+  white-space: nowrap; /* ✅ Empêche le retour à la ligne */
+  overflow: hidden;
+  text-overflow: ellipsis; /* ✅ Ajoute "..." si le texte est trop long */
+}
+
+.ticketHeader span:nth-child(2), /* Date */
+.ticketHeader span:nth-child(3), /* Catégorie */
+.ticketHeader span:nth-child(4) { /* Statut */
+  min-width: 120px; /* ✅ Fixe une largeur minimale pour éviter le décalage */
+  text-align: center;
+}
+
+.arrowButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  min-width: 30px; /* ✅ Empêche la flèche de bouger */
+}
+
 
 .status {
   font-weight: bold;

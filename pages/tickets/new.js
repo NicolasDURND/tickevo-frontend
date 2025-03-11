@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { logout } from "../../reducers/authentification"; // ✅ Vérifie le chemin exact !
 import HeaderUser from "../../components/HeaderUser";
 import styles from "../../styles/NewTicket.module.css";
+import Footer from "../../components/Footer";
 
 const NewTicket = () => {
   const router = useRouter();
@@ -150,6 +151,7 @@ const NewTicket = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

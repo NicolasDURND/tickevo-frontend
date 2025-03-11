@@ -5,6 +5,8 @@ import HeaderAdministrateur from "../components/HeaderAdministrateur";
 import DemandeTickets from "../components/DemandeTickets";
 import LastTickets from "../components/LastTickets";
 import styles from "../styles/Home.module.css";
+import Footer from "../components/Footer";
+import footerstyles from "../styles/Footer.module.css";
 
 export default function Home() {
   const [userRole, setUserRole] = useState(null);
@@ -30,6 +32,9 @@ export default function Home() {
       <div className={styles.container}>
         <DemandeTickets />
         <LastTickets />
+      </div>
+      <div>
+        <Footer />
       </div>
     </div>
   );

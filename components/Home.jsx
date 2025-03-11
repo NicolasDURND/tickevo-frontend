@@ -9,6 +9,7 @@ function Home() {
         <h1 className={styles.title}>Welcome to Tickevo !</h1>
         <Login />
       </main>
+      
     </div>
   );
 }
