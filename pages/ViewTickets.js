@@ -153,10 +153,10 @@ const ViewTickets = () => {
                 <tr>
                   <th>Numéro</th>
                   <th>Date</th>
+                  <th>Catégorie</th>
                   <th>Titre</th>
-                  <th>Description</th>
-                  <th>Statut</th>
                   <th>Créé par</th>
+                  <th>Statut</th>
                   <th>Assigné à</th>
                   <th>Actions</th>
                 </tr>
@@ -165,11 +165,10 @@ const ViewTickets = () => {
                 {sortedTickets.map((ticket) => (
                   <tr key={ticket._id} className={ticket.status === "clôturé" ? styles.closedTicket : ""}>
                     <td>{ticket.ticketNumber}</td>
-                    <td>
-                      {new Date(ticket.createdAt).toLocaleDateString("fr-FR")}
-                    </td>
+                    <td>{new Date(ticket.createdAt).toLocaleDateString("fr-FR")}</td>
+                    <td>{ticket.category || "Demande"}</td>
                     <td>{ticket.title}</td>
-                    <td>{ticket.description}</td>
+                    <td>{ticket.userId?.username || "Inconnu"}</td>
                     <td>
                       {ticket.status === "clôturé" ? (
                         <span className={styles.closedLabel}>Clôturé</span>
@@ -179,7 +178,6 @@ const ViewTickets = () => {
                         <span className={styles.pendingLabel}>En attente</span>
                       )}
                     </td>
-                    <td>{ticket.userId?.username || "Inconnu"}</td>
                     <td>{ticket.assignedTo ? ticket.assignedTo.username : "Non assigné"}</td>
                     <td>
                       <div className={styles.actionButtons}>
