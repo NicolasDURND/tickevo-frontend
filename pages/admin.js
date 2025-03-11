@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import HeaderAdministrateur from "../components/HeaderAdministrateur";
 import UserManagement from "../components/UserManagement";
 import styles from "../styles/Admin.module.css";
@@ -6,31 +6,50 @@ import { IconSearch } from "@tabler/icons-react";
 
 export default function Admin() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [users, setUsers] = useState([
-    { username: "Admin1", role: "Administrateur", group: "" },
-    { username: "Technicien1", role: "Technicien", group: "Groupe 1" },
-    { username: "User1", role: "Demandeur", group: "" },
-    { username: "User2", role: "Demandeur", group: "" },
-    { username: "User3", role: "Demandeur", group: "" },
-    { username: "User4", role: "Demandeur", group: "" },
-    { username: "User5", role: "Demandeur", group: "" },
-    { username: "User6", role: "Demandeur", group: "" },
-    { username: "User7", role: "Demandeur", group: "" },
-    { username: "User8", role: "Demandeur", group: "" },
-    { username: "User9", role: "Demandeur", group: "" },
-    { username: "User10", role: "Demandeur", group: "" },
-    { username: "User11", role: "Demandeur", group: "" },
-    { username: "User12", role: "Demandeur", group: "" },
-  ]);
-
+  const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const usersPerPage = 10; // ✅ Afficher 10 utilisateurs par page
+  const usersPerPage = 10;
 
-  // ✅ Calculer les utilisateurs à afficher
-  const indexOfLastUser = currentPage * usersPerPage;
-  const indexOfFirstUser = indexOfLastUser - usersPerPage;
-  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+  // ✅ Récupérer les utilisateurs depuis le backend
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          alert("Vous devez être connecté pour voir les utilisateurs.");
+          return;
+        }
+
+        const response = await fetch("http://localhost:3000/users/allusers", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const data = await response.json();
+        if (data.success) {
+          setUsers(data.users);
+        } else {
+          console.error("Erreur lors du chargement des utilisateurs:", data.message);
+        }
+      } catch (error) {
+        console.error("Erreur serveur:", error);
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
+// ✅ Calculer et trier les utilisateurs à afficher
+const indexOfLastUser = currentPage * usersPerPage;
+const indexOfFirstUser = indexOfLastUser - usersPerPage;
+const currentUsers = users
+  .slice()
+  .sort((a, b) => a.username.localeCompare(b.username)) // 🔥 Trie par username A-Z
+  .slice(indexOfFirstUser, indexOfLastUser);
 
   // ✅ Changer de page
   const nextPage = () => {
@@ -54,6 +73,7 @@ export default function Admin() {
       <HeaderAdministrateur />
       <div className={styles.pageContainer}>
         <div className={styles.container}>
+          
           {/* ✅ Recherche */}
           <div className={styles.card}>
             <h2>Rechercher un utilisateur</h2>
@@ -65,9 +85,6 @@ export default function Admin() {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
-              <button className={styles.searchButton}>
-                <IconSearch size={20} />
-              </button>
             </div>
 
             {/* ✅ Tableau des utilisateurs */}
@@ -81,21 +98,25 @@ export default function Admin() {
                 </tr>
               </thead>
               <tbody>
-                {currentUsers.map((user, index) => (
-                  <tr key={index}>
-                    <td>{user.username}</td>
-                    <td>{user.role}</td>
-                    <td>{user.group || "-"}</td>
-                    <td>
-                      <button
-                        className={styles.detailButton}
-                        onClick={() => handleDetailClick(user)}
-                      >
-                        Détail
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+                {currentUsers
+                  .filter((user) =>
+                    user.username.toLowerCase().includes(searchTerm.toLowerCase())
+                  )
+                  .map((user, index) => (
+                    <tr key={index}>
+                      <td>{user.username}</td>
+                      <td>{user.roleId?.roleName || "N/A"}</td>
+                      <td>{user.serviceId?.serviceName || "N/A"}</td>
+                      <td>
+                        <button
+                          className={styles.detailButton}
+                          onClick={() => handleDetailClick(user)}
+                        >
+                          Détail
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
 
@@ -108,7 +129,9 @@ export default function Admin() {
               >
                 Précédent
               </button>
-              <span> Page {currentPage} / {Math.ceil(users.length / usersPerPage)} </span>
+              <span>
+                Page {currentPage} / {Math.ceil(users.length / usersPerPage)}
+              </span>
               <button
                 onClick={nextPage}
                 disabled={currentPage === Math.ceil(users.length / usersPerPage)}
@@ -121,6 +144,7 @@ export default function Admin() {
 
           {/* ✅ Gestion des utilisateurs */}
           <UserManagement selectedUser={selectedUser} />
+
         </div>
       </div>
     </>
