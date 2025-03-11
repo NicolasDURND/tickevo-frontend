@@ -11,7 +11,7 @@ function App({ Component, pageProps }) {
         {" "}
         {/* Permet de charger Redux depuis localStorage */}
         <Head>
-          <title>Gestion des Tickets</title>
+          <title>TickEvo - Gestion des tickets</title>
         </Head>
         <Component {...pageProps} />
       </PersistGate>
