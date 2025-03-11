@@ -133,17 +133,37 @@ const TicketsAttribuer = () => {
   // ✅ Fonction pour mettre le ticket en attente
   const handleSetPending = async () => {
     await handleUpdateStatus(ticket._id, "en attente", true);
+    router.push(`/ticketsAccepter`);
   };
 
-  // ✅ Fonction pour mettre le ticket en cours (lors de la réattribution)
-  const handleReassignAndSetStatus = async () => {
-    try {
-      await handleUpdateStatus(ticket._id, "en cours", false);
-      router.push(`/ViewTickets?reassign=${ticket._id}`);
-    } catch (err) {
-      setError(`Erreur: ${err.message}`);
+const handleReassignAndSetStatus = async () => {
+  try {
+    console.log("[TicketsAttribuer] Réattribution du ticket et réinitialisation de l'affectation...");
+
+    const token = localStorage.getItem("token");
+
+    // ✅ Envoyer une requête pour réinitialiser assignedTo à null
+    const response = await fetch(`http://localhost:3000/ticketsTechnicien/${ticket._id}/reassign`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
+      body: JSON.stringify({ newTechnicianId: null }), // ✅ Réinitialisation
+    });
+
+    if (!response.ok) {
+      throw new Error(`Erreur lors de la réattribution du ticket: ${response.status}`);
     }
-  };
+
+    // ✅ Mettre à jour l'état local et rediriger
+    await handleUpdateStatus(ticket._id, "en cours", false);
+    router.push(`/ViewTickets?reassign=${ticket._id}`);
+  } catch (err) {
+    console.log("[TicketsAttribuer] Erreur lors de la réattribution :", err);
+    setError(`Erreur: ${err.message}`);
+  }
+};
 
   // ✅ Fonction pour ajouter un commentaire à un ticket
   const handleAddComment = async (ticketId, message) => {

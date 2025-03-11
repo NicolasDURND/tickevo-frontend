@@ -116,21 +116,21 @@ const TicketsAccepter = () => {
       ) : null}
 
       <div className={styles.content}>
-        <h2 className={styles.title}>Historique de mes tickets</h2>
+        <h2 className={styles.title}>Mes tickets</h2>
 
         <div className={styles.ticketsContainer}>
           {tickets.length === 0 ? (
-            <p className={styles.noTickets}>Aucun ticket trouvé.</p>
+            <p className={styles.noTickets}>Aucun ticket assigné.</p>
           ) : (
             <table className={styles.ticketsTable}>
               <thead>
                 <tr>
-                  <th>N°</th>
-                  <th>Titre</th>
-                  <th>Émetteur</th>
+                  <th>Numéro</th>
                   <th>Date</th>
+                  <th>Titre</th>
+                  <th>Créé par</th>
                   <th>Catégorie</th>
-                  <th>État</th>
+                  <th>Statut</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -138,11 +138,9 @@ const TicketsAccepter = () => {
                 {tickets.map((ticket) => (
                   <tr key={ticket._id}>
                     <td>{ticket.ticketNumber}</td>
+                    <td>{new Date(ticket.createdAt).toLocaleDateString("fr-FR")}</td>
                     <td>{ticket.title}</td>
                     <td>{ticket.userId?.username || "Inconnu"}</td>
-                    <td>
-                      {new Date(ticket.createdAt).toLocaleDateString("fr-FR")}
-                    </td>
                     <td>{ticket.category || "Demande"}</td>
                     <td>
                       {ticket.status === "clôturé" ? (
