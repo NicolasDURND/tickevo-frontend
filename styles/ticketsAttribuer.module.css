@@ -185,6 +185,14 @@
   background-color: #e68a00;
 }
 
+.pendingButton:disabled,
+.cancelPendingButton:disabled,
+.reassignButton:disabled,
+.closeButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
 .closeButton {
   padding: 10px 20px;
   background-color: #28a745;
