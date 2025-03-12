@@ -184,16 +184,14 @@ const UserManagement = ({ selectedUser }) => {
       alert("Aucun utilisateur sélectionné.");
       return;
     }
-
+  
     try {
       const token = localStorage.getItem("token");
       if (!token) {
-        alert(
-          "Vous devez être connecté pour modifier le statut d'un utilisateur."
-        );
+        alert("Vous devez être connecté pour modifier le statut d'un utilisateur.");
         return;
       }
-
+  
       const response = await fetch(
         `http://localhost:3000/users/toggle-status/${selectedUser._id}`,
         {
@@ -204,30 +202,44 @@ const UserManagement = ({ selectedUser }) => {
           },
         }
       );
-
+  
       const data = await response.json();
-
+  
       if (!response.ok) {
-        throw new Error(
-          data.message ||
-            "Erreur lors de la mise à jour du statut de l'utilisateur"
-        );
+        throw new Error(data.message || "Erreur lors de la mise à jour du statut de l'utilisateur");
       }
-
-      alert(
-        `Utilisateur ${
-          selectedUser.isActive ? "désactivé" : "activé"
-        } avec succès !`
+  
+      alert(`Utilisateur ${data.success ? "activé" : "désactivé"} avec succès !`);
+  
+      // ✅ Récupérer les nouvelles données de l'utilisateur depuis la base de données
+      const updatedUserResponse = await fetch(
+        `http://localhost:3000/users/${selectedUser._id}`, // Assure-toi d'avoir une route GET pour récupérer un utilisateur par ID
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
-
-      // ✅ Met à jour localement selectedUser pour rafraîchir l'UI
-      setModifyFormData((prevData) => ({
-        ...prevData,
-        isActive: !prevData.isActive, // Inverse localement l'état
-      }));
-
-      // ✅ Met à jour selectedUser pour rafraîchir le bouton sans recharger la page
-      selectedUser.isActive = !selectedUser.isActive;
+  
+      const updatedUserData = await updatedUserResponse.json();
+  
+      if (!updatedUserResponse.ok) {
+        throw new Error("Impossible de récupérer les nouvelles données.");
+      }
+  
+      // ✅ Mettre à jour `selectedUser` avec les nouvelles données
+      setModifyFormData({
+        username: updatedUserData.username,
+        password: "",
+        roleId: updatedUserData.roleId?._id || updatedUserData.roleId || "",
+        serviceId: updatedUserData.serviceId?._id || updatedUserData.serviceId || "",
+      });
+  
+      // ✅ Mettre à jour `selectedUser` pour re-render le bouton correctement
+      selectedUser.isActive = updatedUserData.isActive;
+  
     } catch (error) {
       console.error("Erreur lors du changement de statut utilisateur:", error);
       alert(error.message);
