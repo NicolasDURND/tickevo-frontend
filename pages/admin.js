@@ -112,7 +112,7 @@ const currentUsers = users
                           className={styles.detailButton}
                           onClick={() => handleDetailClick(user)}
                         >
-                          Détail
+                          Voir détails
                         </button>
                       </td>
                     </tr>

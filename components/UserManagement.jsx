@@ -271,7 +271,7 @@ const UserManagement = ({ selectedUser }) => {
         <div className={styles.modifierBox}>
           <h2>
             {selectedUser
-              ? `Détails ${selectedUser.username}`
+              ? `Détails de ${selectedUser.username}`
               : "Modifier un utilisateur"}
           </h2>
           <input
