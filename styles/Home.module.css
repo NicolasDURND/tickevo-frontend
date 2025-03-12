@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
 
+.body {
+  height: 100vh;
+}
+
 .main {
   display: flex;
   flex-direction: column;
@@ -28,6 +32,7 @@
 }
 .container {
   display: flex;
+  flex: 1;
   flex-wrap: nowrap;
   justify-content: center; /* ✅ Centre les deux cartes */
   align-items: flex-start;

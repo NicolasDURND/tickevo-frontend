@@ -6,8 +6,8 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding-top: 20px;
   justify-content: center;
+  height: 100vh;
 }
 
 /* ✅ Conteneur du contenu principal (Recherche + Modification) */
@@ -18,7 +18,9 @@
   width: 90%;
   max-width: 1300px; /* ✅ Augmenté pour un meilleur alignement */
   gap: 25px; /* ✅ Légèrement augmenté pour l'espacement */
-  min-height: 500px;
+  /* min-height: 500px; */
+  flex: 1;
+  padding-top: 50px;
 }
 
 /* ✅ Cartes (Recherche & Modification) */
