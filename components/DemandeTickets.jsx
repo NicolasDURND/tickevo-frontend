@@ -7,7 +7,7 @@ const DemandeTickets = () => {
   const [activeTab, setActiveTab] = useState("demandes");
   const router = useRouter();
 
-  // Fonction pour rediriger vers la page de création de ticket avec l'objet sélectionné
+  // Fonction pour rediriger vers la page de création de ticket avec l'objet sélectionné.
   const handleCreateTicket = (category) => {
     router.push(`/tickets/new?category=${encodeURIComponent(category)}`);
   };
