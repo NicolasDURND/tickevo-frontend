@@ -18,28 +18,50 @@ const NewTicket = () => {
     if (router.query.category) {
       const selectedCategory = router.query.category;
 
-      // 🔹 Déterminer si c'est une "Demande" ou un "Incident"
-      const isIncident = [
-        "Incident matériel",
-        "Incident logiciel",
-        "Incident autre",
-        "Problème d'écran",
-        "Problème de clavier",
-        "Panne électrique",
-        "Bug logiciel",
-        "Problème d'accès",
-        "Erreur système",
-        "Problème réseau",
-        "Problème de connexion VPN",
-        "Autre",
-      ].includes(selectedCategory);
+      // 🔹 Liste des catégories principales et sous-catégories
+      const incidentCategories = {
+        "Incident matériel": [
+          "Problème d'écran",
+          "Problème de clavier",
+          "Panne électrique",
+          "Autre",
+        ],
+        "Incident logiciel": [
+          "Bug logiciel",
+          "Problème d'accès",
+          "Erreur système",
+        ],
+        "Incident autre": [
+          "Problème réseau",
+          "Problème de connexion VPN",
+          "Autre",
+        ],
+      };
 
-      setCategory(isIncident ? "Incident" : "Demande");
-      setTicketType(selectedCategory);
+      let foundCategory = "Demande"; // Par défaut, c'est une demande
+      let foundSubCategory = "";
 
-      // 🔹 Si c'est un incident, définir la sous-catégorie
-      if (isIncident) {
-        setSubCategory(selectedCategory);
+      // 🔍 Vérifier si la catégorie sélectionnée appartient aux incidents
+      for (const [mainCategory, subCategories] of Object.entries(
+        incidentCategories
+      )) {
+        if (mainCategory === selectedCategory) {
+          foundCategory = "Incident"; // ✅ C'est un incident
+          foundSubCategory = ""; // ✅ Pas de sous-catégorie
+          break;
+        } else if (subCategories.includes(selectedCategory)) {
+          foundCategory = "Incident";
+          foundSubCategory = selectedCategory; // ✅ Définit la sous-catégorie
+          setTicketType(mainCategory); // ✅ Définit `ticketType` comme la catégorie principale
+          break;
+        }
+      }
+
+      setCategory(foundCategory);
+      setSubCategory(foundSubCategory);
+
+      if (foundSubCategory === "") {
+        setTicketType(selectedCategory); // ✅ Si pas de sous-catégorie, `ticketType` reste inchangé
       }
     }
   }, [router.query]);
@@ -127,7 +149,8 @@ const NewTicket = () => {
 
         <div className={styles.card}>
           <h3 className={styles.object}>
-            <strong>Objet :</strong> {ticketType}
+            <strong>Objet :</strong> {category} → {ticketType}
+            {category === "Incident" && subCategory && `→ ${subCategory} `}
           </h3>
 
           <textarea
