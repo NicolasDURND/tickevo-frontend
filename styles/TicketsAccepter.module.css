@@ -10,7 +10,6 @@
 
 .content {
   padding: 20px;
-  margin-top: 60px;
   width: 100%;
   max-width: 1200px;
   margin-left: auto;
@@ -28,19 +27,7 @@
   text-align: center;
 }
 
-/* Messages de chargement et erreurs */
-.loading, .error {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  font-size: 18px;
-}
-
-.error {
-  color: #ff0000;
-}
-
+/* ✅ Message lorsqu'il n'y a pas de tickets */
 .noTickets {
   font-size: 16px;
   color: #777;
@@ -60,7 +47,7 @@
 .ticketsTable {
   width: 100%;
   border-collapse: collapse;
-  min-width: 600px;
+  min-width: 600px; /* ✅ Taille normale en mode Windows */
 }
 
 .ticketsTable th {
@@ -69,62 +56,40 @@
   font-weight: 500;
   text-align: left;
   padding: 12px 15px;
+  font-size: 14px; /* ✅ Taille normale en mode Windows */
+  white-space: nowrap;
 }
 
 .ticketsTable td {
   padding: 12px 15px;
   border-bottom: 1px solid #eee;
-}
-
-.ticketsTable tr:last-child td {
-  border-bottom: none;
-}
-
-.ticketsTable tr:hover {
-  background-color: #f9f9f9;
+  font-size: 14px; /* ✅ Taille normale en mode Windows */
 }
 
 /* États des tickets */
-.closedLabel {
+.closedLabel, .inProgressLabel, .pendingLabel {
   display: inline-block;
   padding: 6px 12px;
-  background-color: #28a745;
-  color: white;
   border-radius: 4px;
   font-size: 14px;
   font-weight: 500;
   text-align: center;
-  margin-left: 0;
-  margin-right: 8px;
   white-space: nowrap;
+}
+
+.closedLabel {
+  background-color: #28a745;
+  color: white;
 }
 
 .inProgressLabel {
-  display: inline-block;
-  padding: 6px 12px;
   background-color: #17a2b8;
   color: white;
-  border-radius: 4px;
-  font-size: 14px;
-  font-weight: 500;
-  text-align: center;
-  margin-left: 0;
-  margin-right: 8px;
-  white-space: nowrap;
 }
 
 .pendingLabel {
-  display: inline-block;
-  padding: 6px 12px;
   background-color: #ffc107;
   color: #212529;
-  border-radius: 4px;
-  font-size: 14px;
-  font-weight: 500;
-  text-align: center;
-  margin-left: 0;
-  margin-right: 8px;
-  white-space: nowrap;
 }
 
 /* Bouton d'action */
@@ -145,50 +110,94 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Media queries pour la responsivité */
+/* ============================= */
+/* ✅ RÉDUCTION DES TAILLES UNIQUEMENT EN MODE MOBILE */
+/* ============================= */
 @media screen and (max-width: 768px) {
-  .content {
-    padding: 15px 10px;
-    box-sizing: border-box;
-  }
-  
   .title {
     font-size: 22px;
     margin-top: 15px;
     margin-bottom: 15px;
   }
-  
+
+  .ticketsTable {
+    min-width: 450px; /* ✅ Réduction de la largeur minimale */
+  }
+
   .ticketsTable th, 
   .ticketsTable td {
-    padding: 8px 6px;
-    font-size: 13px;
-    word-break: break-word;
+    padding: 6px 4px;
+    font-size: 12px;
+    max-width: 80px;
   }
-  
+
   .viewButton {
     padding: 4px 8px;
-    font-size: 12px;
-    margin-bottom: 3px;
+    font-size: 10px;
   }
-  
-  .closedLabel, .pendingLabel, .inProgressLabel {
+
+  .closedLabel, .inProgressLabel, .pendingLabel {
     padding: 4px 8px;
-    font-size: 12px;
+    font-size: 10px;
+  }
+
+  .noTickets {
+    font-size: 14px;
   }
 }
 
 @media screen and (max-width: 480px) {
-  .content {
-    padding: 10px 5px;
+  .ticketsTable {
+    min-width: 380px; /* ✅ Encore plus réduit */
   }
-  
-  .title {
-    font-size: 18px;
-  }
-  
+
   .ticketsTable th, 
   .ticketsTable td {
-    padding: 5px 3px;
-    font-size: 11px;
+    padding: 4px 3px;
+    font-size: 10px;
+    max-width: 70px;
+  }
+
+  .viewButton {
+    padding: 3px 6px;
+    font-size: 9px;
+  }
+
+  .closedLabel, .inProgressLabel, .pendingLabel {
+    padding: 3px 6px;
+    font-size: 9px;
+  }
+
+  .noTickets {
+    font-size: 12px;
   }
 }
+
+@media screen and (max-width: 360px) {
+  .ticketsTable {
+    min-width: 320px; /* ✅ Minimum possible */
+  }
+
+  .ticketsTable th, 
+  .ticketsTable td {
+    padding: 3px 2px;
+    font-size: 8px;
+    max-width: 60px;
+  }
+
+  .viewButton {
+    padding: 2px 5px;
+    font-size: 8px;
+  }
+
+  .closedLabel, .inProgressLabel, .pendingLabel {
+    padding: 2px 5px;
+    font-size: 8px;
+  }
+
+  .noTickets {
+    font-size: 10px;
+  }
+}
+
+
