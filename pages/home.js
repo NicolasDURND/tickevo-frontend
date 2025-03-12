@@ -32,9 +32,7 @@ export default function Home() {
         <DemandeTickets />
         <LastTickets />
       </div>
-      <div>
         <Footer />
-      </div>
     </div>
   );
 }

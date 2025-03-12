@@ -70,7 +70,7 @@ const currentUsers = users
 
   return (
     <>
-      <HeaderAdministrateur />
+    <HeaderAdministrateur />
       <div className={styles.pageContainer}>
         <div className={styles.container}>
           
@@ -112,7 +112,7 @@ const currentUsers = users
                           className={styles.detailButton}
                           onClick={() => handleDetailClick(user)}
                         >
-                          Détail
+                          Voir détails
                         </button>
                       </td>
                     </tr>
