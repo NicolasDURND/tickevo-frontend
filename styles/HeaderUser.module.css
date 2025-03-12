@@ -1,33 +1,77 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
 
-/* Conteneur principal du header */
+/* ✅ Conteneur principal du header */
 .header {
-    background-color: #5474B4; /* Fond bleu */
-    color: white; /* Texte en blanc */
-    padding: 10px 20px; /* Espacement interne */
-    display: flex; /* Aligner en ligne */
-    justify-content: space-between; /* Espacer les éléments */
-    align-items: center; /* Centrer verticalement */
-  }
-  
-  /* Style du logo */
-  .logo {
+    background-color: #5474B4; /* ✅ Fond bleu */
+    color: white; /* ✅ Texte en blanc */
+    padding: 15px 20px; /* ✅ Espacement interne augmenté pour plus d'aération */
+    display: flex; /* ✅ Aligner les éléments en ligne */
+    justify-content: space-between; /* ✅ Espacement entre les groupes */
+    align-items: center; /* ✅ Centrer verticalement */
+    width: 100%;
+    margin: 0 auto; /* ✅ Centre le header */
+}
+
+/* ✅ Style du logo */
+.logo {
     font-size: 40px;
     font-weight: bold;
-    font-family: 'Roboto', sans-serif; 
-  }
+    font-family: 'Roboto', sans-serif;
+    white-space: nowrap; /* ✅ Empêche le texte de se casser */
+}
 
-  /* Navigation des icônes */
-  .nav {
+/* ✅ Conteneur pour le logo et la barre de recherche */
+.logoSearchContainer {
+    display: flex;
+    align-items: center;
+    gap: 40px; /* ✅ Espacement entre le logo et la barre de recherche */
+}
+
+/* ✅ Conteneur de la barre de recherche */
+.searchContainer {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* ✅ Style de l'input de recherche */
+.searchInput {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+    width: 300px; /* ✅ Largeur ajustée */
+    max-width: 100%; /* ✅ Ajustement automatique */
+    font-size: 14px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* ✅ Bouton de recherche */
+.searchButton {
+    background-color: #ffffff;
+    border: none;
+    color: #5474B4;
+    padding: 8px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.searchButton:hover {
+    background-color: #dfe7f4;
+}
+
+/* ✅ Navigation des icônes */
+.nav {
     display: flex;
     gap: 15px;
-  }
+}
 
-  /* Style des boutons d'icônes */
-  .button {
+/* ✅ Style des boutons d'icônes */
+.button {
     background-color: white;
     color: #5474B4;
-    border:none;
+    border: none;
     padding: 10px 15px;
     font-size: 16px;
     cursor: pointer;
@@ -44,7 +88,57 @@
     background-color: lightgray;
 }
 
+/* ✅ Style des icônes */
 .icon {
     color: #000000;
 }
-  
+
+/* ✅ RESPONSIVE DESIGN - Header */
+@media (max-width: 1024px) {
+    .header {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .logoSearchContainer {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .searchInput {
+        width: 250px; /* ✅ Ajustement pour écran moyen */
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        padding: 10px;
+    }
+
+    .logo {
+        font-size: 30px; /* ✅ Réduction du logo sur petits écrans */
+    }
+
+    .logoSearchContainer {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .searchInput {
+        width: 220px; /* ✅ Encore un ajustement sur mobiles */
+    }
+
+    .nav {
+        flex-direction: row;
+        gap: 10px;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .button {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+}

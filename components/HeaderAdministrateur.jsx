@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useRouter } from "next/router"; // ✅ Hook de navigation Next.js
 import { logout } from "../reducers/authentification";
 import styles from "../styles/HeaderAdministrateur.module.css";
-import { IconHome, IconArchive, IconFiles, IconBell, IconSettings, IconLogout, IconSearch } from "@tabler/icons-react";
+import { IconHome, IconArchive, IconTicket, IconFiles, IconBell, IconSettings, IconLogout, IconSearch } from "@tabler/icons-react";
 
 function HeaderAdministrateur() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -44,6 +44,7 @@ function HeaderAdministrateur() {
         <button className={styles.button} onClick={() => router.push("/ViewTickets")}><IconArchive size={25} className={styles.icon} /></button>
         <button className={styles.button} onClick={() => router.push("/ticketsAccepter")}><IconFiles size={25} className={styles.icon} /></button>
         <button className={styles.button}><IconBell size={25} className={styles.icon} /></button>
+        <button className={styles.button} onClick={() => router.push("/mytickets")}><IconTicket size={25} className={styles.icon} /></button>
         <button className={styles.button} onClick={() => router.push("/admin")}><IconSettings size={25} className={styles.icon} /></button>
         <button className={styles.button} onClick={handleLogout}><IconLogout size={25} className={styles.icon} /></button>
       </nav>

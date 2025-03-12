@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import HeaderAdministrateur from "../components/HeaderAdministrateur";
 import UserManagement from "../components/UserManagement";
 import styles from "../styles/Admin.module.css";
-import { IconSearch } from "@tabler/icons-react";
+import Footer from "../components/Footer";
 
 export default function Admin() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -146,6 +146,7 @@ const currentUsers = users
           <UserManagement selectedUser={selectedUser} />
 
         </div>
+        <Footer />
       </div>
     </>
   );
