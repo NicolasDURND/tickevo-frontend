@@ -14,8 +14,15 @@ const TicketsAttribuer = () => {
   const [commentText, setCommentText] = useState("");
   const [closeReason, setCloseReason] = useState("");
   const [showCloseError, setShowCloseError] = useState(false);
+  const [isPending, setIsPending] = useState(false); // ✅ État pour gérer la mise en attente
   const router = useRouter();
   const { ticketId } = router.query;
+
+  useEffect(() => {
+    if (ticket) {
+      setIsPending(ticket.status === "en attente"); // ✅ Met à jour l'état "en attente"
+    }
+  }, [ticket]); // ✅ Dépend de `ticket`, s'exécute après chaque mise à jour
 
   useEffect(() => {
     // ✅ Récupère les informations de l'utilisateur depuis localStorage
@@ -123,6 +130,7 @@ const TicketsAttribuer = () => {
         setTicket(updatedTicket);
         setCloseReason("");
         setShowCloseError(false);
+        setIsPending(newStatus === "en attente"); // ✅ Met à jour l'état "en attente"
       }
     } catch (err) {
       console.log("[TicketsAttribuer] Erreur mise à jour statut:", err);
@@ -130,11 +138,45 @@ const TicketsAttribuer = () => {
     }
   };
 
-  // ✅ Fonction pour mettre le ticket en attente
   const handleSetPending = async () => {
-    await handleUpdateStatus(ticket._id, "en attente", true);
-    router.push(`/ticketsAccepter`);
+    await handleUpdateStatus(ticket._id, "en attente");
+    setIsPending(true); // Désactive "Réattribuer" et "Clôturer"
+    router.push(`/ticketsAccepter`); // Redirige après la mise en attente
   };
+  
+    // ✅ Fonction pour annuler la mise en attente et réactiver les boutons
+  const handleCancelPending = async () => {
+    try {
+      console.log("[TicketsAttribuer] Annulation de la mise en attente du ticket:", ticket._id);
+
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(`http://localhost:3000/ticketsTechnicien/${ticket._id}/status`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify({ status: "en cours" }), // ✅ Envoie bien le nouveau statut "en cours"
+      });
+
+      if (!response.ok) {
+        throw new Error(`Erreur lors de la mise à jour du statut: ${response.status}`);
+      }
+
+      const updatedTicket = await response.json();
+      console.log("[TicketsAttribuer] Ticket mis à jour après annulation de l'attente:", updatedTicket);
+
+      // ✅ Met à jour l'état local du ticket pour actualiser l'affichage
+      setTicket(updatedTicket);
+      setIsPending(false); // Réactive "Réattribuer" et "Clôturer"
+
+    } catch (err) {
+      console.log("[TicketsAttribuer] Erreur lors de l'annulation de la mise en attente :", err);
+      setError(`Erreur: ${err.message}`);
+    }
+  };
+
 
 const handleReassignAndSetStatus = async () => {
   try {
@@ -286,24 +328,42 @@ const handleReassignAndSetStatus = async () => {
                 onChange={(e) => setCloseReason(e.target.value)}
               />
               <div className={styles.actionButtons}>
-                <button 
-                  className={`${styles.pendingButton} ${styles.orangeButton}`}
-                  onClick={handleSetPending}
-                >
-                  Mettre en attente
-                </button>
-                <button 
-                  className={styles.reassignButton}
-                  onClick={handleReassignAndSetStatus}
-                >
-                  Réattribuer
-                </button>
-                <button 
-                  className={styles.closeButton}
-                  onClick={() => handleUpdateStatus(ticket._id, "clôturé", true)}
-                >
-                  Clôturer
-                </button>
+                {/* ✅ Bouton Mettre en attente (Désactivé si déjà en attente) */}
+                  <button 
+                    className={styles.pendingButton} 
+                    onClick={handleSetPending} 
+                    disabled={isPending}
+                  >
+                    Mettre en attente
+                  </button>
+
+                  {/* ✅ Bouton Annuler la mise en attente (Désactivé si pas en attente) */}
+                  <button 
+                    className={styles.cancelPendingButton} 
+                    onClick={handleCancelPending} 
+                    disabled={!isPending}
+                  >
+                    Annuler la mise en attente
+                  </button>
+
+                  {/* ✅ Bouton Réattribuer (Désactivé si en attente) */}
+                  <button 
+                    className={styles.reassignButton} 
+                    onClick={handleReassignAndSetStatus} 
+                    disabled={isPending}
+                  >
+                    Réattribuer
+                  </button>
+
+                  {/* ✅ Bouton Clôturer (Désactivé si en attente) */}
+                  <button 
+                    className={styles.closeButton} 
+                    onClick={() => handleUpdateStatus(ticket._id, "clôturé", true)} 
+                    disabled={isPending}
+                  >
+                    Clôturer
+                  </button>
+
               </div>
             </div>
           ) : (
