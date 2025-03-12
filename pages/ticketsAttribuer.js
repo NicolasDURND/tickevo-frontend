@@ -29,24 +29,24 @@ const TicketsAttribuer = () => {
     const storedRole = localStorage.getItem("role");
     const storedUser = localStorage.getItem("user");
     const token = localStorage.getItem("token");
-    
-    console.log("[TicketsAttribuer] Informations utilisateur chargées:", { 
-      role: storedRole, 
-      token: token ? "Présent" : "Absent" 
+
+    console.log("[TicketsAttribuer] Informations utilisateur chargées:", {
+      role: storedRole,
+      token: token ? "Présent" : "Absent",
     });
-    
+
     if (storedRole) {
       setUserRole(storedRole);
     }
-    
+
     if (storedUser) {
       try {
         const user = JSON.parse(storedUser);
         const userIdentifier = user.id || user._id;
         setUserId(userIdentifier);
-        
+
         console.log("[TicketsAttribuer] User ID extrait:", userIdentifier);
-        
+
         if (router.isReady && ticketId) {
           fetchTicket(ticketId, token);
         }
@@ -61,77 +61,106 @@ const TicketsAttribuer = () => {
   const fetchTicket = async (ticketId, token) => {
     try {
       setLoading(true);
-      console.log("[TicketsAttribuer] Récupération du ticket spécifique:", ticketId);
-      
-      const response = await fetch(`http://localhost:3000/tickets/${ticketId}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
-        },
-      });
+      console.log(
+        "[TicketsAttribuer] Récupération du ticket spécifique:",
+        ticketId
+      );
 
-      console.log("[TicketsAttribuer] Réponse API ticket spécifique:", { 
-        status: response.status, 
-        ok: response.ok 
+      const response = await fetch(
+        `http://localhost:3000/tickets/${ticketId}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log("[TicketsAttribuer] Réponse API ticket spécifique:", {
+        status: response.status,
+        ok: response.ok,
       });
 
       if (!response.ok) {
-        throw new Error(`Erreur lors de la récupération du ticket: ${response.status}`);
+        throw new Error(
+          `Erreur lors de la récupération du ticket: ${response.status}`
+        );
       }
 
       const data = await response.json();
       console.log("[TicketsAttribuer] Données du ticket:", data);
-      
+
       setTicket(data);
     } catch (err) {
-      console.log("[TicketsAttribuer] Erreur récupération ticket spécifique:", err);
+      console.log(
+        "[TicketsAttribuer] Erreur récupération ticket spécifique:",
+        err
+      );
       setError(`Erreur: ${err.message}`);
     } finally {
       setLoading(false);
     }
   };
 
-  // ✅ Fonction pour mettre à jour le statut d'un ticket
   const handleUpdateStatus = async (ticketId, newStatus, redirect = false) => {
     try {
-      console.log("[TicketsAttribuer] Mise à jour du statut:", { ticketId, newStatus });
-      
-      // Vérifier si c'est une clôture et si une raison est fournie
+      console.log("[TicketsAttribuer] Mise à jour du statut:", {
+        ticketId,
+        newStatus,
+      });
+
       if (newStatus === "clôturé" && !closeReason.trim()) {
         setShowCloseError(true);
         return;
       }
-      
+
       const token = localStorage.getItem("token");
-      
-      const response = await fetch(`http://localhost:3000/ticketsTechnicien/${ticketId}/status`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
-        },
-        body: JSON.stringify({ 
-          status: newStatus,
-          closeReason: closeReason
-        }),
-      });
+
+      // ✅ 1. Ajouter le message de clôture dans les commentaires du ticket
+      if (newStatus === "clôturé") {
+        await fetch(
+          `http://localhost:3000/ticketsTechnicien/${ticketId}/comment`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+              userId,
+              message: closeReason, // ✅ Sauvegarde le message comme un commentaire
+            }),
+          }
+        );
+      }
+
+      // ✅ 2. Mettre à jour le statut du ticket
+      const response = await fetch(
+        `http://localhost:3000/ticketsTechnicien/${ticketId}/status`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            status: newStatus,
+          }),
+        }
+      );
 
       if (!response.ok) {
-        throw new Error(`Erreur lors de la mise à jour du statut: ${response.status}`);
+        throw new Error(
+          `Erreur lors de la mise à jour du statut: ${response.status}`
+        );
       }
 
-      // ✅ Rediriger vers ViewTickets si demandé, sinon mettre à jour l'état local
-      if (redirect) {
-        router.push("/ViewTickets");
-      } else {
-        // ✅ Mettre à jour l'état local après la mise à jour réussie
-        const updatedTicket = await response.json();
-        setTicket(updatedTicket);
-        setCloseReason("");
-        setShowCloseError(false);
-        setIsPending(newStatus === "en attente"); // ✅ Met à jour l'état "en attente"
-      }
+      const updatedTicket = await response.json();
+      setTicket(updatedTicket);
+      setCloseReason("");
+      setShowCloseError(false);
+      setIsPending(newStatus === "en attente");
     } catch (err) {
       console.log("[TicketsAttribuer] Erreur mise à jour statut:", err);
       setError(`Erreur: ${err.message}`);
@@ -143,89 +172,116 @@ const TicketsAttribuer = () => {
     setIsPending(true); // Désactive "Réattribuer" et "Clôturer"
     router.push(`/ticketsAccepter`); // Redirige après la mise en attente
   };
-  
-    // ✅ Fonction pour annuler la mise en attente et réactiver les boutons
+
+  // ✅ Fonction pour annuler la mise en attente et réactiver les boutons
   const handleCancelPending = async () => {
     try {
-      console.log("[TicketsAttribuer] Annulation de la mise en attente du ticket:", ticket._id);
+      console.log(
+        "[TicketsAttribuer] Annulation de la mise en attente du ticket:",
+        ticket._id
+      );
 
       const token = localStorage.getItem("token");
 
-      const response = await fetch(`http://localhost:3000/ticketsTechnicien/${ticket._id}/status`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
-        },
-        body: JSON.stringify({ status: "en cours" }), // ✅ Envoie bien le nouveau statut "en cours"
-      });
+      const response = await fetch(
+        `http://localhost:3000/ticketsTechnicien/${ticket._id}/status`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ status: "en cours" }), // ✅ Envoie bien le nouveau statut "en cours"
+        }
+      );
 
       if (!response.ok) {
-        throw new Error(`Erreur lors de la mise à jour du statut: ${response.status}`);
+        throw new Error(
+          `Erreur lors de la mise à jour du statut: ${response.status}`
+        );
       }
 
       const updatedTicket = await response.json();
-      console.log("[TicketsAttribuer] Ticket mis à jour après annulation de l'attente:", updatedTicket);
+      console.log(
+        "[TicketsAttribuer] Ticket mis à jour après annulation de l'attente:",
+        updatedTicket
+      );
 
       // ✅ Met à jour l'état local du ticket pour actualiser l'affichage
       setTicket(updatedTicket);
       setIsPending(false); // Réactive "Réattribuer" et "Clôturer"
-
     } catch (err) {
-      console.log("[TicketsAttribuer] Erreur lors de l'annulation de la mise en attente :", err);
+      console.log(
+        "[TicketsAttribuer] Erreur lors de l'annulation de la mise en attente :",
+        err
+      );
       setError(`Erreur: ${err.message}`);
     }
   };
 
+  const handleReassignAndSetStatus = async () => {
+    try {
+      console.log(
+        "[TicketsAttribuer] Réattribution du ticket et réinitialisation de l'affectation..."
+      );
 
-const handleReassignAndSetStatus = async () => {
-  try {
-    console.log("[TicketsAttribuer] Réattribution du ticket et réinitialisation de l'affectation...");
+      const token = localStorage.getItem("token");
 
-    const token = localStorage.getItem("token");
+      // ✅ Envoyer une requête pour réinitialiser assignedTo à null
+      const response = await fetch(
+        `http://localhost:3000/ticketsTechnicien/${ticket._id}/reassign`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ newTechnicianId: null }), // ✅ Réinitialisation
+        }
+      );
 
-    // ✅ Envoyer une requête pour réinitialiser assignedTo à null
-    const response = await fetch(`http://localhost:3000/ticketsTechnicien/${ticket._id}/reassign`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
-      },
-      body: JSON.stringify({ newTechnicianId: null }), // ✅ Réinitialisation
-    });
+      if (!response.ok) {
+        throw new Error(
+          `Erreur lors de la réattribution du ticket: ${response.status}`
+        );
+      }
 
-    if (!response.ok) {
-      throw new Error(`Erreur lors de la réattribution du ticket: ${response.status}`);
+      // ✅ Mettre à jour l'état local et rediriger
+      await handleUpdateStatus(ticket._id, "en cours", false);
+      router.push(`/ViewTickets?reassign=${ticket._id}`);
+    } catch (err) {
+      console.log("[TicketsAttribuer] Erreur lors de la réattribution :", err);
+      setError(`Erreur: ${err.message}`);
     }
-
-    // ✅ Mettre à jour l'état local et rediriger
-    await handleUpdateStatus(ticket._id, "en cours", false);
-    router.push(`/ViewTickets?reassign=${ticket._id}`);
-  } catch (err) {
-    console.log("[TicketsAttribuer] Erreur lors de la réattribution :", err);
-    setError(`Erreur: ${err.message}`);
-  }
-};
+  };
 
   // ✅ Fonction pour ajouter un commentaire à un ticket
   const handleAddComment = async (ticketId, message) => {
     if (!message.trim()) return;
-    
+
     try {
-      console.log("[TicketsAttribuer] Ajout commentaire:", { ticketId, message });
-      const token = localStorage.getItem("token");
-      
-      const response = await fetch(`http://localhost:3000/ticketsTechnicien/${ticketId}/comment`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
-        },
-        body: JSON.stringify({ userId, message }),
+      console.log("[TicketsAttribuer] Ajout commentaire:", {
+        ticketId,
+        message,
       });
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(
+        `http://localhost:3000/ticketsTechnicien/${ticketId}/comment`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ userId, message }),
+        }
+      );
 
       if (!response.ok) {
-        throw new Error(`Erreur lors de l'ajout du commentaire: ${response.status}`);
+        throw new Error(
+          `Erreur lors de l'ajout du commentaire: ${response.status}`
+        );
       }
 
       // ✅ Rafraîchir le ticket après l'ajout du commentaire
@@ -268,7 +324,7 @@ const handleReassignAndSetStatus = async () => {
         <div className={styles.container}>
           <h1 className={styles.title}>Ticket non trouvé</h1>
           {error && <p className={styles.error}>{error}</p>}
-          <button 
+          <button
             className={styles.backButton}
             onClick={() => router.push("/ViewTickets")}
           >
@@ -289,39 +345,41 @@ const handleReassignAndSetStatus = async () => {
       ) : (
         <HeaderUser />
       )}
-      
+
       <div className={styles.container}>
         <div className={styles.ticketHeader}>
           <h1 className={styles.title}>
             Ticket N°{ticket.ticketNumber} - {ticket.title}
           </h1>
         </div>
-        
+
         {/* Bouton de retour en bas à gauche */}
         <div className={styles.backButtonContainer}>
-          <button 
+          <button
             className={styles.backButton}
             onClick={() => router.push("/ViewTickets")}
           >
             Retour à la liste des tickets
           </button>
         </div>
-        
+
         <div className={styles.sectionBox}>
           <h2 className={styles.sectionTitle}>Description du ticket</h2>
           <div className={styles.descriptionBox}>
             <p>{ticket.description}</p>
           </div>
         </div>
-        
+
         <div className={styles.sectionBox}>
           <h2 className={styles.sectionTitle}>Actions</h2>
           {ticket.status !== "clôturé" ? (
             <div className={styles.actionsContainer}>
               {showCloseError && (
-                <p className={styles.error}>Veuillez entrer une explication avant de clôturer le ticket.</p>
+                <p className={styles.error}>
+                  Veuillez entrer une explication avant de clôturer le ticket.
+                </p>
               )}
-              <textarea 
+              <textarea
                 className={styles.textarea}
                 placeholder="Expliquez les raisons de la clôture du ticket..."
                 value={closeReason}
@@ -329,72 +387,78 @@ const handleReassignAndSetStatus = async () => {
               />
               <div className={styles.actionButtons}>
                 {/* ✅ Bouton Mettre en attente (Désactivé si déjà en attente) */}
-                  <button 
-                    className={styles.pendingButton} 
-                    onClick={handleSetPending} 
-                    disabled={isPending}
-                  >
-                    Mettre en attente
-                  </button>
+                <button
+                  className={styles.pendingButton}
+                  onClick={handleSetPending}
+                  disabled={isPending}
+                >
+                  Mettre en attente
+                </button>
 
-                  {/* ✅ Bouton Annuler la mise en attente (Désactivé si pas en attente) */}
-                  <button 
-                    className={styles.cancelPendingButton} 
-                    onClick={handleCancelPending} 
-                    disabled={!isPending}
-                  >
-                    Annuler la mise en attente
-                  </button>
+                {/* ✅ Bouton Annuler la mise en attente (Désactivé si pas en attente) */}
+                <button
+                  className={styles.cancelPendingButton}
+                  onClick={handleCancelPending}
+                  disabled={!isPending}
+                >
+                  Annuler la mise en attente
+                </button>
 
-                  {/* ✅ Bouton Réattribuer (Désactivé si en attente) */}
-                  <button 
-                    className={styles.reassignButton} 
-                    onClick={handleReassignAndSetStatus} 
-                    disabled={isPending}
-                  >
-                    Réattribuer
-                  </button>
+                {/* ✅ Bouton Réattribuer (Désactivé si en attente) */}
+                <button
+                  className={styles.reassignButton}
+                  onClick={handleReassignAndSetStatus}
+                  disabled={isPending}
+                >
+                  Réattribuer
+                </button>
 
-                  {/* ✅ Bouton Clôturer (Désactivé si en attente) */}
-                  <button 
-                    className={styles.closeButton} 
-                    onClick={() => handleUpdateStatus(ticket._id, "clôturé", true)} 
-                    disabled={isPending}
-                  >
-                    Clôturer
-                  </button>
-
+                {/* ✅ Bouton Clôturer (Désactivé si en attente) */}
+                <button
+                  className={styles.closeButton}
+                  onClick={() =>
+                    handleUpdateStatus(ticket._id, "clôturé", true)
+                  }
+                  disabled={isPending}
+                >
+                  Clôturer
+                </button>
               </div>
             </div>
           ) : (
             <p className={styles.closedMessage}>Ce ticket est clôturé.</p>
           )}
         </div>
-        
+
         <div className={styles.sectionBox}>
-          <h2 className={styles.sectionTitle}>Historique</h2>
+          <h2 className={styles.sectionTitle}>Message de clôture</h2>
           <div className={styles.historyContainer}>
             {ticket.comments && ticket.comments.length > 0 ? (
               ticket.comments.map((comment, index) => (
                 <div key={index} className={styles.historyItem}>
                   <div className={styles.commentHeader}>
                     <span className={styles.commentDate}>
-                      {new Date(comment.createdAt).toLocaleDateString()} {new Date(comment.createdAt).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
-                    </span>
+                      le &nbsp;
+                      {new Date(comment.timestamp).toLocaleDateString()}{" "}
+                      {/* Ajout de l'espace */}
+                      {" à "}
+                      {new Date(comment.timestamp).toLocaleTimeString([], {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
+                    </span>{" "}
+                    De : &nbsp;{/* Séparateur entre la date et le username */}
                     <span className={styles.commentAuthor}>
-                      {comment.userId?.username || comment.author || "utilisateur"}
-                    </span>
-                    <span className={styles.commentLabel}>
-                      {comment.type || "Commentaire"}
+                      {comment.userId?.username || "Utilisateur inconnu"}
                     </span>
                   </div>
-                  <div className={styles.commentContent}>
-                    {comment.message}
-                  </div>
+                  <div className={styles.commentContent}>{comment.message}</div>
                 </div>
               ))
             ) : (
-              <p className={styles.noComments}>Aucun commentaire pour le moment.</p>
+              <p className={styles.noComments}>
+                Aucun commentaire pour le moment.
+              </p>
             )}
           </div>
         </div>
