@@ -209,7 +209,7 @@ const UserManagement = ({ selectedUser }) => {
         throw new Error(data.message || "Erreur lors de la mise à jour du statut de l'utilisateur");
       }
   
-      alert(`Utilisateur ${data.success ? "activé" : "désactivé"} avec succès !`);
+      alert(data.message);
   
       // ✅ Récupérer les nouvelles données de l'utilisateur depuis la base de données
       const updatedUserResponse = await fetch(
