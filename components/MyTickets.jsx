@@ -173,7 +173,7 @@ const MyTickets = () => {
       ) : (
         <p className={styles.noTickets}>Aucun ticket trouvé</p>
       )}
-      <Footer />
+     
     </div>
   );
 };

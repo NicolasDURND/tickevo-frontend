@@ -38,7 +38,7 @@
   align-items: flex-start;
   gap: 50px; /* ✅ Ajoute un espace entre les deux cards sans changer leurs dimensions */
   width: 100%;
-  padding: 80px;
+  padding: 40px;
   max-width: 1200px;
   margin: 0 auto;
 }
