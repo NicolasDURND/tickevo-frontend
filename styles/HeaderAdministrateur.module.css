@@ -123,10 +123,6 @@
         width: 180px;
     }
 
-    .icon {
-        width: 25px;
-        height: 25px;
-    }
 }
 /* ✅ RESPONSIVE DESIGN - Mobile */
 @media (max-width: 768px) {
