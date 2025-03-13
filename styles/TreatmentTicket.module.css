@@ -1,65 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+/* --- Mise en page globale --- */
 .main {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #f5f7fb;
+  background-color: #f9f9f9; /* Fond clair et neutre */
   font-family: 'Roboto', sans-serif;
 }
 
 .container {
-  padding: 20px;
-  margin: 20px;
   max-width: 1200px;
-  margin: 20px auto;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #fff; /* Fond blanc de la "carte" principale */
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+/* --- Entête du ticket (Desktop) --- */
 .ticketHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: #5474B4; /* Couleur d'entête */
+  border-radius: 8px;
+  padding: 20px;
   margin-bottom: 20px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid #e1e4e8;
+  color: #fff;
 }
 
 .title {
-  color: #2c3e50;
-  font-size: 24px;
   margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.loading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  font-size: 18px;
-  color: #5474B4;
-}
-
-.error {
-  color: #e74c3c;
-  text-align: center;
-  padding: 15px;
-  font-size: 16px;
-  background-color: #fdedec;
-  border-radius: 5px;
-  margin-bottom: 20px;
-}
-
-.noTickets {
-  text-align: center;
-  padding: 30px;
-  color: #7f8c8d;
-  font-size: 16px;
-}
-
+/* --- Bouton de retour --- */
 .backButtonContainer {
-  display: flex;
-  justify-content: flex-start;
   margin-bottom: 20px;
 }
 
@@ -78,12 +59,40 @@
   background-color: #e9ecef;
 }
 
-/* Styling for ticket information box */
+/* --- Chargement et erreurs --- */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  color: #5474B4;
+  margin: 40px 0;
+}
+
+.error {
+  color: #e74c3c;
+  background-color: #fdedec;
+  text-align: center;
+  padding: 15px;
+  font-size: 16px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.noTickets {
+  text-align: center;
+  padding: 30px;
+  color: #7f8c8d;
+  font-size: 16px;
+}
+
+/* --- Infos du ticket (carte) --- */
 .ticketInfoBox {
   background-color: #f9f9f9;
   border-radius: 8px;
-  padding: 15px;
-  margin-bottom: 20px;
+  padding: 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
 .ticketInfoGrid {
@@ -109,11 +118,13 @@
   color: #212529;
 }
 
-/* Section styling */
+/* --- Sections (Description, Historique, etc.) --- */
 .sectionBox {
   margin-bottom: 30px;
   border: 1px solid #e1e4e8;
   border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
 .sectionTitle {
@@ -122,10 +133,8 @@
   font-size: 18px;
   padding: 12px 15px;
   margin: 0;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  border-bottom: 1px solid #e1e4e8;
   font-weight: 500;
+  border-bottom: 1px solid #e1e4e8;
 }
 
 .descriptionBox {
@@ -133,9 +142,10 @@
   min-height: 60px;
 }
 
-/* Actions styling */
+/* --- Actions (boutons, textarea, etc.) --- */
 .actionsContainer {
   padding: 15px;
+  background: #fff;
 }
 
 .textarea {
@@ -155,25 +165,11 @@
   gap: 10px;
 }
 
-.reassignButton {
-  padding: 10px 20px;
-  background-color: #4b6bab;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.2s;
-}
-
-.reassignButton:hover {
-  background-color: #3c5a96;
-}
-
+/* Boutons d'action */
 .pendingButton {
   padding: 10px 20px;
-  background-color: #ff9800;
-  color: white;
+  background-color: #ffc107; /* "en-attente" */
+  color: #333;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -182,15 +178,37 @@
 }
 
 .pendingButton:hover {
-  background-color: #e68a00;
+  background-color: #e0a800;
 }
 
-.pendingButton:disabled,
-.cancelPendingButton:disabled,
-.reassignButton:disabled,
-.closeButton:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+.cancelPendingButton {
+  padding: 10px 20px;
+  background-color: #f1f3f5;
+  color: #343a40;
+  border: 1px solid #dfe3e8;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.cancelPendingButton:hover {
+  background-color: #e9ecef;
+}
+
+.reassignButton {
+  padding: 10px 20px;
+  background-color: #17a2b8; /* "en-cours" */
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.reassignButton:hover {
+  background-color: #138496;
 }
 
 .closeButton {
@@ -208,13 +226,21 @@
   background-color: #218838;
 }
 
+.pendingButton:disabled,
+.cancelPendingButton:disabled,
+.reassignButton:disabled,
+.closeButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
 .closedMessage {
   padding: 15px;
   color: #6c757d;
   font-style: italic;
 }
 
-/* History styling */
+/* --- Historique des commentaires --- */
 .historyContainer {
   padding: 10px 15px;
 }
@@ -266,7 +292,7 @@
   padding: 10px 0;
 }
 
-/* Comment form */
+/* --- Formulaire de commentaire --- */
 .commentForm {
   display: flex;
   flex-direction: column;
@@ -300,7 +326,7 @@
   background-color: #3c5a96;
 }
 
-/* Status specific styles */
+/* --- Sélecteur de statut --- */
 .statusSelect {
   padding: 6px 10px;
   border: 1px solid #dfe3e8;
@@ -308,7 +334,7 @@
   background-color: white;
 }
 
-/* Table styles for compatibility with previous version */
+/* --- Table pour compatibilité --- */
 .ticketsTable {
   width: 100%;
   border-collapse: collapse;
@@ -348,3 +374,64 @@
 .viewButton:hover, .commentButton:hover {
   background-color: #3c5a96;
 }
+
+/* --- RESPONSIVE (Mobile) --- */
+@media screen and (max-width: 768px) {
+  .container {
+    margin: 20px 10px;
+    padding: 20px;
+  }
+  
+  .ticketHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+  
+  /* Réduction de la police pour le titre pour que le texte complet tienne */
+  .title {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .ticketInfoGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  /* Affichage des boutons d'action côte à côte en mode mobile */
+  .actionButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 5px;
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .actionButtons button {
+    flex: 1;
+    margin: 0;
+  }
+  
+  .sectionTitle {
+    font-size: 16px;
+    padding: 10px 12px;
+  }
+  
+  .commentButton {
+    align-self: stretch;
+  }
+  
+  /* Réduction de la hauteur et de la taille de la police pour les boutons d'action */
+  .pendingButton,
+  .cancelPendingButton,
+  .reassignButton,
+  .closeButton {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+}
+
+
+
+

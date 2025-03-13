@@ -1,82 +1,84 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
 
+/* --- Styles généraux (desktop) --- */
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
   font-family: 'Roboto', sans-serif;
+  min-height: 100vh;
 }
 
 .title {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 30px;
   color: #333;
+  text-align: center;
 }
 
-.sectionTitle{
-  font-size: 14px;
-  font-weight: bold;
-  color: #333;
-}
-
-/* ✅ Boutons de filtre */
 .filterButtons {
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 30px;
 }
 
 .filterButton {
-  padding: 8px 16px;
+  padding: 10px 20px;
   border: none;
-  border-radius: 5px;
-  background: #ccc;
+  border-radius: 25px;
+  background: #e0e0e0;
+  color: #555;
+  font-size: 16px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .filterButton:hover {
-  background: #999;
+  background: #d5d5d5;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .active {
-  background: #007bff;
-  color: white;
+  background: #5474B4;
+  color: #fff;
 }
 
 .ticketContainer {
-  width: 80%;
-  border: 1px solid #ccc;
-  padding: 15px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  background: #f9f9f9;
+  width: 90%;
+  max-width: 1000px; /* Carte élargie sur desktop */
+  margin: 20px auto;
+  border: none;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
 }
 
+.ticketContainer:hover {
+  transform: translateY(-3px);
+}
+
+/* --- Header en mode desktop : grille pour répartir l'espace --- */
 .ticketHeader {
   display: grid;
-  grid-template-columns: 3fr 1fr 1fr 1fr auto; /* ✅ Fixe la largeur des colonnes */
+  grid-template-columns: 3fr 1fr 1fr 1fr auto;
   align-items: center;
-  gap: 10px; /* ✅ Ajoute un espacement uniforme */
-  padding: 5px;
-  background: #e6e6e6;
-  border-radius: 5px;
+  gap: 15px;
+  padding: 20px;
+  background: #5474B4;
+  color: #fff;
 }
 
 .ticketHeader span {
-  white-space: nowrap; /* ✅ Empêche le retour à la ligne */
+  font-size: 14px;
+  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; /* ✅ Ajoute "..." si le texte est trop long */
-}
-
-.ticketHeader span:nth-child(2), /* Date */
-.ticketHeader span:nth-child(3), /* Catégorie */
-.ticketHeader span:nth-child(4) { /* Statut */
-  min-width: 120px; /* ✅ Fixe une largeur minimale pour éviter le décalage */
-  text-align: center;
+  text-overflow: ellipsis;
 }
 
 .arrowButton {
@@ -84,53 +86,215 @@
   border: none;
   cursor: pointer;
   font-size: 18px;
-  min-width: 30px; /* ✅ Empêche la flèche de bouger */
+  color: #fff;
 }
 
-
+/* --- Statuts avec couleurs personnalisées --- */
 .status {
   font-weight: bold;
   padding: 5px 10px;
-  border-radius: 5px;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 14px;
 }
 
-/* ✅ Différencier les statuts */
 .en-cours {
-  background-color: #ffcc00;
-  color: black;
+  background-color: #17a2b8; /* Couleur rétablie pour "en-cours" */
+  color: #fff;
 }
 
 .en-attente {
-  background-color: #ff6600;
-  color: white;
+  background-color: #ffc107; /* Couleur rétablie pour "en-attente" */
+  color: #333;
 }
 
 .clôturé {
   background-color: #28a745;
-  color: white;
-}
-
-.arrowButton {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 18px;
+  color: #fff;
 }
 
 .ticketDetails {
-  padding: 10px;
-  background: #ffffff;
-  border-top: 1px solid #ccc;
+  padding: 20px;
+  border-top: 1px solid #eee;
+  background: #f9f9f9;
+  color: #333;
+  font-size: 16px;
+}
+
+.ticketDetails p {
+  margin-bottom: 15px;
+  line-height: 1.5;
+  font-size: 16px;
+}
+
+.sectionBox {
+  margin-top: 20px;
+}
+
+.sectionTitle {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #333;
+  border-bottom: 2px solid #5474B4;
+  padding-bottom: 5px;
+}
+
+.historyContainer {
+  margin-top: 10px;
+}
+
+.historyItem {
+  padding: 15px;
+  border-left: 4px solid #5474B4;
+  background: #fff;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.commentHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #555;
+}
+
+.commentContent {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #444;
+}
+
+.noComments {
+  font-size: 14px;
+  text-align: center;
+  font-style: italic;
+  color: #777;
 }
 
 .noTickets {
+  text-align: center;
   color: #777;
   font-style: italic;
+  margin-top: 20px;
 }
 
-.sectionTitle{
-  font-size: 17px;
-  font-weight: bolder;
-  margin-bottom: 20px;
-  color: #000000;
+/* --- Responsive mobile --- */
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 20px 10px;
+  }
+
+  .title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    
+  }
+
+  .ticketDetails {
+    margin-bottom: 15px;
+    line-height: 1.5;
+    font-size: 16px;
+  }
+
+  .filterButton {
+    padding: 8px 15px;
+    font-size: 14px;
+  }
+
+  /* Le header passe en flex-wrap pour gérer deux lignes */
+  .ticketHeader {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 10px;
+  }
+
+  /* On enlève le truncage pour la demande sur mobile */
+  .ticketHeader span {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: initial;
+  }
+
+  /* 1ère ligne : la demande (1er span) + flèche à droite */
+  .ticketHeader span:first-of-type {
+    order: 1;
+    flex: 1 1 auto;
+    font-size: 13px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .arrowButton {
+    order: 2;
+    font-size: 16px;
+    margin-left: auto;
+  }
+
+  /* 2e ligne : date (2e span) à gauche, statut (4e span) à droite */
+  .ticketHeader span:nth-of-type(2) {
+    order: 3;
+    flex: 0 1 auto;
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+    flex-basis: 100%;
+  }
+
+  .ticketHeader span:nth-of-type(4) {
+    order: 4;
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: auto;
+    padding: 5px 10px;
+    flex: 0 0 auto;
+  }
+
+  /* Masquer le 3e span (catégorie) en mobile */
+  .ticketHeader span:nth-of-type(3) {
+    display: none;
+  }
+
+  .ticketDetails {
+    padding: 15px;
+  }
+
+  .sectionTitle {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .historyItem {
+    padding: 10px;
+  }
+
+  .commentHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 12px;
+  }
+
+  .commentContent {
+    font-size: 12px;
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
