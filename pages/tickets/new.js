@@ -191,7 +191,6 @@ const NewTicket = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

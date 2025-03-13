@@ -104,9 +104,9 @@ const MyTickets = () => {
               <span>{new Date(ticket.createdAt).toLocaleDateString()}</span>
               <span>{ticket.category}</span>
               <span
-                className={`${styles.status} ${
-                  styles[ticket.status.toLowerCase()]
-                }`}
+                className={`${styles.status} ${styles[ticket.status
+                  .toLowerCase()
+                  .replace(/\s+/g, "-")]}`}
               >
                 {ticket.status}
               </span>
