@@ -54,11 +54,13 @@ const Login = () => {
   
   return (
     <div className={styles.container}>
-      <div className={styles.logo}>
-        <img src="/LogoV2.jpg" alt="logo" width={250} height={200} />
-      </div>
+      
 
       <div className={styles.input}>
+
+        <div className={styles.logo}>
+          <img src="/LogoV2.jpg" alt="logo" width={250} height={200} />
+        </div>
         <input
           className={styles.username}
           type="text"
