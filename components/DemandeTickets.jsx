@@ -14,6 +14,7 @@ const DemandeTickets = () => {
 
   return (
     <div className={styles.card}>
+      <h2 className={styles.title}>Créer un ticket</h2>
       <div className={styles.tabs}>
         <button
           className={`${styles.tab} ${

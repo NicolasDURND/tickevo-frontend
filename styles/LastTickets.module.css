@@ -27,7 +27,8 @@
 
 /* ✅ Titre de la section */
 .title {
-    font-size: 20px;
+    font-size: 25px;
+    font-family: 'Roboto', sans-serif;
     font-weight: bold;
     margin-bottom: 10px;
     color: #333;

@@ -1,5 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
+/* ✅ Titre de la section */
+.title {
+  font-size: 25px;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+  margin-bottom: 10px;
+  color: #333;
+}
+
 .card {
     width: 800px; /* Ajuste la largeur */
     padding: 20px;
