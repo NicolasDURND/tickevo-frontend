@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import HeaderTechnicien from "../components/HeaderTechnicien";
 import HeaderAdministrateur from "../components/HeaderAdministrateur";
-import styles from "../styles/ViewTickets.module.css";
+import styles from "../styles/AllTicketsList.module.css";
 import { useRouter } from "next/router";
 
-const ViewTickets = () => {
+const allTicketsList = () => {
   const [tickets, setTickets] = useState([]);
   const [sortedTickets, setSortedTickets] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -110,8 +110,8 @@ const ViewTickets = () => {
       }
 
       // ✅ Rediriger vers la page des tickets attribués avec l'ID du ticket
-      // router.push(`/ticketsAttribuer?ticketId=${ticketId}`);
-      router.push(`/ticketsAccepter`);
+      // router.push(`/treatmentTicket?ticketId=${ticketId}`);
+      router.push(`/personalTicketsList`);
     } catch (err) {
       setError(err.message);
     }
@@ -209,4 +209,4 @@ const ViewTickets = () => {
   );
 };
 
-export default ViewTickets;
+export default allTicketsList;

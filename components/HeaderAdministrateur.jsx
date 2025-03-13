@@ -41,8 +41,8 @@ function HeaderAdministrateur() {
       {/* Navigation */}
       <nav className={styles.nav}>
         <button className={styles.button} onClick={() => router.push("/home")}><IconHome size={25} className={styles.icon} /></button>
-        <button className={styles.button} onClick={() => router.push("/ViewTickets")}><IconArchive size={25} className={styles.icon} /></button>
-        <button className={styles.button} onClick={() => router.push("/ticketsAccepter")}><IconFiles size={25} className={styles.icon} /></button>
+        <button className={styles.button} onClick={() => router.push("/allTicketsList")}><IconArchive size={25} className={styles.icon} /></button>
+        <button className={styles.button} onClick={() => router.push("/personalTicketsList")}><IconFiles size={25} className={styles.icon} /></button>
         <button className={styles.button}><IconBell size={25} className={styles.icon} /></button>
         <button className={styles.button} onClick={() => router.push("/mytickets")}><IconTicket size={25} className={styles.icon} /></button>
         <button className={styles.button} onClick={() => router.push("/admin")}><IconSettings size={25} className={styles.icon} /></button>

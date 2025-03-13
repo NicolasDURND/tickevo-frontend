@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import HeaderTechnicien from "../components/HeaderTechnicien";
 import HeaderAdministrateur from "../components/HeaderAdministrateur";
-import styles from "../styles/TicketsAccepter.module.css";
+import styles from "../styles/PersonalTicketsList.module.css";
 
-const TicketsAccepter = () => {
+const personalTicketsList = () => {
   const [tickets, setTickets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -42,7 +42,7 @@ const TicketsAccepter = () => {
   const fetchUserTickets = async (userId) => {
     try {
       setLoading(true);
-      console.log("[TicketsAccepter] Récupération des tickets pour l'utilisateur:", userId);
+      console.log("[personalTicketsList] Récupération des tickets pour l'utilisateur:", userId);
       
       // Ajout d'une période d'attente pour s'assurer que le serveur est prêt
       const response = await fetch(`http://localhost:3000/ticketsTechnicien/assigned/${userId}`, {
@@ -54,16 +54,16 @@ const TicketsAccepter = () => {
       });
 
       if (!response.ok) {
-        console.error(`[TicketsAccepter] Erreur HTTP: ${response.status}`);
+        console.error(`[personalTicketsList] Erreur HTTP: ${response.status}`);
         throw new Error(`Erreur lors de la récupération des tickets: ${response.status}`);
       }
 
       const data = await response.json();
-      console.log("[TicketsAccepter] Tickets récupérés:", data);
+      console.log("[personalTicketsList] Tickets récupérés:", data);
       
       // Vérifier si les tickets existent dans la réponse
       if (!data.tickets) {
-        console.error("[TicketsAccepter] Format de réponse inattendu:", data);
+        console.error("[personalTicketsList] Format de réponse inattendu:", data);
         setTickets([]);
         return;
       }
@@ -71,7 +71,7 @@ const TicketsAccepter = () => {
       // ✅ Récupération des tickets (déjà triés par le backend du plus récent au plus ancien)
       setTickets(data.tickets);
     } catch (err) {
-      console.error("[TicketsAccepter] Erreur:", err);
+      console.error("[personalTicketsList] Erreur:", err);
       setError(`Erreur: ${err.message}`);
     } finally {
       setLoading(false);
@@ -156,7 +156,7 @@ const TicketsAccepter = () => {
                     <td>
                       <button
                         className={styles.viewButton}
-                        onClick={() => router.push(`/ticketsAttribuer?ticketId=${ticket._id}`)}
+                        onClick={() => router.push(`/treatmentTicket?ticketId=${ticket._id}`)}
                       >
                         Voir
                       </button>
@@ -172,4 +172,4 @@ const TicketsAccepter = () => {
   );
 };
 
-export default TicketsAccepter;
+export default personalTicketsList;

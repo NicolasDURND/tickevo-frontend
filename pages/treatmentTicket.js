@@ -3,9 +3,9 @@ import { useRouter } from "next/router";
 import HeaderTechnicien from "../components/HeaderTechnicien";
 import HeaderAdministrateur from "../components/HeaderAdministrateur";
 import HeaderUser from "../components/HeaderUser";
-import styles from "../styles/ticketsAttribuer.module.css";
+import styles from "../styles/TreatmentTicket.module.css";
 
-const TicketsAttribuer = () => {
+const treatmentTicket = () => {
   const [ticket, setTicket] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -30,7 +30,7 @@ const TicketsAttribuer = () => {
     const storedUser = localStorage.getItem("user");
     const token = localStorage.getItem("token");
 
-    console.log("[TicketsAttribuer] Informations utilisateur chargées:", {
+    console.log("[treatmentTicket] Informations utilisateur chargées:", {
       role: storedRole,
       token: token ? "Présent" : "Absent",
     });
@@ -45,13 +45,13 @@ const TicketsAttribuer = () => {
         const userIdentifier = user.id || user._id;
         setUserId(userIdentifier);
 
-        console.log("[TicketsAttribuer] User ID extrait:", userIdentifier);
+        console.log("[treatmentTicket] User ID extrait:", userIdentifier);
 
         if (router.isReady && ticketId) {
           fetchTicket(ticketId, token);
         }
       } catch (err) {
-        console.log("[TicketsAttribuer] Erreur de parsing user:", err);
+        console.log("[treatmentTicket] Erreur de parsing user:", err);
         setError("Erreur lors de la récupération des informations utilisateur");
         setLoading(false);
       }
@@ -62,7 +62,7 @@ const TicketsAttribuer = () => {
     try {
       setLoading(true);
       console.log(
-        "[TicketsAttribuer] Récupération du ticket spécifique:",
+        "[treatmentTicket] Récupération du ticket spécifique:",
         ticketId
       );
 
@@ -77,7 +77,7 @@ const TicketsAttribuer = () => {
         }
       );
 
-      console.log("[TicketsAttribuer] Réponse API ticket spécifique:", {
+      console.log("[treatmentTicket] Réponse API ticket spécifique:", {
         status: response.status,
         ok: response.ok,
       });
@@ -89,12 +89,12 @@ const TicketsAttribuer = () => {
       }
 
       const data = await response.json();
-      console.log("[TicketsAttribuer] Données du ticket:", data);
+      console.log("[treatmentTicket] Données du ticket:", data);
 
       setTicket(data);
     } catch (err) {
       console.log(
-        "[TicketsAttribuer] Erreur récupération ticket spécifique:",
+        "[treatmentTicket] Erreur récupération ticket spécifique:",
         err
       );
       setError(`Erreur: ${err.message}`);
@@ -105,7 +105,7 @@ const TicketsAttribuer = () => {
 
   const handleUpdateStatus = async (ticketId, newStatus, redirect = false) => {
     try {
-      console.log("[TicketsAttribuer] Mise à jour du statut:", {
+      console.log("[treatmentTicket] Mise à jour du statut:", {
         ticketId,
         newStatus,
       });
@@ -168,7 +168,7 @@ const TicketsAttribuer = () => {
         }
 
     } catch (err) {
-      console.log("[TicketsAttribuer] Erreur mise à jour statut:", err);
+      console.log("[treatmentTicket] Erreur mise à jour statut:", err);
       setError(`Erreur: ${err.message}`);
     }
   };
@@ -176,14 +176,14 @@ const TicketsAttribuer = () => {
   const handleSetPending = async () => {
     await handleUpdateStatus(ticket._id, "en attente");
     setIsPending(true); // Désactive "Réattribuer" et "Clôturer"
-    router.push(`/ticketsAccepter`); // Redirige après la mise en attente
+    router.push(`/personalTicketsList`); // Redirige après la mise en attente
   };
 
   // ✅ Fonction pour annuler la mise en attente et réactiver les boutons
   const handleCancelPending = async () => {
     try {
       console.log(
-        "[TicketsAttribuer] Annulation de la mise en attente du ticket:",
+        "[treatmentTicket] Annulation de la mise en attente du ticket:",
         ticket._id
       );
 
@@ -209,7 +209,7 @@ const TicketsAttribuer = () => {
 
       const updatedTicket = await response.json();
       console.log(
-        "[TicketsAttribuer] Ticket mis à jour après annulation de l'attente:",
+        "[treatmentTicket] Ticket mis à jour après annulation de l'attente:",
         updatedTicket
       );
 
@@ -218,7 +218,7 @@ const TicketsAttribuer = () => {
       setIsPending(false); // Réactive "Réattribuer" et "Clôturer"
     } catch (err) {
       console.log(
-        "[TicketsAttribuer] Erreur lors de l'annulation de la mise en attente :",
+        "[treatmentTicket] Erreur lors de l'annulation de la mise en attente :",
         err
       );
       setError(`Erreur: ${err.message}`);
@@ -228,7 +228,7 @@ const TicketsAttribuer = () => {
   const handleReassignAndSetStatus = async () => {
     try {
       console.log(
-        "[TicketsAttribuer] Réattribution du ticket et réinitialisation de l'affectation..."
+        "[treatmentTicket] Réattribution du ticket et réinitialisation de l'affectation..."
       );
 
       const token = localStorage.getItem("token");
@@ -254,9 +254,9 @@ const TicketsAttribuer = () => {
 
       // ✅ Mettre à jour l'état local et rediriger
       await handleUpdateStatus(ticket._id, "en cours", false);
-      router.push(`/ViewTickets?reassign=${ticket._id}`);
+      router.push(`/allTicketsList?reassign=${ticket._id}`);
     } catch (err) {
-      console.log("[TicketsAttribuer] Erreur lors de la réattribution :", err);
+      console.log("[treatmentTicket] Erreur lors de la réattribution :", err);
       setError(`Erreur: ${err.message}`);
     }
   };
@@ -266,7 +266,7 @@ const TicketsAttribuer = () => {
     if (!message.trim()) return;
 
     try {
-      console.log("[TicketsAttribuer] Ajout commentaire:", {
+      console.log("[treatmentTicket] Ajout commentaire:", {
         ticketId,
         message,
       });
@@ -295,7 +295,7 @@ const TicketsAttribuer = () => {
       setTicket(updatedTicket);
       setCommentText("");
     } catch (err) {
-      console.log("[TicketsAttribuer] Erreur ajout commentaire:", err);
+      console.log("[treatmentTicket] Erreur ajout commentaire:", err);
       setError(`Erreur: ${err.message}`);
     }
   };
@@ -332,7 +332,7 @@ const TicketsAttribuer = () => {
           {error && <p className={styles.error}>{error}</p>}
           <button
             className={styles.backButton}
-            onClick={() => router.push("/ViewTickets")}
+            onClick={() => router.push("/allTicketsList")}
           >
             Retour à la liste des tickets
           </button>
@@ -363,7 +363,7 @@ const TicketsAttribuer = () => {
         <div className={styles.backButtonContainer}>
           <button
             className={styles.backButton}
-            onClick={() => router.push("/ViewTickets")}
+            onClick={() => router.push("/allTicketsList")}
           >
             Retour à la liste des tickets
           </button>
@@ -473,4 +473,4 @@ const TicketsAttribuer = () => {
   );
 };
 
-export default TicketsAttribuer;
+export default treatmentTicket;
