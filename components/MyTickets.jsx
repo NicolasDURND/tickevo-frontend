@@ -131,6 +131,41 @@ const MyTickets = () => {
                     <strong>Réponse :</strong> {ticket.response}
                   </p>
                 )}
+                
+                <div className={styles.sectionBox}>
+                  <h2 className={styles.sectionTitle}>Réponse du technicien :</h2>
+                  <div className={styles.historyContainer}>
+                    {ticket.comments && ticket.comments.length > 0 ? (
+                      // 🔹 Filtre pour récupérer uniquement le dernier commentaire
+                      (() => {
+                        const lastComment = ticket.comments[ticket.comments.length - 1];
+                        return (
+                          <div key={lastComment._id} className={styles.historyItem}>
+                            <div className={styles.commentHeader}>
+                              <span className={styles.commentDate}>
+                                le&nbsp;
+                                {new Date(lastComment.timestamp).toLocaleDateString()} {" "}
+                                {" à "}
+                                {new Date(lastComment.timestamp).toLocaleTimeString([], {
+                                  hour: "2-digit",
+                                  minute: "2-digit",
+                                })}
+                              </span>{" "}
+                              <span className={styles.commentAuthor}>
+                              De :&nbsp;
+                                {lastComment.userId?.username || "Utilisateur inconnu"}
+                              </span>
+                            </div>
+                            <div className={styles.commentContent}>{lastComment.message}</div>
+                          </div>
+                        );
+                      })()
+                    ) : (
+                      <p className={styles.noComments}>Aucun message de clôture disponible.</p>
+                    )}
+                  </div>
+                </div>
+
               </div>
             )}
           </div>

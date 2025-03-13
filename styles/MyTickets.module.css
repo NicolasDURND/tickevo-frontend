@@ -16,6 +16,12 @@
   color: #333;
 }
 
+.sectionTitle{
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+
 /* ✅ Boutons de filtre */
 .filterButtons {
   display: flex;
@@ -120,4 +126,11 @@
 .noTickets {
   color: #777;
   font-style: italic;
+}
+
+.sectionTitle{
+  font-size: 17px;
+  font-weight: bolder;
+  margin-bottom: 20px;
+  color: #000000;
 }

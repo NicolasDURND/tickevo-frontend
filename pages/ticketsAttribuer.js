@@ -161,6 +161,12 @@ const TicketsAttribuer = () => {
       setCloseReason("");
       setShowCloseError(false);
       setIsPending(newStatus === "en attente");
+
+      // Rafraîchit la page si redirect est true
+      if (redirect) {
+        router.replace(router.asPath, undefined, { shallow: true });
+        }
+
     } catch (err) {
       console.log("[TicketsAttribuer] Erreur mise à jour statut:", err);
       setError(`Erreur: ${err.message}`);
@@ -431,7 +437,7 @@ const TicketsAttribuer = () => {
         </div>
 
         <div className={styles.sectionBox}>
-          <h2 className={styles.sectionTitle}>Message de clôture</h2>
+          <h2 className={styles.sectionTitle}>Message de clôture :</h2>
           <div className={styles.historyContainer}>
             {ticket.comments && ticket.comments.length > 0 ? (
               ticket.comments.map((comment, index) => (
