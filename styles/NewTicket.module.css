@@ -92,11 +92,48 @@
 .submitButton:hover {
   background-color: #1e7e34;
 }
+
 .rte {
-    width: 100%;
-    min-height: 150px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    font-size: 1rem;
+  width: 100%;
+  min-height: 150px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 900px) {
+  .card {
+    width: 90%;
+    padding: 60px;
   }
-  
+  .title {
+    font-size: 22px;
+  }
+  .object {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .card {
+    width: 95%;
+    padding: 40px;
+  }
+  .title {
+    font-size: 20px;
+  }
+  .object {
+    font-size: 14px;
+  }
+  .textarea {
+    height: 140px;
+  }
+  .cancelButton, .submitButton {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+  .buttonContainer {
+    flex-direction: column;
+  }
+}
