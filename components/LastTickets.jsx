@@ -76,7 +76,7 @@ const LastTickets = () => {
                     className={styles.detailButton}
                     onClick={() => router.push(`/tickets/${ticket._id}`)}
                   >
-                    Détail
+                    Détails
                   </button>
                 </td>
               </tr>
