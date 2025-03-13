@@ -40,12 +40,12 @@ function HeaderTechnicien() {
 
       {/* Navigation */}
       <nav className={styles.nav}>
-        <button className={styles.button} onClick={() => router.push("/home")}><IconHome size={25} className={styles.icon} /></button>
-        <button className={styles.button} onClick={() => router.push("/allTicketsList")}><IconArchive size={25} className={styles.icon} /></button>
-        <button className={styles.button} onClick={() => router.push("/personalTicketsList")}><IconFiles size={25} className={styles.icon} /></button>
-        <button className={styles.button}><IconBell size={25} className={styles.icon} /></button>
-        <button className={styles.button} onClick={() => router.push("/mytickets")}><IconTicket size={25} className={styles.icon} /></button>
-        <button className={styles.button} onClick={handleLogout}><IconLogout size={25} className={styles.icon} /></button>
+      <button title="Accueil" className={styles.button} onClick={() => router.push("/home")}><IconHome size={25} className={styles.icon} /></button>
+        <button title="Tous les tickets à traiter" className={styles.button} onClick={() => router.push("/allTicketsList")}><IconArchive size={25} className={styles.icon} /></button>
+        <button title="Mes tickets à traiter" className={styles.button} onClick={() => router.push("/personalTicketsList")}><IconFiles size={25} className={styles.icon} /></button>
+        <button title="Notifications" className={styles.button}><IconBell size={25} className={styles.icon} /></button>
+        <button title="Mes tickets créés" className={styles.button} onClick={() => router.push("/mytickets")}><IconTicket size={25} className={styles.icon} /></button>
+        <button title="Déconnexion" className={styles.button} onClick={handleLogout}><IconLogout size={25} className={styles.icon} /></button>
       </nav>
     </div>
   );

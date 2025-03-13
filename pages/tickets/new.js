@@ -3,16 +3,27 @@ import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { logout } from "../../reducers/authentification"; // ✅ Vérifie le chemin exact !
 import HeaderUser from "../../components/HeaderUser";
+import HeaderTechnicien from "../../components/HeaderTechnicien";
+import HeaderAdministrateur from "../../components/HeaderAdministrateur";
 import styles from "../../styles/NewTicket.module.css";
 import Footer from "../../components/Footer";
 
 const NewTicket = () => {
   const router = useRouter();
   const dispatch = useDispatch();
+  
+  const [userRole, setUserRole] = useState(null);
   const [description, setDescription] = useState("");
   const [ticketType, setTicketType] = useState(""); // ✅ Stocke la catégorie
   const [subCategory, setSubCategory] = useState(""); // ✅ Stocke la sous-catégorie (pour les incidents)
   const [category, setCategory] = useState(""); // ✅ Définit la catégorie principale (Demande ou Incident)
+
+  useEffect(() => {
+    const storedRole = localStorage.getItem("role"); // Récupère le rôle stocké
+    if (storedRole) {
+      setUserRole(storedRole);
+    }
+  }, []);
 
   useEffect(() => {
     if (router.query.category) {
@@ -143,7 +154,13 @@ const NewTicket = () => {
 
   return (
     <div className={styles.pageContainer}>
-      <HeaderUser />
+      {userRole === "Administrateur" ? (
+        <HeaderAdministrateur />
+      ) : userRole === "Technicien" ? (
+        <HeaderTechnicien />
+      ) : (
+        <HeaderUser />
+      )}
       <div className={styles.content}>
         <h2 className={styles.title}>Créer un ticket</h2>
 

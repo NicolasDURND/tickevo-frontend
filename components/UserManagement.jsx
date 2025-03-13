@@ -2,17 +2,20 @@ import React, { useState, useEffect } from "react";
 import styles from "../styles/Admin.module.css";
 
 const UserManagement = ({ selectedUser }) => {
+  // Tab state: either "modify" or "create"
   const [activeTab, setActiveTab] = useState("modify");
+  // State to store roles and services data fetched from the backend
   const [roles, setRoles] = useState([]);
   const [services, setServices] = useState([]);
 
-  // ✅ États des formulaires
+  // State for the modification form data
   const [modifyFormData, setModifyFormData] = useState({
     username: "",
     password: "",
     roleId: "",
     serviceId: "",
   });
+  // State for the creation form data
   const [createFormData, setCreateFormData] = useState({
     username: "",
     email: "",
@@ -21,7 +24,9 @@ const UserManagement = ({ selectedUser }) => {
     serviceId: "",
   });
 
-  // ✅ Récupérer les rôles et services depuis le backend
+  // -----------------------------
+  // Fetch roles and services on component mount
+  // -----------------------------
   useEffect(() => {
     const fetchRolesAndServices = async () => {
       try {
@@ -31,6 +36,7 @@ const UserManagement = ({ selectedUser }) => {
           return;
         }
 
+        // Fetch roles and services concurrently
         const [rolesResponse, servicesResponse] = await Promise.all([
           fetch("http://localhost:3000/users/roles", {
             method: "GET",
@@ -54,19 +60,13 @@ const UserManagement = ({ selectedUser }) => {
         if (rolesResponse.ok) {
           setRoles(rolesData.roles);
         } else {
-          console.error(
-            "Erreur lors du chargement des rôles:",
-            rolesData.error
-          );
+          console.error("Erreur lors du chargement des rôles:", rolesData.error);
         }
 
         if (servicesResponse.ok) {
           setServices(servicesData.services);
         } else {
-          console.error(
-            "Erreur lors du chargement des services:",
-            servicesData.error
-          );
+          console.error("Erreur lors du chargement des services:", servicesData.error);
         }
       } catch (error) {
         console.error("Erreur serveur:", error);
@@ -76,7 +76,9 @@ const UserManagement = ({ selectedUser }) => {
     fetchRolesAndServices();
   }, []);
 
-  // ✅ Met à jour les champs si un utilisateur est sélectionné
+  // -----------------------------
+  // Update modification form when selectedUser changes
+  // -----------------------------
   useEffect(() => {
     if (selectedUser) {
       setActiveTab("modify");
@@ -89,20 +91,26 @@ const UserManagement = ({ selectedUser }) => {
     }
   }, [selectedUser]);
 
-  // ✅ Gestion des changements de champs
+  // -----------------------------
+  // Handlers for form field changes
+  // -----------------------------
   const handleModifyChange = (e) => {
-    let value = e.target.value;
-    if (e.target.name === "serviceId" && value === "") {
+    let { name, value } = e.target;
+    // If the serviceId is set to an empty string, set its value to null
+    if (name === "serviceId" && value === "") {
       value = null;
     }
-    setModifyFormData({ ...modifyFormData, [e.target.name]: value });
+    setModifyFormData({ ...modifyFormData, [name]: value });
   };
 
   const handleCreateChange = (e) => {
-    setCreateFormData({ ...createFormData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setCreateFormData({ ...createFormData, [name]: value });
   };
 
-  // ✅ Fonction pour soumettre la création d'un utilisateur (POST - signupAdmin)
+  // -----------------------------
+  // Submit handler for creating a new user
+  // -----------------------------
   const handleCreateSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem("token");
@@ -125,7 +133,7 @@ const UserManagement = ({ selectedUser }) => {
 
       if (response.ok) {
         alert("Utilisateur créé avec succès !");
-        window.location.reload(); // ✅ Recharge la page après création
+        window.location.reload(); // Reload page after successful creation
       } else {
         alert(data.error || "Erreur lors de la création de l'utilisateur.");
       }
@@ -135,7 +143,9 @@ const UserManagement = ({ selectedUser }) => {
     }
   };
 
-  // ✅ Fonction pour modifier un utilisateur (PATCH)
+  // -----------------------------
+  // Submit handler for modifying an existing user
+  // -----------------------------
   const handleModifySubmit = async (e) => {
     e.preventDefault();
     if (!selectedUser) {
@@ -171,27 +181,29 @@ const UserManagement = ({ selectedUser }) => {
       }
 
       alert("Utilisateur mis à jour avec succès !");
-      window.location.reload(); // ✅ Recharge la page après modification
+      window.location.reload(); // Reload page after successful modification
     } catch (error) {
       console.error("Erreur mise à jour utilisateur:", error);
       alert(error.message);
     }
   };
 
-  // ✅ Fonction pour désactiver/activer un utilisateur (PATCH - toggle-status)
+  // -----------------------------
+  // Handler for toggling user status (activate/deactivate)
+  // -----------------------------
   const handleToggleStatus = async () => {
     if (!selectedUser) {
       alert("Aucun utilisateur sélectionné.");
       return;
     }
-  
+
     try {
       const token = localStorage.getItem("token");
       if (!token) {
         alert("Vous devez être connecté pour modifier le statut d'un utilisateur.");
         return;
       }
-  
+
       const response = await fetch(
         `http://localhost:3000/users/toggle-status/${selectedUser._id}`,
         {
@@ -202,18 +214,18 @@ const UserManagement = ({ selectedUser }) => {
           },
         }
       );
-  
+
       const data = await response.json();
-  
+
       if (!response.ok) {
         throw new Error(data.message || "Erreur lors de la mise à jour du statut de l'utilisateur");
       }
-  
-      alert(`Utilisateur ${data.success ? "activé" : "désactivé"} avec succès !`);
-  
-      // ✅ Récupérer les nouvelles données de l'utilisateur depuis la base de données
+
+      alert(data.message);
+
+      // Fetch the updated user data
       const updatedUserResponse = await fetch(
-        `http://localhost:3000/users/${selectedUser._id}`, // Assure-toi d'avoir une route GET pour récupérer un utilisateur par ID
+        `http://localhost:3000/users/${selectedUser._id}`,
         {
           method: "GET",
           headers: {
@@ -222,30 +234,32 @@ const UserManagement = ({ selectedUser }) => {
           },
         }
       );
-  
+
       const updatedUserData = await updatedUserResponse.json();
-  
+
       if (!updatedUserResponse.ok) {
         throw new Error("Impossible de récupérer les nouvelles données.");
       }
-  
-      // ✅ Mettre à jour `selectedUser` avec les nouvelles données
+
+      // Update the modify form with new user data
       setModifyFormData({
         username: updatedUserData.username,
         password: "",
         roleId: updatedUserData.roleId?._id || updatedUserData.roleId || "",
         serviceId: updatedUserData.serviceId?._id || updatedUserData.serviceId || "",
       });
-  
-      // ✅ Mettre à jour `selectedUser` pour re-render le bouton correctement
+
+      // Update selectedUser status to re-render button label correctly
       selectedUser.isActive = updatedUserData.isActive;
-  
     } catch (error) {
       console.error("Erreur lors du changement de statut utilisateur:", error);
       alert(error.message);
     }
   };
 
+  // -----------------------------
+  // Render the component UI
+  // -----------------------------
   return (
     <div className={styles.card}>
       <div className={styles.tabs}>
@@ -320,10 +334,10 @@ const UserManagement = ({ selectedUser }) => {
             <button
               className={styles.button}
               onClick={handleModifySubmit}
-              disabled={!selectedUser} // ✅ Désactive le bouton si aucun utilisateur sélectionné
+              disabled={!selectedUser}
               style={{
-                opacity: !selectedUser ? 0.5 : 1, // ✅ Grise le bouton quand il est désactivé
-                cursor: !selectedUser ? "not-allowed" : "pointer", // ✅ Change le pointeur en fonction de l'état du bouton
+                opacity: !selectedUser ? 0.5 : 1,
+                cursor: !selectedUser ? "not-allowed" : "pointer",
               }}
             >
               Sauvegarder
@@ -332,10 +346,10 @@ const UserManagement = ({ selectedUser }) => {
             <button
               className={styles.buttonSecondary}
               onClick={handleToggleStatus}
-              disabled={!selectedUser} // ✅ Désactive le bouton si aucun utilisateur sélectionné
+              disabled={!selectedUser}
               style={{
-                opacity: !selectedUser ? 0.5 : 1, // ✅ Grise le bouton quand il est désactivé
-                cursor: !selectedUser ? "not-allowed" : "pointer", // ✅ Change le pointeur en fonction de l'état du bouton
+                opacity: !selectedUser ? 0.5 : 1,
+                cursor: !selectedUser ? "not-allowed" : "pointer",
               }}
             >
               {selectedUser
