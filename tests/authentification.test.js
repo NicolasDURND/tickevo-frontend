@@ -1,7 +1,7 @@
 import authentificationReducer, {
   loginSuccess,
   logout,
-} from "./reducers/authentification";
+} from "../reducers/authentification";
 
 describe("Authentification Reducer", () => {
   const initialState = {
