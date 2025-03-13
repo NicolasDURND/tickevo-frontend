@@ -22,10 +22,10 @@ function HeaderUser() {
     <div className={styles.header}>
       <div className={styles.logo}>TickEvo</div>
       <nav className={styles.nav}>
-        <button className={styles.button} onClick={() => router.push("/home")}><IconHome size={25} className={styles.icon} /></button>
-        <button className={styles.button} onClick={() => router.push("/mytickets")}><IconTicket size={25} className={styles.icon} /></button>
-        <button className={styles.button} onClick={() => router.push("/mytickets")}><IconBell size={25} className={styles.icon} /></button>
-        <button className={styles.button} onClick={handleLogout}><IconLogout size={25} className={styles.icon} /></button>
+        <button title="Accueil" className={styles.button} onClick={() => router.push("/home")}><IconHome size={25} className={styles.icon} /></button>
+        <button title="Mes tickets créés" className={styles.button} onClick={() => router.push("/mytickets")}><IconTicket size={25} className={styles.icon} /></button>
+        <button title="Notifications" className={styles.button}><IconBell size={25} className={styles.icon} /></button>
+        <button title="Déconnexion" className={styles.button} onClick={handleLogout}><IconLogout size={25} className={styles.icon} /></button>
       </nav>
     </div>
   );

@@ -37,7 +37,16 @@ const Login = () => {
       localStorage.setItem("user", JSON.stringify(data.user));
   
       dispatch(loginSuccess({ user: data.user, token: data.user.token }));
-      router.push("/home");
+      
+      // Redirection conditionnelle selon le rôle utilisateur
+      if (
+        data.user.roleId === "Administrateur" ||
+        data.user.roleId === "Technicien"
+      ) {
+        router.push("/allTicketsList");
+      } else {
+        router.push("/home");
+      }
     } catch (error) {
       dispatch(loginFailure(error.message)); // ✅ Affiche le message du backend
     }
