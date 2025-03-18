@@ -1,24 +1,25 @@
-import React, { useEffect, useState } from "react";
-import styles from "../styles/MyTickets.module.css"; // ✅ On crée ce fichier après
-import { useRouter } from "next/router";
-import Footer from "./Footer";
+import React, { useEffect, useState } from "react"; // Importe React et les hooks useState et useEffect
+import styles from "../styles/MyTickets.module.css"; // Importe les styles CSS
+import { useRouter } from "next/router"; // Importe le hook de navigation Next.js
+import Footer from "./Footer"; // Importe le footer du site
 
 const MyTickets = () => {
-  const [tickets, setTickets] = useState([]);
-  const [filteredTickets, setFilteredTickets] = useState([]); // ✅ Tickets après filtrage
-  const [activeFilter, setActiveFilter] = useState("Tous"); // ✅ Filtre actif
-  const [openTicketId, setOpenTicketId] = useState(null); // ✅ Stocke l'ID du ticket ouvert
-  const token = localStorage.getItem("token");
-  const router = useRouter();
+  const [tickets, setTickets] = useState([]); // Stocke tous les tickets récupérés
+  const [filteredTickets, setFilteredTickets] = useState([]); // Tickets après application du filtre
+  const [activeFilter, setActiveFilter] = useState("Tous"); // Stocke le filtre actif
+  const [openTicketId, setOpenTicketId] = useState(null); // Stocke l'ID du ticket actuellement ouvert
+  const token = localStorage.getItem("token"); // Récupère le token utilisateur
+  const router = useRouter(); // Permet de naviguer entre les pages
 
   useEffect(() => {
+    // Récupère les tickets depuis l'API
     const fetchTickets = async () => {
       try {
         const response = await fetch("http://localhost:3000/tickets/last", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`, // ✅ Ajoute le token
+            Authorization: `Bearer ${token}`, // Envoie le token pour l'authentification
           },
         });
 
@@ -29,8 +30,8 @@ const MyTickets = () => {
         }
 
         const data = await response.json();
-        setTickets(data);
-        setFilteredTickets(data); // ✅ Affiche tous les tickets au début
+        setTickets(data); // Stocke tous les tickets
+        setFilteredTickets(data); // Affiche tous les tickets par défaut
       } catch (error) {
         console.error("❌ Erreur lors de la récupération des tickets :", error);
       }
@@ -39,26 +40,26 @@ const MyTickets = () => {
     fetchTickets();
   }, []);
 
-  // ✅ Fonction pour filtrer les tickets selon leur statut
+  // Filtre les tickets selon leur statut
   const filterTickets = (status) => {
-    setActiveFilter(status); // ✅ Change le filtre actif
+    setActiveFilter(status); // Change le filtre actif
     if (status === "Tous") {
-      setFilteredTickets(tickets); // ✅ Affiche tous les tickets
+      setFilteredTickets(tickets); // Affiche tous les tickets
     } else {
       setFilteredTickets(tickets.filter((ticket) => ticket.status === status));
     }
   };
 
-  // ✅ Fonction pour basculer l'affichage des détails d'un ticket
+  // Ouvre ou ferme les détails d'un ticket
   const toggleTicket = (ticketId) => {
     setOpenTicketId(openTicketId === ticketId ? null : ticketId); // Ferme si déjà ouvert, sinon ouvre
   };
 
   return (
-    <div className={styles.container}>
-      <h2 className={styles.title}>Mon historique de Tickets</h2>
+    <div className={styles.container}> {/* Conteneur principal */}
+      <h2 className={styles.title}>Mon historique de Tickets</h2> {/* Titre de la section */}
 
-      {/* ✅ Boutons de filtrage */}
+      {/* Boutons pour filtrer les tickets */}
       <div className={styles.filterButtons}>
         <button
           className={`${styles.filterButton} ${
@@ -94,6 +95,7 @@ const MyTickets = () => {
         </button>
       </div>
 
+      {/* Affichage des tickets filtrés */}
       {filteredTickets.length > 0 ? (
         filteredTickets.map((ticket) => (
           <div key={ticket._id} className={styles.ticketContainer}>
@@ -111,7 +113,7 @@ const MyTickets = () => {
                 {ticket.status}
               </span>
 
-              {/* ✅ Flèche pour ouvrir/fermer le ticket */}
+              {/* Flèche pour ouvrir/fermer le ticket */}
               <button
                 onClick={() => toggleTicket(ticket._id)}
                 className={styles.arrowButton}
@@ -120,7 +122,7 @@ const MyTickets = () => {
               </button>
             </div>
 
-            {/* ✅ Détails affichés uniquement si le ticket est ouvert */}
+            {/* Détails affichés uniquement si le ticket est ouvert */}
             {openTicketId === ticket._id && (
               <div className={styles.ticketDetails}>
                 <p>
@@ -132,11 +134,12 @@ const MyTickets = () => {
                   </p>
                 )}
                 
+                {/* Affichage du dernier commentaire laissé par un technicien */}
                 <div className={styles.sectionBox}>
                   <h2 className={styles.sectionTitle}>Réponse du technicien :</h2>
                   <div className={styles.historyContainer}>
                     {ticket.comments && ticket.comments.length > 0 ? (
-                      // 🔹 Filtre pour récupérer uniquement le dernier commentaire
+                      // Récupère uniquement le dernier commentaire
                       (() => {
                         const lastComment = ticket.comments[ticket.comments.length - 1];
                         return (
@@ -152,7 +155,7 @@ const MyTickets = () => {
                                 })}
                               </span>{" "}
                               <span className={styles.commentAuthor}>
-                              De :&nbsp;
+                                De :&nbsp;
                                 {lastComment.userId?.username || "Utilisateur inconnu"}
                               </span>
                             </div>
@@ -165,17 +168,15 @@ const MyTickets = () => {
                     )}
                   </div>
                 </div>
-
               </div>
             )}
           </div>
         ))
       ) : (
-        <p className={styles.noTickets}>Aucun ticket trouvé</p>
+        <p className={styles.noTickets}>Aucun ticket trouvé</p> // Message si aucun ticket disponible
       )}
-     
     </div>
   );
 };
 
-export default MyTickets;
+export default MyTickets; // Exporte le composant pour être utilisé ailleurs

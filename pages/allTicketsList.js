@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react";
-import HeaderTechnicien from "../components/HeaderTechnicien";
-import HeaderAdministrateur from "../components/HeaderAdministrateur";
-import styles from "../styles/AllTicketsList.module.css";
-import { useRouter } from "next/router";
+import { useEffect, useState } from "react"; // Import des hooks useEffect et useState pour gérer les effets et l'état
+import HeaderTechnicien from "../components/HeaderTechnicien"; // Import du header pour les techniciens
+import HeaderAdministrateur from "../components/HeaderAdministrateur"; // Import du header pour les administrateurs
+import styles from "../styles/AllTicketsList.module.css"; // Import du fichier CSS spécifique à la page
+import { useRouter } from "next/router"; // Import du hook useRouter pour gérer la navigation
 
 const allTicketsList = () => {
-  const [tickets, setTickets] = useState([]);
-  const [sortedTickets, setSortedTickets] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-  const [userRole, setUserRole] = useState(null);
-  const [userId, setUserId] = useState(null);
-  const router = useRouter();
+  const [tickets, setTickets] = useState([]); // Stocke la liste des tickets récupérés du backend
+  const [sortedTickets, setSortedTickets] = useState([]); // Stocke la liste triée des tickets
+  const [loading, setLoading] = useState(true); // Gère l'affichage du chargement
+  const [error, setError] = useState(""); // Stocke les erreurs éventuelles
+  const [userRole, setUserRole] = useState(null); // Stocke le rôle de l'utilisateur connecté
+  const [userId, setUserId] = useState(null); // Stocke l'ID de l'utilisateur connecté
+  const router = useRouter(); // Initialise le routeur pour la navigation
 
   useEffect(() => {
     // ✅ Récupère le rôle de l'utilisateur stocké dans localStorage
@@ -19,19 +19,19 @@ const allTicketsList = () => {
     const storedUser = localStorage.getItem("user");
     
     if (storedRole) {
-      setUserRole(storedRole);
+      setUserRole(storedRole); // Met à jour l'état avec le rôle
     }
     
     if (storedUser) {
       const user = JSON.parse(storedUser);
-      setUserId(user.id);
+      setUserId(user.id); // Met à jour l'état avec l'ID utilisateur
     }
 
-    // ✅ Requête fetch vers le backend sur localhost:3000
+    // ✅ Requête fetch vers le backend pour récupérer la liste des tickets
     const fetchTickets = async () => {
       try {
         const response = await fetch("http://localhost:3000/tickets", {
-          method: "GET",
+          method: "GET", // Requête GET pour récupérer les tickets
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`, // ✅ Vérifie l'authentification
@@ -43,94 +43,88 @@ const allTicketsList = () => {
         }
 
         const data = await response.json();
-        setTickets(data.tickets);
+        setTickets(data.tickets); // Stocke les tickets dans l'état
       } catch (err) {
-        setError(err.message);
+        setError(err.message); // Stocke l'erreur en cas de problème
       } finally {
-        setLoading(false);
+        setLoading(false); // Désactive l'affichage du chargement
       }
     };
 
-    fetchTickets();
+    fetchTickets(); // Appelle la fonction pour récupérer les tickets
   }, []);
 
-  // ✅ Trier les tickets à chaque fois que la liste de tickets change
+  // ✅ Trie les tickets à chaque fois que la liste des tickets change
   useEffect(() => {
-    // Fonction pour trier les tickets
     const sortTickets = () => {
       if (!tickets || tickets.length === 0) return [];
-      
-      // Séparation des tickets clôturés et non clôturés
+
+      // Séparer les tickets clôturés et non clôturés
       const closedTickets = tickets.filter(ticket => ticket.status === "clôturé");
       const activeTickets = tickets.filter(ticket => ticket.status !== "clôturé");
-      
-      // Tri des tickets actifs du plus récent au plus ancien
+
+      // Trier les tickets actifs par date (du plus récent au plus ancien)
       const sortedActiveTickets = activeTickets.sort((a, b) => {
-        // Utilisation de la date de création pour trier
         const dateA = new Date(a.createdAt || 0);
         const dateB = new Date(b.createdAt || 0);
-        return dateB - dateA; // Ordre décroissant (plus récent en premier)
+        return dateB - dateA; // Ordre décroissant (du plus récent au plus ancien)
       });
-      
-      // Tri des tickets clôturés du plus récent au plus ancien
+
+      // Trier les tickets clôturés par date (du plus récent au plus ancien)
       const sortedClosedTickets = closedTickets.sort((a, b) => {
         const dateA = new Date(a.createdAt || 0);
         const dateB = new Date(b.createdAt || 0);
         return dateB - dateA;
       });
-      
-      // Retourne les tickets actifs suivis des tickets clôturés
+
+      // Combiner les tickets actifs et clôturés
       return [...sortedActiveTickets, ...sortedClosedTickets];
     };
-    
-    // Mise à jour des tickets triés
-    setSortedTickets(sortTickets());
+
+    setSortedTickets(sortTickets()); // Met à jour la liste triée
   }, [tickets]);
 
   // ✅ Fonction pour assigner un ticket à l'utilisateur connecté
   const handleAssignTicket = async (ticketId) => {
     try {
-      // ✅ Vérifier si l'utilisateur est un technicien ou un administrateur
+      // Vérifie si l'utilisateur est un technicien ou un administrateur
       if (userRole !== "Technicien" && userRole !== "Administrateur") {
         setError("Vous n'avez pas les droits pour assigner des tickets");
         return;
       }
 
       const response = await fetch(`http://localhost:3000/ticketsTechnicien/${ticketId}/assign`, {
-        method: "PATCH",
+        method: "PATCH", // Requête PATCH pour assigner le ticket
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-        body: JSON.stringify({ technicianId: userId }),
+        body: JSON.stringify({ technicianId: userId }), // Envoie l'ID du technicien qui prend en charge le ticket
       });
 
       if (!response.ok) {
         throw new Error("Erreur lors de l'assignation du ticket");
       }
 
-      // ✅ Rediriger vers la page des tickets attribués avec l'ID du ticket
-      // router.push(`/treatmentTicket?ticketId=${ticketId}`);
+      // ✅ Redirige vers la liste des tickets personnels après assignation
       router.push(`/personalTicketsList`);
     } catch (err) {
-      setError(err.message);
+      setError(err.message); // Stocke l'erreur en cas de problème
     }
   };
 
-  // ✅ Fonction pour vérifier si un ticket peut être assigné
+  // ✅ Vérifie si un ticket peut être assigné par l'utilisateur
   const canAssignTicket = (ticket) => {
-    // Vérifier si l'utilisateur est technicien ou administrateur et si le statut du ticket est "en attente" ou "en cours"
     return (userRole === "Administrateur" || userRole === "Technicien") 
       && (ticket.status === "en attente" || ticket.status === "en cours" || !ticket.status);
   };
 
   if (loading) return <p className={styles.loading}>Chargement des tickets...</p>;
   if (error) return <p className={styles.error}>Erreur : {error}</p>;
-  // if (tickets.length === 0) return <p className={styles.noTickets}>Aucun ticket trouvé.</p>;
 
   return (
     <div className={styles.container}>
-      {/* ✅ Affichage dynamique du bon Header */}
+      {/* ✅ Affichage dynamique du bon Header selon le rôle */}
       {userRole === "Administrateur" ? (
         <HeaderAdministrateur />
       ) : userRole === "Technicien" ? (
@@ -139,69 +133,69 @@ const allTicketsList = () => {
         <p className={styles.error}>Accès refusé</p>
       )}
 
-      {/* ✅ Contenu principal */}
+      {/* ✅ Affichage du contenu principal */}
       {userRole === "Administrateur" || userRole === "Technicien" ? (
         <div className={styles.content}>
           <h2 className={styles.title}>Liste des Tickets</h2>
 
           <div className={styles.ticketsContainer}>
             {tickets.length === 0 ? (
-                        <p className={styles.noTickets}>Aucun tickets.</p>
-                      ) : (
-            <table className={styles.ticketsTable}>
-              <thead>
-                <tr>
-                  <th>Numéro</th>
-                  <th>Date</th>
-                  <th>Catégorie</th>
-                  <th>Titre</th>
-                  <th>Créé par</th>
-                  <th>Statut</th>
-                  <th>Assigné à</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {sortedTickets.map((ticket) => (
-                  <tr key={ticket._id} className={ticket.status === "clôturé" ? styles.closedTicket : ""}>
-                    <td>{ticket.ticketNumber}</td>
-                    <td>{new Date(ticket.createdAt).toLocaleDateString("fr-FR")}</td>
-                    <td>{ticket.category || "Demande"}</td>
-                    <td>{ticket.title}</td>
-                    <td>{ticket.userId?.username || "Inconnu"}</td>
-                    <td>
-                      {ticket.status === "clôturé" ? (
-                        <span className={styles.closedLabel}>Clôturé</span>
-                      ) : ticket.status === "en cours" ? (
-                        <span className={styles.inProgressLabel}>En cours</span>
-                      ) : (
-                        <span className={styles.pendingLabel}>En attente</span>
-                      )}
-                    </td>
-                    <td>{ticket.assignedTo ? ticket.assignedTo.username : "Non assigné"}</td>
-                    <td>
-                      <div className={styles.actionButtons}>
-                        <button 
-                          className={styles.viewButton}
-                          onClick={() => router.push(`/tickets/${ticket._id}`)}
-                        >
-                          Voir
-                        </button>
-                        {canAssignTicket(ticket) && (
-                          <button 
-                            className={styles.assignButton}
-                            onClick={() => handleAssignTicket(ticket._id)}
-                          >
-                            Traiter
-                          </button>
-                        )}
-                      </div>
-                    </td>
+              <p className={styles.noTickets}>Aucun tickets.</p>
+            ) : (
+              <table className={styles.ticketsTable}>
+                <thead>
+                  <tr>
+                    <th>Numéro</th>
+                    <th>Date</th>
+                    <th>Catégorie</th>
+                    <th>Titre</th>
+                    <th>Créé par</th>
+                    <th>Statut</th>
+                    <th>Assigné à</th>
+                    <th>Actions</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-                      )}
+                </thead>
+                <tbody>
+                  {sortedTickets.map((ticket) => (
+                    <tr key={ticket._id} className={ticket.status === "clôturé" ? styles.closedTicket : ""}>
+                      <td>{ticket.ticketNumber}</td>
+                      <td>{new Date(ticket.createdAt).toLocaleDateString("fr-FR")}</td>
+                      <td>{ticket.category || "Demande"}</td>
+                      <td>{ticket.title}</td>
+                      <td>{ticket.userId?.username || "Inconnu"}</td>
+                      <td>
+                        {ticket.status === "clôturé" ? (
+                          <span className={styles.closedLabel}>Clôturé</span>
+                        ) : ticket.status === "en cours" ? (
+                          <span className={styles.inProgressLabel}>En cours</span>
+                        ) : (
+                          <span className={styles.pendingLabel}>En attente</span>
+                        )}
+                      </td>
+                      <td>{ticket.assignedTo ? ticket.assignedTo.username : "Non assigné"}</td>
+                      <td>
+                        <div className={styles.actionButtons}>
+                          <button 
+                            className={styles.viewButton}
+                            onClick={() => router.push(`/tickets/${ticket._id}`)}
+                          >
+                            Voir
+                          </button>
+                          {canAssignTicket(ticket) && (
+                            <button 
+                              className={styles.assignButton}
+                              onClick={() => handleAssignTicket(ticket._id)}
+                            >
+                              Traiter
+                            </button>
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
           </div>
         </div>
       ) : null}
@@ -209,4 +203,4 @@ const allTicketsList = () => {
   );
 };
 
-export default allTicketsList;
+export default allTicketsList; // Exporte le composant pour être utilisé ailleurs

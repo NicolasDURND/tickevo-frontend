@@ -1,55 +1,90 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useRouter } from "next/router"; // ✅ Hook de navigation Next.js
-import { logout } from "../reducers/authentification";
-import styles from "../styles/HeaderAdministrateur.module.css";
-import { IconHome, IconArchive, IconTicket, IconFiles, IconBell, IconSettings, IconLogout, IconSearch } from "@tabler/icons-react";
+import { useState } from "react"; // Gère l'état local (ici pour la barre de recherche)
+import { useDispatch } from "react-redux"; // Permet d'envoyer des actions Redux
+import { useRouter } from "next/router"; // Gestion de la navigation avec Next.js
+import { logout } from "../reducers/authentification"; // Action Redux pour la déconnexion
+import styles from "../styles/HeaderAdministrateur.module.css"; // Importe les styles CSS du header
+import { 
+  IconHome, IconArchive, IconTicket, IconFiles, 
+  IconBell, IconSettings, IconLogout, IconSearch 
+} from "@tabler/icons-react"; // Importe des icônes depuis Tabler
 
 function HeaderAdministrateur() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const dispatch = useDispatch();
-  const router = useRouter();
+  const [searchTerm, setSearchTerm] = useState(""); // État pour stocker la recherche
+  const dispatch = useDispatch(); // Permet d'envoyer des actions Redux
+  const router = useRouter(); // Hook de navigation Next.js
 
+  // Fonction exécutée lors d'une recherche
   const handleSearch = () => {
     console.log("Recherche : ", searchTerm);
   };
 
+  // Déconnecte l'utilisateur et le redirige à l'accueil
   const handleLogout = () => {
-    dispatch(logout()); // ✅ Déclenche le logout
-    router.replace("/");
+    dispatch(logout()); // Envoie l'action de déconnexion
+    router.replace("/"); // Redirige vers la page d'accueil
   };
 
   return (
-    <div className={styles.header}>
+    <div className={styles.header}> {/* Conteneur principal du header */}
+      
       {/* Logo + Barre de recherche */}
       <div className={styles.logoSearchContainer}>
-        <div className={styles.logo}>TickEvo</div>
+        <div className={styles.logo}>TickEvo</div> {/* Nom de l'application */}
+
+        {/* Barre de recherche */}
         <div className={styles.searchContainer}>
           <input
             type="text"
-            placeholder="Rechercher un ticket..."
-            className={styles.searchInput}
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Rechercher un ticket..." // Texte affiché avant la saisie
+            className={styles.searchInput} // Style de l'input
+            value={searchTerm} // Associe l'état à la valeur du champ
+            onChange={(e) => setSearchTerm(e.target.value)} // Met à jour l'état à chaque saisie
           />
-          <button className={styles.searchButton} onClick={handleSearch}>
+          <button className={styles.searchButton} onClick={handleSearch}> {/* Bouton de recherche */}
             <IconSearch size={20} />
           </button>
         </div>
       </div>
 
-      {/* Navigation */}
+      {/* Navigation principale */}
       <nav className={styles.nav}>
-        <button title="Accueil" className={styles.button} onClick={() => router.push("/home")}><IconHome size={25} className={styles.icon} /></button>
-        <button title="Tous les tickets à traiter" className={styles.button} onClick={() => router.push("/allTicketsList")}><IconArchive size={25} className={styles.icon} /></button>
-        <button title="Mes tickets à traiter" className={styles.button} onClick={() => router.push("/personalTicketsList")}><IconFiles size={25} className={styles.icon} /></button>
-        <button title="Notifications" className={styles.button}><IconBell size={25} className={styles.icon} /></button>
-        <button title="Mes tickets créés" className={styles.button} onClick={() => router.push("/mytickets")}><IconTicket size={25} className={styles.icon} /></button>
-        <button title="Configuration" className={styles.button} onClick={() => router.push("/admin")}><IconSettings size={25} className={styles.icon} /></button>
-        <button title="Déconnexion" className={styles.button} onClick={handleLogout}><IconLogout size={25} className={styles.icon} /></button>
+        {/* Accueil */}
+        <button title="Accueil" className={styles.button} onClick={() => router.push("/home")}>
+          <IconHome size={25} className={styles.icon} />
+        </button>
+
+        {/* Tous les tickets à traiter */}
+        <button title="Tous les tickets à traiter" className={styles.button} onClick={() => router.push("/allTicketsList")}>
+          <IconArchive size={25} className={styles.icon} />
+        </button>
+
+        {/* Mes tickets à traiter */}
+        <button title="Mes tickets à traiter" className={styles.button} onClick={() => router.push("/personalTicketsList")}>
+          <IconFiles size={25} className={styles.icon} />
+        </button>
+
+        {/* Notifications */}
+        <button title="Notifications" className={styles.button}>
+          <IconBell size={25} className={styles.icon} />
+        </button>
+
+        {/* Mes tickets créés */}
+        <button title="Mes tickets créés" className={styles.button} onClick={() => router.push("/mytickets")}>
+          <IconTicket size={25} className={styles.icon} />
+        </button>
+
+        {/* Page d'administration */}
+        <button title="Configuration" className={styles.button} onClick={() => router.push("/admin")}>
+          <IconSettings size={25} className={styles.icon} />
+        </button>
+
+        {/* Déconnexion */}
+        <button title="Déconnexion" className={styles.button} onClick={handleLogout}>
+          <IconLogout size={25} className={styles.icon} />
+        </button>
       </nav>
     </div>
   );
 }
 
-export default HeaderAdministrateur;
+export default HeaderAdministrateur; // Exporte le composant pour l'utiliser ailleurs

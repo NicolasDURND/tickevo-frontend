@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from "react";
-import styles from "../styles/LastTickets.module.css";
-import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react"; // Gère l'affichage dynamique avec état et effets
+import styles from "../styles/LastTickets.module.css"; // Importe les styles CSS
+import { useRouter } from "next/router"; // Importe le hook de navigation Next.js
 
 const LastTickets = () => {
-  const [tickets, setTickets] = useState([]);
-  const [currentPage, setCurrentPage] = useState(0); // ✅ Gère la pagination
-  const ticketsPerPage = 5; // ✅ Nombre de tickets affichés par page
-  const token = localStorage.getItem("token");
-  const router = useRouter();
+  const [tickets, setTickets] = useState([]); // Stocke la liste des tickets
+  const [currentPage, setCurrentPage] = useState(0); // Gère la pagination
+  const ticketsPerPage = 5; // Nombre de tickets affichés par page
+  const token = localStorage.getItem("token"); // Récupère le token pour l'authentification
+  const router = useRouter(); // Permet la navigation entre les pages
 
   useEffect(() => {
+    // Récupère les tickets depuis l'API
     const fetchTickets = async () => {
       try {
         const response = await fetch("http://localhost:3000/tickets/last", {
@@ -27,7 +28,7 @@ const LastTickets = () => {
         }
 
         const data = await response.json();
-        setTickets(data);
+        setTickets(data); // Met à jour l'état avec les tickets récupérés
       } catch (error) {
         console.error("❌ Erreur lors de la récupération des tickets :", error);
       }
@@ -36,19 +37,18 @@ const LastTickets = () => {
     fetchTickets();
   }, []);
 
-  // ✅ Gestion de la pagination
+  // Gère la pagination et filtre les tickets clôturés
   const totalPages = Math.ceil(tickets.length / ticketsPerPage);
   const startIndex = currentPage * ticketsPerPage;
   const displayedTickets = tickets
-  .filter((ticket) => ticket.status.toLowerCase() !== "clôturé") // ✅ Filtre les tickets clôturés
-  .slice(startIndex, startIndex + ticketsPerPage);
-
+    .filter((ticket) => ticket.status.toLowerCase() !== "clôturé") // Exclut les tickets clôturés
+    .slice(startIndex, startIndex + ticketsPerPage); // Sélectionne les tickets de la page en cours
 
   return (
-    <div className={styles.card}>
-      <h2 className={styles.title}>Mon historique de Tickets</h2>
+    <div className={styles.card}> {/* Conteneur principal */}
+      <h2 className={styles.title}>Mon historique de Tickets</h2> {/* Titre de la section */}
 
-      {/* ✅ Tableau des tickets */}
+      {/* Tableau affichant les tickets */}
       <table className={styles.table}>
         <thead>
           <tr>
@@ -72,6 +72,7 @@ const LastTickets = () => {
                   {ticket.status}
                 </td>
                 <td>
+                  {/* Bouton pour voir les détails du ticket */}
                   <button
                     className={styles.detailButton}
                     onClick={() => router.push(`/tickets/${ticket._id}`)}
@@ -83,6 +84,7 @@ const LastTickets = () => {
             ))
           ) : (
             <tr>
+              {/* Message affiché si aucun ticket n'est disponible */}
               <td colSpan="6" className={styles.noTickets}>
                 Aucun ticket trouvé
               </td>
@@ -91,12 +93,12 @@ const LastTickets = () => {
         </tbody>
       </table>
 
-      {/* ✅ Boutons de navigation */}
+      {/* Boutons pour naviguer entre les pages de tickets */}
       <div className={styles.buttonContainer}>
         <button
           className={styles.button}
           onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
-          disabled={currentPage === 0}
+          disabled={currentPage === 0} // Désactivé si on est à la première page
         >
           Précédent
         </button>
@@ -105,7 +107,7 @@ const LastTickets = () => {
           onClick={() =>
             setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))
           }
-          disabled={currentPage === totalPages - 1}
+          disabled={currentPage === totalPages - 1} // Désactivé si on est à la dernière page
         >
           Suivant
         </button>
@@ -114,4 +116,4 @@ const LastTickets = () => {
   );
 };
 
-export default LastTickets;
+export default LastTickets; // Exporte le composant pour être utilisé ailleurs
