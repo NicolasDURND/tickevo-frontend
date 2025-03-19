@@ -10,10 +10,11 @@
   background-color: #ffffff;
 }
 
-/* ✅ Permet au header de prendre toute la largeur */
+/* ✅ Sélectionne le premier élément <div> à l'intérieur de .pageContainer */
 .pageContainer > div:first-child {
-  width: 100%;
+  width: 100%; /* 🔹 Assure que l'élément occupe toute la largeur */
 }
+
 
 .content {
   display: flex;
@@ -24,7 +25,8 @@
 }
 
 .card {
-  width: 800px; /* Uniformisé avec DemandeTickets */
+  width: 800px;
+  /* Uniformisé avec DemandeTickets */
   padding: 90px;
   border-radius: 10px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -63,7 +65,8 @@
   gap: 10px;
 }
 
-.cancelButton, .submitButton {
+.cancelButton,
+.submitButton {
   width: 100%;
   padding: 10px 15px;
   border-radius: 5px;
@@ -107,9 +110,11 @@
     width: 90%;
     padding: 60px;
   }
+
   .title {
     font-size: 22px;
   }
+
   .object {
     font-size: 16px;
   }
@@ -120,19 +125,25 @@
     width: 95%;
     padding: 40px;
   }
+
   .title {
     font-size: 20px;
   }
+
   .object {
     font-size: 14px;
   }
+
   .textarea {
     height: 140px;
   }
-  .cancelButton, .submitButton {
+
+  .cancelButton,
+  .submitButton {
     padding: 8px 12px;
     font-size: 0.9rem;
   }
+
   .buttonContainer {
     flex-direction: column;
   }

@@ -1,29 +1,67 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
 
+/* ✅ Style du pied de page */
 .footer {
   display: flex;
+  /* Active Flexbox pour organiser le contenu */
   flex-direction: column;
+  /* Aligne les éléments verticalement */
   align-items: center;
+  /* Centre les éléments horizontalement */
   justify-content: center;
+  /* Centre les éléments verticalement */
   width: 100%;
+  /* Prend toute la largeur de la page */
   padding: 15px 10px;
-  background-color: rgb(255, 255, 255); /* ✅ Fond blanc */
-  color: black; /* ✅ Texte noir */
+  /* ✅ Ajoute un espace intérieur */
+  background-color: rgb(255, 255, 255);
+  /* ✅ Fond blanc */
+  color: black;
+  /* ✅ Texte noir */
   text-align: center;
+  /* ✅ Centre le texte */
   font-family: "Roboto", sans-serif;
+  /* ✅ Applique la police Roboto */
   font-weight: 400;
+  /* ✅ Poids de la police : normal */
   font-size: 14px;
+  /* ✅ Taille du texte */
   bottom: 0;
+  /* ✅ Positionne en bas (uniquement si `position: fixed;`) */
   left: 0;
-  border-top: 1px solid #ccc; /* ✅ Ligne de séparation */
+  /* ✅ S'assure que le footer démarre à gauche */
+  border-top: 1px solid #ccc;
+  /* ✅ Ajoute une bordure en haut */
   margin-top: 50px;
+  /* ✅ Ajoute un espace au-dessus du footer */
   padding: 20px;
+  /* ✅ Double le padding pour un meilleur espacement */
   position: relative;
+  /* ✅ Permet un positionnement flexible (peut être `fixed` si nécessaire) */
 }
 
+/* ✅ Style de l'affichage de la date et de l'heure */
 .dateTime {
   font-size: 12px;
+  /* ✅ Texte plus petit que le footer */
   font-weight: 300;
+  /* ✅ Texte plus léger */
   opacity: 0.9;
+  /* ✅ Rend le texte légèrement transparent */
   margin-top: 5px;
+  /* ✅ Ajoute un petit espace au-dessus */
+}
+
+@media screen and (max-width: 768px) {
+  .footer {
+    font-size: 12px;
+    /* ✅ Réduit la taille du texte */
+    padding: 10px 5px;
+    /* ✅ Réduit le padding pour économiser de l'espace */
+  }
+
+  .dateTime {
+    font-size: 10px;
+    /* ✅ Réduit encore la taille du texte de la date */
+  }
 }

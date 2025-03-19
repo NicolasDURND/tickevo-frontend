@@ -3,15 +3,25 @@
 /* ✅ Conteneur principal du header */
 .header {
     background-color: #5474B4;
+    /* 🔹 Définit un fond bleu */
     color: white;
+    /* 🔹 Texte en blanc pour un bon contraste */
     padding: 10px 15px;
+    /* 🔹 Ajoute un espace intérieur */
     display: flex;
+    /* 🔹 Active Flexbox pour aligner les éléments */
     justify-content: space-between;
+    /* 🔹 Place les éléments aux extrémités */
     align-items: center;
+    /* 🔹 Centre verticalement les éléments */
     width: 100%;
+    /* 🔹 Occupe toute la largeur */
     margin: 0 auto;
+    /* 🔹 Centre le header s'il a une largeur maximale définie */
     flex-wrap: wrap;
+    /* 🔹 Permet de passer à la ligne sur petits écrans */
 }
+
 
 /* ✅ Conteneur pour le logo et la barre de recherche */
 .logoSearchContainer {
@@ -33,7 +43,8 @@
 .searchContainer {
     display: flex;
     align-items: center;
-    gap: 4px; /* Ajoute un espacement entre l'input et la loupe */
+    gap: 4px;
+    /* Ajoute un espacement entre l'input et la loupe */
     position: relative;
 }
 
@@ -60,8 +71,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative; /* Supprime la position absolue */
-    right: 0; /* Annule l'ancien décalage */
+    position: relative;
+    /* Supprime la position absolue */
+    right: 0;
+    /* Annule l'ancien décalage */
 }
 
 
@@ -124,45 +137,54 @@
     }
 
 }
+
 /* ✅ RESPONSIVE DESIGN - Mobile */
 @media (max-width: 768px) {
     .header {
-        flex-direction: row; /* ✅ Remet tout sur une ligne */
+        flex-direction: row;
+        /* ✅ Remet tout sur une ligne */
         align-items: center;
         justify-content: space-between;
         padding: 8px 10px;
     }
 
     .logoSearchContainer {
-        flex-direction: row; /* ✅ Alignement horizontal */
+        flex-direction: row;
+        /* ✅ Alignement horizontal */
         justify-content: flex-start;
         align-items: center;
-        gap: 6px; /* Réduction de l'espace */
+        gap: 6px;
+        /* Réduction de l'espace */
         flex-grow: 1;
         width: auto;
     }
 
     /* ✅ Réduction du logo pour mieux s'intégrer */
     .logo {
-        font-size: 22px; /* Réduction de la taille */
+        font-size: 22px;
+        /* Réduction de la taille */
     }
 
     /* ✅ Ajustement de la barre de recherche */
     .searchContainer {
-        flex-direction: row; /* ✅ Maintien de l'alignement horizontal */
+        flex-direction: row;
+        /* ✅ Maintien de l'alignement horizontal */
         align-items: center;
         width: auto;
-        gap: 3px; /* Réduction de l'espace */
+        gap: 3px;
+        /* Réduction de l'espace */
     }
 
     .searchInput {
-        width: 120px; /* Réduction de la taille */
+        width: 120px;
+        /* Réduction de la taille */
         font-size: 12px;
         padding: 5px 8px;
     }
 
     .searchButton {
-        width: 25px; /* Réduction de la taille */
+        width: 25px;
+        /* Réduction de la taille */
         height: 25px;
     }
 
@@ -178,11 +200,13 @@
     }
 
     .button {
-        padding: 3px 5px; /* ✅ Réduction de la taille des boutons */
+        padding: 3px 5px;
+        /* ✅ Réduction de la taille des boutons */
     }
 
     .icon {
-        width: 14px; /* ✅ Réduction de la taille des icônes */
+        width: 14px;
+        /* ✅ Réduction de la taille des icônes */
         height: 14px;
     }
 }

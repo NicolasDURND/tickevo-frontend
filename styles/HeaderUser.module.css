@@ -2,16 +2,17 @@
 
 /* ✅ Conteneur principal du header */
 .header {
-    background-color: #5474B4;
-    color: white;
-    padding: 10px 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin: 0 auto;
-    flex-wrap: wrap;
+    background-color: #5474B4; /* 🔹 Définit un fond bleu */
+    color: white; /* 🔹 Définit la couleur du texte en blanc */
+    padding: 10px 15px; /* 🔹 Ajoute un espacement intérieur pour éviter que le contenu touche les bords */
+    display: flex; /* 🔹 Utilise Flexbox pour gérer l'alignement des éléments */
+    justify-content: space-between; /* 🔹 Aligne les éléments aux extrémités gauche et droite */
+    align-items: center; /* 🔹 Centre les éléments verticalement */
+    width: 100%; /* 🔹 Fait en sorte que le header prenne toute la largeur de la page */
+    margin: 0 auto; /* 🔹 Centre le header si une largeur max est définie */
+    flex-wrap: wrap; /* 🔹 Permet aux éléments de passer à la ligne si l’espace est insuffisant */
 }
+
 
 /* ✅ Style du logo */
 .logo {

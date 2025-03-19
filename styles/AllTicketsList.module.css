@@ -2,11 +2,17 @@
 
 .container {
   display: flex;
+  /* Utilisation de Flexbox pour la mise en page */
   flex-direction: column;
+  /* Organise les enfants verticalement */
   width: 100%;
+  /* Prend toute la largeur de la page */
   min-height: 100vh;
+  /* Prend toute la hauteur visible de l’écran */
   background-color: #ffffff;
+  /* Fond blanc */
 }
+
 
 .content {
   padding: 20px;
@@ -28,7 +34,8 @@
 }
 
 /* Messages de chargement et erreurs */
-.loading, .error {
+.loading,
+.error {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -49,14 +56,16 @@
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  overflow-x: auto; /* Permet le défilement horizontal sur petits écrans */
+  overflow-x: auto;
+  /* Permet le défilement horizontal sur petits écrans */
   margin-top: 20px;
 }
 
 .ticketsTable {
   width: 100%;
   border-collapse: collapse;
-  min-width: 600px; /* Garantit que la table ne devient pas trop étroite */
+  min-width: 600px;
+  /* Garantit que la table ne devient pas trop étroite */
 }
 
 .ticketsTable th {
@@ -84,7 +93,8 @@
 }
 
 /* Bouton d'action */
-.viewButton, .assignButton {
+.viewButton,
+.assignButton {
   padding: 6px 12px;
   color: white;
   border: none;
@@ -92,7 +102,8 @@
   cursor: pointer;
   font-size: 14px;
   transition: background-color 0.2s;
-  white-space: nowrap; /* Empêche le texte du bouton de se couper */
+  white-space: nowrap;
+  /* Empêche le texte du bouton de se couper */
 }
 
 .viewButton {
@@ -103,19 +114,26 @@
   background-color: #28a745;
 }
 
-.viewButton:hover, .assignButton:hover {
+.viewButton:hover,
+.assignButton:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Container pour les boutons d'action */
+/* ✅ Container pour les boutons d'action */
 .actionButtons {
   display: flex;
+  /* Utilisation de Flexbox pour aligner les boutons */
   flex-direction: row;
+  /* Aligne les boutons horizontalement */
   justify-content: flex-start;
+  /* Aligne les boutons à gauche */
   align-items: center;
+  /* Centre verticalement les boutons */
   gap: 6px;
+  /* ✅ Ajoute un espacement de 6px entre les boutons */
 }
+
 
 .closedLabel {
   display: inline-block;
@@ -172,36 +190,37 @@
     padding: 15px 10px;
     box-sizing: border-box;
   }
-  
+
   .title {
     font-size: 22px;
     margin-top: 15px;
     margin-bottom: 15px;
   }
-  
-  .ticketsTable th, 
+
+  .ticketsTable th,
   .ticketsTable td {
     padding: 8px 6px;
     font-size: 13px;
     word-break: break-word;
   }
-  
-  .viewButton, .assignButton {
+
+  .viewButton,
+  .assignButton {
     padding: 4px 8px;
     font-size: 12px;
     margin-bottom: 3px;
   }
-  
+
   .closedLabel {
     padding: 4px 8px;
     font-size: 12px;
   }
-  
+
   .inProgressLabel {
     padding: 4px 8px;
     font-size: 12px;
   }
-  
+
   .pendingLabel {
     padding: 4px 8px;
     font-size: 12px;
@@ -213,46 +232,49 @@
     padding: 8px 4px;
     margin-top: 40px;
   }
-  
+
   .title {
     font-size: 16px;
     margin-top: 8px;
     margin-bottom: 8px;
     padding-bottom: 6px;
   }
-  
+
   .ticketsTable {
-    min-width: 400px; /* Réduit davantage */
+    min-width: 400px;
+    /* Réduit davantage */
   }
-  
-  .ticketsTable th, 
+
+  .ticketsTable th,
   .ticketsTable td {
     padding: 5px 3px;
     font-size: 10px;
     word-break: break-word;
-    max-width: 90px; /* Limite encore plus la largeur des cellules */
+    max-width: 90px;
+    /* Limite encore plus la largeur des cellules */
   }
-  
-  .viewButton, .assignButton {
+
+  .viewButton,
+  .assignButton {
     padding: 2px 4px;
     font-size: 9px;
     margin-right: 2px;
     margin-bottom: 2px;
     line-height: 1;
   }
-  
+
   .closedLabel {
     padding: 2px 4px;
     font-size: 9px;
     line-height: 1;
   }
-  
+
   .inProgressLabel {
     padding: 2px 4px;
     font-size: 9px;
     line-height: 1;
   }
-  
+
   .pendingLabel {
     padding: 2px 4px;
     font-size: 9px;
@@ -265,42 +287,44 @@
     padding: 5px 2px;
     margin-top: 35px;
   }
-  
+
   .title {
     font-size: 14px;
     margin-top: 6px;
     margin-bottom: 6px;
     padding-bottom: 4px;
   }
-  
+
   .ticketsTable {
-    min-width: 340px; /* Encore plus petit */
+    min-width: 340px;
+    /* Encore plus petit */
   }
-  
-  .ticketsTable th, 
+
+  .ticketsTable th,
   .ticketsTable td {
     padding: 3px 2px;
     font-size: 8px;
     max-width: 70px;
   }
-  
-  .viewButton, .assignButton {
+
+  .viewButton,
+  .assignButton {
     padding: 1px 3px;
     font-size: 8px;
     margin-right: 1px;
     margin-bottom: 1px;
   }
-  
+
   .closedLabel {
     padding: 1px 3px;
     font-size: 8px;
   }
-  
+
   .inProgressLabel {
     padding: 1px 3px;
     font-size: 8px;
   }
-  
+
   .pendingLabel {
     padding: 1px 3px;
     font-size: 8px;
@@ -309,31 +333,33 @@
 
 @media screen and (max-width: 320px) {
   .ticketsTable {
-    min-width: 300px; /* Minimum pour les plus petits téléphones */
+    min-width: 300px;
+    /* Minimum pour les plus petits téléphones */
   }
-  
-  .ticketsTable th, 
+
+  .ticketsTable th,
   .ticketsTable td {
     padding: 2px 1px;
     font-size: 7px;
     max-width: 60px;
   }
-  
-  .viewButton, .assignButton {
+
+  .viewButton,
+  .assignButton {
     padding: 1px 2px;
     font-size: 7px;
   }
-  
+
   .closedLabel {
     padding: 1px 2px;
     font-size: 7px;
   }
-  
+
   .inProgressLabel {
     padding: 1px 2px;
     font-size: 7px;
   }
-  
+
   .pendingLabel {
     padding: 1px 2px;
     font-size: 7px;
@@ -359,7 +385,8 @@
   background-color: white;
   border-radius: 5px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  width: 280px; /* Plus compact */
+  width: 280px;
+  /* Plus compact */
   max-width: 90%;
   overflow: hidden;
   animation: slideIn 0.3s ease-out;
@@ -408,13 +435,25 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slideIn {
-  from { transform: translateY(-20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 /* Version ultra-compacte pour tablettes */
@@ -422,24 +461,24 @@
   .modal {
     width: 220px;
   }
-  
+
   .modalHeader {
     padding: 0.25rem;
   }
-  
+
   .modalTitle {
     font-size: 0.75rem;
   }
-  
+
   .modalContent {
     padding: 0.35rem;
     font-size: 0.7rem;
   }
-  
+
   .modalFooter {
     padding: 0.25rem;
   }
-  
+
   .modalButton {
     padding: 0.2rem 0.5rem;
     font-size: 0.7rem;
@@ -451,24 +490,24 @@
   .modal {
     width: 200px;
   }
-  
+
   .modalHeader {
     padding: 0.15rem;
   }
-  
+
   .modalTitle {
     font-size: 0.6rem;
   }
-  
+
   .modalContent {
     padding: 0.15rem;
     font-size: 0.5rem;
   }
-  
+
   .modalFooter {
     padding: 0.15rem;
   }
-  
+
   .modalButton {
     padding: 0.15rem 0.3rem;
     font-size: 0.5rem;

@@ -5,7 +5,8 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #ffffff; /* Fond clair et neutre */
+  background-color: #ffffff;
+  /* Fond clair et neutre */
   font-family: 'Roboto', sans-serif;
 }
 
@@ -13,7 +14,8 @@
   max-width: 1200px;
   margin: 40px auto;
   padding: 30px;
-  background-color: #fff; /* Fond blanc de la "carte" principale */
+  background-color: #fff;
+  /* Fond blanc de la "carte" principale */
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
@@ -23,7 +25,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #5474B4; /* Couleur d'entête */
+  background: #5474B4;
+  /* Couleur d'entête */
   border-radius: 8px;
   padding: 20px;
   margin-bottom: 20px;
@@ -92,7 +95,7 @@
   border-radius: 8px;
   padding: 20px;
   margin-bottom: 30px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .ticketInfoGrid {
@@ -124,7 +127,7 @@
   border: 1px solid #e1e4e8;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .sectionTitle {
@@ -168,7 +171,8 @@
 /* Boutons d'action */
 .pendingButton {
   padding: 10px 20px;
-  background-color: #ffc107; /* "en-attente" */
+  background-color: #ffc107;
+  /* "en-attente" */
   color: #333;
   border: none;
   border-radius: 4px;
@@ -198,7 +202,8 @@
 
 .reassignButton {
   padding: 10px 20px;
-  background-color: #17a2b8; /* "en-cours" */
+  background-color: #17a2b8;
+  /* "en-cours" */
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -360,7 +365,8 @@
   color: #495057;
 }
 
-.viewButton, .commentButton {
+.viewButton,
+.commentButton {
   padding: 6px 12px;
   background-color: #4b6bab;
   color: white;
@@ -371,7 +377,8 @@
   font-size: 13px;
 }
 
-.viewButton:hover, .commentButton:hover {
+.viewButton:hover,
+.commentButton:hover {
   background-color: #3c5a96;
 }
 
@@ -381,23 +388,23 @@
     margin: 20px 10px;
     padding: 20px;
   }
-  
+
   .ticketHeader {
     flex-direction: column;
     align-items: flex-start;
     text-align: left;
   }
-  
+
   /* Réduction de la police pour le titre pour que le texte complet tienne */
   .title {
     font-size: 16px;
     margin-bottom: 10px;
   }
-  
+
   .ticketInfoGrid {
     grid-template-columns: 1fr 1fr;
   }
-  
+
   /* Affichage des boutons d'action côte à côte en mode mobile */
   .actionButtons {
     display: flex;
@@ -407,21 +414,21 @@
     width: 100%;
     margin-top: 10px;
   }
-  
+
   .actionButtons button {
     flex: 1;
     margin: 0;
   }
-  
+
   .sectionTitle {
     font-size: 16px;
     padding: 10px 12px;
   }
-  
+
   .commentButton {
     align-self: stretch;
   }
-  
+
   /* Réduction de la hauteur et de la taille de la police pour les boutons d'action */
   .pendingButton,
   .cancelPendingButton,
@@ -431,7 +438,3 @@
     font-size: 12px;
   }
 }
-
-
-
-

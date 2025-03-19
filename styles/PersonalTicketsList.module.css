@@ -47,7 +47,8 @@
 .ticketsTable {
   width: 100%;
   border-collapse: collapse;
-  min-width: 600px; /* ✅ Taille normale en mode Windows */
+  min-width: 600px;
+  /* ✅ Taille normale en mode Windows */
 }
 
 .ticketsTable th {
@@ -56,18 +57,22 @@
   font-weight: 500;
   text-align: left;
   padding: 12px 15px;
-  font-size: 14px; /* ✅ Taille normale en mode Windows */
+  font-size: 14px;
+  /* ✅ Taille normale en mode Windows */
   white-space: nowrap;
 }
 
 .ticketsTable td {
   padding: 12px 15px;
   border-bottom: 1px solid #eee;
-  font-size: 14px; /* ✅ Taille normale en mode Windows */
+  font-size: 14px;
+  /* ✅ Taille normale en mode Windows */
 }
 
 /* États des tickets */
-.closedLabel, .inProgressLabel, .pendingLabel {
+.closedLabel,
+.inProgressLabel,
+.pendingLabel {
   display: inline-block;
   padding: 6px 12px;
   border-radius: 4px;
@@ -121,10 +126,11 @@
   }
 
   .ticketsTable {
-    min-width: 450px; /* ✅ Réduction de la largeur minimale */
+    min-width: 450px;
+    /* ✅ Réduction de la largeur minimale */
   }
 
-  .ticketsTable th, 
+  .ticketsTable th,
   .ticketsTable td {
     padding: 6px 4px;
     font-size: 12px;
@@ -136,7 +142,9 @@
     font-size: 10px;
   }
 
-  .closedLabel, .inProgressLabel, .pendingLabel {
+  .closedLabel,
+  .inProgressLabel,
+  .pendingLabel {
     padding: 4px 8px;
     font-size: 10px;
   }
@@ -148,10 +156,11 @@
 
 @media screen and (max-width: 480px) {
   .ticketsTable {
-    min-width: 380px; /* ✅ Encore plus réduit */
+    min-width: 380px;
+    /* ✅ Encore plus réduit */
   }
 
-  .ticketsTable th, 
+  .ticketsTable th,
   .ticketsTable td {
     padding: 4px 3px;
     font-size: 10px;
@@ -163,7 +172,9 @@
     font-size: 9px;
   }
 
-  .closedLabel, .inProgressLabel, .pendingLabel {
+  .closedLabel,
+  .inProgressLabel,
+  .pendingLabel {
     padding: 3px 6px;
     font-size: 9px;
   }
@@ -175,10 +186,11 @@
 
 @media screen and (max-width: 360px) {
   .ticketsTable {
-    min-width: 320px; /* ✅ Minimum possible */
+    min-width: 320px;
+    /* ✅ Minimum possible */
   }
 
-  .ticketsTable th, 
+  .ticketsTable th,
   .ticketsTable td {
     padding: 3px 2px;
     font-size: 8px;
@@ -190,7 +202,9 @@
     font-size: 8px;
   }
 
-  .closedLabel, .inProgressLabel, .pendingLabel {
+  .closedLabel,
+  .inProgressLabel,
+  .pendingLabel {
     padding: 2px 5px;
     font-size: 8px;
   }
@@ -199,5 +213,3 @@
     font-size: 10px;
   }
 }
-
-

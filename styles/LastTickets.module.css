@@ -6,7 +6,8 @@
   flex-direction: column;
   align-items: center;
   width: auto;
-  max-width: 600px; /* ✅ Réduction de la taille */
+  max-width: 600px;
+  /* ✅ Réduction de la taille */
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -15,112 +16,152 @@
   border: 1px solid #ddd;
   margin: auto;
 }
+
 .card {
-    width: 800px; /* Ajuste la largeur */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    background-color: white;
-    text-align: center;
+  width: 800px;
+  /* Ajuste la largeur */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  text-align: center;
 }
-  
+
 
 /* ✅ Titre de la section */
 .title {
-    font-size: 25px;
-    font-family: 'Roboto', sans-serif;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #333;
+  font-size: 25px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
 }
-
 /* ✅ Tableau responsive */
 .table {
-  width: 100%;
-  border-collapse: collapse;
-  table-layout: auto; /* ✅ Laisse le tableau s’adapter au contenu */
-  margin-top: 10px;
+  width: 100%; /* 🔹 Le tableau prend toute la largeur du conteneur */
+  border-collapse: collapse; /* 🔹 Supprime les espaces entre les bordures */
+  table-layout: auto; /* 🔹 Permet au tableau de s’adapter au contenu */
+  margin-top: 10px; /* 🔹 Ajoute un petit espacement au-dessus du tableau */
 }
 
-.table th, .table td {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-    text-align: center;
+/* ✅ Style général des cellules */
+.table th,
+.table td {
+  padding: 10px; /* 🔹 Ajoute un espacement intérieur */
+  border-bottom: 1px solid #ddd; /* 🔹 Ajoute une ligne séparatrice entre les lignes */
+  text-align: center; /* 🔹 Centre le texte dans toutes les cellules */
 }
 
+/* ✅ Style des en-têtes */
 .table th {
-    background: #f1f1f1;
-    font-weight: bold;
+  background: #f1f1f1; /* 🔹 Fond gris clair pour différencier les en-têtes */
+  font-weight: bold; /* 🔹 Met en gras les textes des en-têtes */
 }
 
 /* ✅ Largeur fixe des colonnes */
-.table th:nth-child(1), .table td:nth-child(1) { width: 10%; } /* N° */
-.table th:nth-child(2), .table td:nth-child(2) { width: 20%; } /* Émetteur */
-.table th:nth-child(3), .table td:nth-child(3) { width: 20%; } /* Date */
-.table th:nth-child(4), .table td:nth-child(4) { width: 15%; } /* Type */
-.table th:nth-child(5), .table td:nth-child(5) { width: 15%; } /* Statut */
-.table th:nth-child(6), .table td:nth-child(6) { width: 20%; text-align: center; } /* Action */
+
+/* 🔹 Première colonne (ex: ID) */
+.table th:nth-child(1),
+.table td:nth-child(1) {
+  width: 10%;
+}
+
+/* 🔹 Deuxième colonne (ex: N° de référence) */
+.table th:nth-child(2),
+.table td:nth-child(2) {
+  width: 20%;
+}
+
+/* 🔹 Troisième colonne (ex: Émetteur) */
+.table th:nth-child(3),
+.table td:nth-child(3) {
+  width: 20%;
+}
+
+/* 🔹 Quatrième colonne (ex: Date) */
+.table th:nth-child(4),
+.table td:nth-child(4) {
+  width: 15%;
+}
+
+/* 🔹 Cinquième colonne (ex: Type de ticket) */
+.table th:nth-child(5),
+.table td:nth-child(5) {
+  width: 15%;
+}
+
+/* 🔹 Sixième colonne (ex: Statut) */
+.table th:nth-child(6),
+.table td:nth-child(6) {
+  width: 20%;
+  text-align: center; /* 🔹 Assure que le statut est bien centré */
+}
 
 /* ✅ Couleurs des statuts */
 .en-cours {
-    color: orange;
-    font-weight: bold;
+  color: orange; /* 🔹 Statut "En cours" en orange */
+  font-weight: bold;
 }
 
 .en-attente {
-    color: red;
-    font-weight: bold;
+  color: red; /* 🔹 Statut "En attente" en rouge */
+  font-weight: bold;
 }
 
 .clôturé {
-    color: green;
-    font-weight: bold;
+  color: green; /* 🔹 Statut "Clôturé" en vert */
+  font-weight: bold;
 }
 
-/* ✅ Bouton "Détail" bien aligné */
+/* ✅ Style du bouton "Détail" */
 .detailButton {
-    background-color: #5474B4;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 0.9rem;
-    transition: background 0.3s;
-    white-space: nowrap; /* ✅ Empêche le texte de passer à la ligne */
+  background-color: #5474B4; /* 🔹 Fond bleu */
+  color: white; /* 🔹 Texte blanc */
+  border: none; /* 🔹 Supprime la bordure */
+  padding: 5px 10px; /* 🔹 Ajoute un espacement intérieur */
+  cursor: pointer; /* 🔹 Change le curseur en main au survol */
+  border-radius: 5px; /* 🔹 Arrondit les coins du bouton */
+  font-size: 0.9rem; /* 🔹 Taille du texte légèrement réduite */
+  transition: background 0.3s; /* 🔹 Ajoute un effet fluide au survol */
+  white-space: nowrap; /* 🔹 Empêche le texte de passer à la ligne */
 }
 
+/* ✅ Effet de survol du bouton */
 .detailButton:hover {
-    background-color: #0056b3;
+  background-color: #0056b3; /* 🔹 Assombrit la couleur au survol */
 }
 
-/* ✅ Pagination */
+/* ✅ Conteneur de la pagination */
 .buttonContainer {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 15px;
-    width: 100%;
+  display: flex; /* 🔹 Active Flexbox */
+  justify-content: space-around; /* 🔹 Répartit les boutons de pagination équitablement */
+  margin-top: 15px; /* 🔹 Ajoute un espace entre le tableau et la pagination */
+  width: 100%;
 }
 
+/* ✅ Style des boutons de pagination */
 .button {
-    padding: 8px 12px;
-    border: none;
-    border-radius: 5px;
-    background-color: #5474B4;
-    color: white;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background 0.3s;
+  padding: 8px 12px; /* 🔹 Ajoute un espacement intérieur */
+  border: none; /* 🔹 Supprime la bordure */
+  border-radius: 5px; /* 🔹 Arrondit les coins */
+  background-color: #5474B4; /* 🔹 Couleur de fond bleu */
+  color: white; /* 🔹 Texte blanc */
+  cursor: pointer; /* 🔹 Change le curseur au survol */
+  font-size: 1rem; /* 🔹 Ajuste la taille du texte */
+  transition: background 0.3s; /* 🔹 Ajoute une transition fluide */
 }
 
+/* ✅ Effet de survol des boutons */
 .button:hover {
-    background-color: #0056b3;
+  background-color: #0056b3; /* 🔹 Assombrit la couleur au survol */
 }
 
+/* ✅ Style des boutons désactivés */
 .button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+  background-color: #ccc; /* 🔹 Grise le bouton */
+  cursor: not-allowed; /* 🔹 Désactive le curseur */
 }
+
 
 /* ========================
    Media Queries Responsive
@@ -132,26 +173,27 @@
     width: 90%;
     padding: 15px;
   }
-  
+
   .lastTicketsContainer {
     max-width: 90%;
     padding: 15px;
   }
-  
+
   .title {
     font-size: 18px;
   }
-  
-  .table th, .table td {
+
+  .table th,
+  .table td {
     font-size: 0.95rem;
     padding: 9px;
   }
-  
+
   .detailButton {
     font-size: 0.85rem;
     padding: 5px 8px;
   }
-  
+
   .button {
     font-size: 0.95rem;
     padding: 7px 10px;
@@ -164,26 +206,27 @@
     width: 100%;
     padding: 10px;
   }
-  
+
   .lastTicketsContainer {
     max-width: 100%;
     padding: 10px;
   }
-  
+
   .title {
     font-size: 16px;
   }
-  
-  .table th, .table td {
+
+  .table th,
+  .table td {
     font-size: 0.8rem;
     padding: 6px;
   }
-  
+
   .detailButton {
     font-size: 0.7rem;
     padding: 4px 6px;
   }
-  
+
   .button {
     font-size: 0.8rem;
     padding: 5px 8px;

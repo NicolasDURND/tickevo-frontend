@@ -49,7 +49,8 @@
 
 .ticketContainer {
   width: 90%;
-  max-width: 1000px; /* Carte élargie sur desktop */
+  max-width: 1000px;
+  /* Carte élargie sur desktop */
   margin: 20px auto;
   border: none;
   border-radius: 10px;
@@ -99,12 +100,14 @@
 }
 
 .en-cours {
-  background-color: #17a2b8; /* Couleur rétablie pour "en-cours" */
+  background-color: #17a2b8;
+  /* Couleur rétablie pour "en-cours" */
   color: #fff;
 }
 
 .en-attente {
-  background-color: #ffc107; /* Couleur rétablie pour "en-attente" */
+  background-color: #ffc107;
+  /* Couleur rétablie pour "en-attente" */
   color: #333;
 }
 
@@ -192,7 +195,7 @@
   .title {
     font-size: 24px;
     margin-bottom: 20px;
-    
+
   }
 
   .ticketDetails {
@@ -283,18 +286,3 @@
     font-size: 12px;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

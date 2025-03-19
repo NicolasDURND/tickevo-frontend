@@ -12,20 +12,31 @@
 /* ✅ Conteneur du contenu principal (Recherche + Modification) */
 .container {
   display: flex;
+  /* ✅ Utilisation de flexbox pour l'alignement */
   justify-content: center;
+  /* ✅ Centre les éléments horizontalement */
   align-items: flex-start;
+  /* ✅ Aligne les éléments en haut du conteneur */
   width: 90%;
-  max-width: 1300px; /* ✅ Augmenté pour un meilleur alignement */
-  gap: 25px; /* ✅ Légèrement augmenté pour l'espacement */
+  /* ✅ Le conteneur occupe 90% de la largeur de son parent */
+  max-width: 1300px;
+  /* ✅ Largeur maximale fixée pour éviter un affichage trop étiré */
+  gap: 25px;
+  /* ✅ Espacement entre les éléments enfants */
   /* min-height: 500px; */
+  /*  Commenté : Définir une hauteur minimale si nécessaire */
   flex: 1;
+  /* ✅ Permet au conteneur de prendre tout l'espace disponible */
   padding-top: 50px;
+  /* ✅ Ajoute un espace en haut pour l'aération */
 }
 
 /* ✅ Cartes (Recherche & Modification) */
 .card {
-  width: 55%; /* ✅ Augmenté pour occuper plus d'espace */
-  max-width: 600px; /* ✅ Empêche une extension trop grande */
+  width: 55%;
+  /* ✅ Augmenté pour occuper plus d'espace */
+  max-width: 600px;
+  /* ✅ Empêche une extension trop grande */
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -36,8 +47,10 @@
 /* ✅ Responsive : Ajustement des cartes sur petits écrans */
 @media (max-width: 768px) {
   .card {
-    width: 90%; /* ✅ Prend plus de place en mode mobile */
-    max-width: 100%; /* ✅ Empêche toute restriction excessive */
+    width: 90%;
+    /* ✅ Prend plus de place en mode mobile */
+    max-width: 100%;
+    /* ✅ Empêche toute restriction excessive */
   }
 }
 
@@ -54,7 +67,8 @@
   border-radius: 20px;
   outline: none;
   width: 700px;
-  max-width: 100%; /* ✅ Ajustement automatique */
+  max-width: 100%;
+  /* ✅ Ajustement automatique */
   font-size: 14px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
 }
@@ -77,26 +91,33 @@
 /* ✅ Wrapper pour éviter le débordement du tableau */
 .userTableWrapper {
   width: 100%;
-  max-width: 1200px; /* ✅ Garde une taille max pour éviter l'effet élastique */
-  overflow-x: auto; /* ✅ Ajoute un scroll horizontal si nécessaire */
+  max-width: 1200px;
+  /* ✅ Garde une taille max pour éviter l'effet élastique */
+  overflow-x: auto;
+  /* ✅ Ajoute un scroll horizontal si nécessaire */
 }
 
 /* ✅ Tableau des utilisateurs */
 .userTable {
   width: 100%;
-  max-width: 100%; /* ✅ S'adapte parfaitement au composant parent */
+  max-width: 100%;
+  /* ✅ S'adapte parfaitement au composant parent */
   border-collapse: collapse;
   margin-top: 15px;
-  table-layout: fixed; /* ✅ Assure que les colonnes gardent une taille uniforme */
+  table-layout: fixed;
+  /* ✅ Assure que les colonnes gardent une taille uniforme */
 }
 
 /* ✅ Styles des cellules du tableau */
-.userTable th, .userTable td {
+.userTable th,
+.userTable td {
   padding: 10px;
   border: 1px solid #ddd;
   text-align: center;
-  white-space: normal; /* ✅ Permet au texte de passer à la ligne si nécessaire */
-  word-break: break-word; /* ✅ Empêche le texte de forcer le débordement */
+  white-space: normal;
+  /* ✅ Permet au texte de passer à la ligne si nécessaire */
+  word-break: break-word;
+  /* ✅ Empêche le texte de forcer le débordement */
 }
 
 /* ✅ Adaptation du tableau sur mobile */
@@ -125,7 +146,8 @@
 }
 
 /* ✅ Formulaire de création et de modification */
-.createBox, .modifierBox {
+.createBox,
+.modifierBox {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -133,13 +155,17 @@
 }
 
 /* ✅ Style général des inputs et selects */
-.createBox input, .modifierBox input, .createBox select, .modifierBox select {
+.createBox input,
+.modifierBox input,
+.createBox select,
+.modifierBox select {
   padding: 8px 12px;
   border: 1px solid #ccc;
   border-radius: 20px;
   outline: none;
   width: 100%;
-  max-width: 500px; /* ✅ Empêche l'extension excessive */
+  max-width: 500px;
+  /* ✅ Empêche l'extension excessive */
   font-size: 14px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
   background-color: white;
@@ -148,7 +174,8 @@
 }
 
 /* ✅ Effet au focus */
-.createBox select:focus, .modifierBox select:focus {
+.createBox select:focus,
+.modifierBox select:focus {
   border-color: #5474B4;
   box-shadow: 0px 0px 8px rgba(84, 116, 180, 0.5);
 }
@@ -158,7 +185,8 @@
   display: flex;
   justify-content: space-between;
   width: 50%;
-  max-width: 500px; /* ✅ Empêche l'extension excessive */
+  max-width: 500px;
+  /* ✅ Empêche l'extension excessive */
   gap: 20px;
   margin-top: 10px;
 }
@@ -166,14 +194,23 @@
 /* ✅ Bouton général */
 .button {
   width: 50%;
+  /* ✅ Définit une largeur de 50% pour le bouton */
   padding: 10px 15px;
+  /* ✅ Ajoute un espace intérieur : 10px en haut/bas, 15px gauche/droite */
   border: none;
+  /* ✅ Supprime la bordure par défaut */
   border-radius: 5px;
+  /* ✅ Arrondit légèrement les coins du bouton */
   background-color: #5474B4;
+  /* ✅ Définit une couleur de fond bleu */
   color: white;
+  /* ✅ Définit la couleur du texte en blanc */
   cursor: pointer;
+  /* ✅ Change le curseur en "main" au survol pour indiquer qu'il est cliquable */
   font-size: 1rem;
+  /* ✅ Définit la taille du texte à 1rem (16px par défaut) */
   transition: background 0.3s;
+  /* ✅ Ajoute une transition fluide lors du changement de couleur */
 }
 
 .button:hover {
@@ -245,8 +282,11 @@
 
 .pageButton:disabled {
   background-color: #ccc;
+  /* ✅ Change la couleur du bouton en gris pour indiquer qu'il est désactivé */
   cursor: not-allowed;
+  /* ✅ Change le curseur en "interdit" pour montrer que l'action est impossible */
 }
+
 
 .pageButton:hover:not(:disabled) {
   background-color: #405a8d;
@@ -268,7 +308,10 @@
     width: 100%;
   }
 
-  .createBox input, .modifierBox input, .createBox select, .modifierBox select {
+  .createBox input,
+  .modifierBox input,
+  .createBox select,
+  .modifierBox select {
     width: 100%;
     max-width: 90%;
   }
@@ -278,7 +321,8 @@
     width: 100%;
   }
 
-  .button, .buttonSecondary {
+  .button,
+  .buttonSecondary {
     width: 100%;
   }
 

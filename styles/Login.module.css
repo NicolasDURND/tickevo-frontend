@@ -1,23 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
 
-/* --- Conteneur global --- */
+/* --- ✅ Conteneur global de la page --- */
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #ffffff; /* Fond clair */
-  font-family: 'Roboto', sans-serif;
-  padding-top: 105px;
-
+  display: flex; /* 🔹 Active Flexbox pour gérer l'alignement */
+  flex-direction: column; /* 🔹 Organise les éléments verticalement */
+  align-items: center; /* 🔹 Centre les éléments horizontalement */
+  justify-content: center; /* 🔹 Centre les éléments verticalement */
+  background-color: #ffffff; /* 🔹 Définit un fond blanc */
+  font-family: 'Roboto', sans-serif; /* 🔹 Définit la police principale */
+  padding-top: 105px; /* 🔹 Ajoute un espace en haut pour éviter le chevauchement */
 }
+
 
 /* --- Logo (placé au-dessus du formulaire) --- */
 .logo {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px; /* Espace entre le logo et le formulaire */
+  margin-bottom: 20px;
+  /* Espace entre le logo et le formulaire */
 }
 
 .logo img {
@@ -79,19 +80,19 @@
     width: 200px;
     height: 150px;
   }
-  
+
   .input {
     width: 90%;
     padding: 20px;
     margin-top: 30px;
   }
-  
+
   .username,
   .password {
     width: 200px;
     font-size: 13px;
   }
-  
+
   .loginButton {
     width: 200px;
     padding: 10px;

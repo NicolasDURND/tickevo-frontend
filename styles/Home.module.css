@@ -7,8 +7,10 @@
 .main {
   display: flex;
   flex-direction: column;
-  align-items: stretch; /* Étire les composants sur toute la largeur */
-  justify-content: flex-start; /* Aligne tout en haut */
+  align-items: stretch;
+  /* Étire les composants sur toute la largeur */
+  justify-content: flex-start;
+  /* Aligne tout en haut */
   width: 100%;
   min-height: 100vh;
   padding: 0;
@@ -26,17 +28,24 @@
   text-decoration: none;
 }
 
-.title a:hover, .title a:focus, .title a:active {
-  text-decoration: underline;
+/* ✅ Styles pour les liens à l'intérieur des éléments avec la classe .title */
+/* Ces styles s'appliquent lorsque l'utilisateur survole (hover), sélectionne (focus) ou clique (active) sur le lien */
+.title a:hover, /* 🔹 Quand la souris passe sur le lien */
+.title a:focus, /* 🔹 Quand l'utilisateur sélectionne le lien avec Tab */
+.title a:active { /* 🔹 Quand le lien est activé (cliqué) */
+  text-decoration: underline; /* 🔹 Ajoute un soulignement */
 }
+
 
 .container {
   display: flex;
   flex: 1;
   flex-wrap: nowrap;
-  justify-content: center; /* ✅ Centre les deux cartes */
+  justify-content: center;
+  /* ✅ Centre les deux cartes */
   align-items: flex-start;
-  gap: 50px; /* ✅ Ajoute un espace entre les deux cards sans changer leurs dimensions */
+  gap: 50px;
+  /* ✅ Ajoute un espace entre les deux cards sans changer leurs dimensions */
   width: 100%;
   padding: 40px;
   max-width: 1200px;
@@ -60,11 +69,11 @@
   .main {
     padding: 0;
   }
-  
+
   .title {
     font-size: 3rem;
   }
-  
+
   .container {
     flex-direction: column;
     padding: 20px;
