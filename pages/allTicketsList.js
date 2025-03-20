@@ -30,7 +30,7 @@ const allTicketsList = () => {
     // ✅ Requête fetch vers le backend pour récupérer la liste des tickets
     const fetchTickets = async () => {
       try {
-        const response = await fetch("http://localhost:3000/tickets", {
+        const response = await fetch("https://tickevo-backend.vercel.app/tickets", {
           method: "GET", // Requête GET pour récupérer les tickets
           headers: {
             "Content-Type": "application/json",
@@ -93,7 +93,7 @@ const allTicketsList = () => {
         return;
       }
 
-      const response = await fetch(`http://localhost:3000/ticketsTechnicien/${ticketId}/assign`, {
+      const response = await fetch(`https://tickevo-backend.vercel.app/ticketsTechnicien/${ticketId}/assign`, {
         method: "PATCH", // Requête PATCH pour assigner le ticket
         headers: {
           "Content-Type": "application/json",

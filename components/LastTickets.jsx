@@ -13,7 +13,7 @@ const LastTickets = () => {
     // Récupère les tickets depuis l'API
     const fetchTickets = async () => {
       try {
-        const response = await fetch("http://localhost:3000/tickets/last", {
+        const response = await fetch("https://tickevo-backend.vercel.app/tickets/last", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

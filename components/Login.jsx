@@ -21,7 +21,7 @@ const Login = () => {
     dispatch(loginStart()); // Indique que la connexion est en cours
 
     try {
-      const response = await fetch("http://localhost:3000/users/signin", {
+      const response = await fetch("https://tickevo-backend.vercel.app/users/signin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }), // Envoie les identifiants au serveur

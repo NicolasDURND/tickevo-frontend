@@ -122,7 +122,7 @@ const NewTicket = () => {
     console.log("🚀 Envoi du ticket avec les données :", ticketData);
 
     try {
-      const response = await fetch("http://localhost:3000/tickets", {
+      const response = await fetch("https://tickevo-backend.vercel.app/tickets", {
         method: "POST", // Envoie une requête POST pour créer un nouveau ticket
         headers: {
           "Content-Type": "application/json", // Indique que les données sont en JSON

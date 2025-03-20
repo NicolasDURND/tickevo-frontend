@@ -21,7 +21,7 @@ export default function Admin() {
           return;
         }
 
-        const response = await fetch("http://localhost:3000/users/allusers", {
+        const response = await fetch("https://tickevo-backend.vercel.app/users/allusers", {
           method: "GET", // Requête GET pour récupérer les utilisateurs
           headers: {
             "Content-Type": "application/json", // Indique que les données sont au format JSON

@@ -42,7 +42,7 @@ const personalTicketsList = () => {
       console.log("[personalTicketsList] Récupération des tickets pour l'utilisateur:", userId)
 
       // ✅ Effectue une requête pour récupérer les tickets assignés à l'utilisateur
-      const response = await fetch(`http://localhost:3000/ticketsTechnicien/assigned/${userId}`, {
+      const response = await fetch(`https://tickevo-backend.vercel.app/ticketsTechnicien/assigned/${userId}`, {
         method: "GET", // Requête GET pour récupérer les tickets
         headers: {
           "Content-Type": "application/json", // Indique que les données envoyées et reçues sont au format JSON

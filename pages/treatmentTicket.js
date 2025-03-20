@@ -87,7 +87,7 @@ const treatmentTicket = () => {
 
       // ✅ Envoi de la requête HTTP GET pour récupérer le ticket avec l'ID spécifié
       const response = await fetch(
-        `http://localhost:3000/tickets/${ticketId}`,
+        `https://tickevo-backend.vercel.app/tickets/${ticketId}`,
         {
           method: "GET", // Utilisation de la méthode GET pour récupérer les données
           headers: {
@@ -152,7 +152,7 @@ const treatmentTicket = () => {
       // ✅ 1. Si le ticket est clôturé, ajouter la raison comme un commentaire
       if (newStatus === "clôturé") {
         await fetch(
-          `http://localhost:3000/ticketsTechnicien/${ticketId}/comment`,
+          `https://tickevo-backend.vercel.app/ticketsTechnicien/${ticketId}/comment`,
           {
             method: "POST",
             headers: {
@@ -169,7 +169,7 @@ const treatmentTicket = () => {
 
       // ✅ 2. Mettre à jour le statut du ticket via une requête PATCH
       const response = await fetch(
-        `http://localhost:3000/ticketsTechnicien/${ticketId}/status`,
+        `https://tickevo-backend.vercel.app/ticketsTechnicien/${ticketId}/status`,
         {
           method: "PATCH",
           headers: {
@@ -239,7 +239,7 @@ const treatmentTicket = () => {
 
       // ✅ Envoi d'une requête PATCH pour mettre à jour le statut du ticket à "en cours"
       const response = await fetch(
-        `http://localhost:3000/ticketsTechnicien/${ticket._id}/status`,
+        `https://tickevo-backend.vercel.app/ticketsTechnicien/${ticket._id}/status`,
         {
           method: "PATCH",
           headers: {
@@ -294,7 +294,7 @@ const treatmentTicket = () => {
 
       // ✅ Envoi d'une requête PATCH pour réinitialiser l'affectation du ticket
       const response = await fetch(
-        `http://localhost:3000/ticketsTechnicien/${ticket._id}/reassign`,
+        `https://tickevo-backend.vercel.app/ticketsTechnicien/${ticket._id}/reassign`,
         {
           method: "PATCH",
           headers: {
@@ -341,7 +341,7 @@ const treatmentTicket = () => {
 
       // ✅ Envoi d'une requête POST à l'API pour ajouter un commentaire
       const response = await fetch(
-        `http://localhost:3000/ticketsTechnicien/${ticketId}/comment`,
+        `https://tickevo-backend.vercel.app/ticketsTechnicien/${ticketId}/comment`,
         {
           method: "POST", // Utilisation de la méthode POST pour envoyer les données
           headers: {

@@ -38,14 +38,14 @@ const UserManagement = ({ selectedUser }) => {
 
         // Fetch roles and services concurrently
         const [rolesResponse, servicesResponse] = await Promise.all([
-          fetch("http://localhost:3000/users/roles", {
+          fetch("https://tickevo-backend.vercel.app/users/roles", {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
               Authorization: `Bearer ${token}`,
             },
           }),
-          fetch("http://localhost:3000/users/services", {
+          fetch("https://tickevo-backend.vercel.app/users/services", {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
@@ -120,7 +120,7 @@ const UserManagement = ({ selectedUser }) => {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/users/signupAdmin", {
+      const response = await fetch("https://tickevo-backend.vercel.app/users/signupAdmin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -161,7 +161,7 @@ const UserManagement = ({ selectedUser }) => {
       }
 
       const response = await fetch(
-        `http://localhost:3000/users/update/${selectedUser._id}`,
+        `https://tickevo-backend.vercel.app/users/update/${selectedUser._id}`,
         {
           method: "PATCH",
           headers: {
@@ -205,7 +205,7 @@ const UserManagement = ({ selectedUser }) => {
       }
 
       const response = await fetch(
-        `http://localhost:3000/users/toggle-status/${selectedUser._id}`,
+        `https://tickevo-backend.vercel.app/users/toggle-status/${selectedUser._id}`,
         {
           method: "PATCH",
           headers: {
@@ -225,7 +225,7 @@ const UserManagement = ({ selectedUser }) => {
 
       // Fetch the updated user data
       const updatedUserResponse = await fetch(
-        `http://localhost:3000/users/${selectedUser._id}`,
+        `https://tickevo-backend.vercel.app/users/${selectedUser._id}`,
         {
           method: "GET",
           headers: {

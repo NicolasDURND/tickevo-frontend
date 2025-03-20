@@ -18,7 +18,7 @@ const TicketDetails = () => {
       // Fonction asynchrone pour récupérer les détails du ticket
       const fetchTicket = async () => {
         try {
-          const response = await fetch(`http://localhost:3000/tickets/${id}`, {
+          const response = await fetch(`https://tickevo-backend.vercel.app/tickets/${id}`, {
             method: "GET", // Requête GET pour obtenir les données du ticket
             headers: {
               "Content-Type": "application/json", // Indique que les données sont en JSON
