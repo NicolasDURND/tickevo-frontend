@@ -2,7 +2,7 @@ import { useState } from "react"; // Gère l'état local (ici pour la barre de r
 import { useDispatch } from "react-redux"; // Permet d'envoyer des actions Redux
 import { useRouter } from "next/router"; // Hook de navigation Next.js
 import { logout } from "../reducers/authentification"; // Action Redux pour la déconnexion
-import styles from "../styles/Headertechnicien.module.css"; // Importe les styles CSS du header
+import styles from "../styles/HeaderTechnicien.module.css"; // Importe les styles CSS du header
 import { 
   IconHome, IconArchive, IconFiles, 
   IconBell, IconTicket, IconLogout, IconSearch 
