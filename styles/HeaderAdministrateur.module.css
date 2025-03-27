@@ -176,10 +176,11 @@
     }
 
     .searchInput {
-        width: 120px;
+        width: 80px;
         /* Réduction de la taille */
         font-size: 12px;
         padding: 5px 8px;
+        height: 15px;
     }
 
     .searchButton {
@@ -205,8 +206,8 @@
     }
 
     .icon {
-        width: 14px;
+        width: 11px;
         /* ✅ Réduction de la taille des icônes */
-        height: 14px;
+        height: 11px;
     }
 }
