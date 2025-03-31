@@ -1,11 +1,7 @@
 import React, { useState } from "react"; // Gère l'état local pour les inputs utilisateur
 import { useDispatch, useSelector } from "react-redux"; // Permet de gérer l'état global avec Redux
 import { useRouter } from "next/router"; // Importe le hook de navigation Next.js
-import {
-  loginStart,
-  loginSuccess,
-  loginFailure,
-} from "../reducers/authentification"; // Actions Redux pour gérer la connexion
+import { loginStart, loginSuccess, loginFailure } from "../reducers/authentification"; // Actions Redux pour gérer la connexion
 import styles from "../styles/Login.module.css"; // Importe les styles CSS
 
 const Login = () => {
