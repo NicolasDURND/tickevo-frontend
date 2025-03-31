@@ -175,7 +175,7 @@
     }
 
     .searchInput {
-        width: 80px;
+        width: 50px;
         /* Réduction de la taille */
         font-size: 12px;
         padding: 5px 8px;
@@ -205,8 +205,8 @@
     }
 
     .icon {
-        width: 11px;
+        width: 10px;
         /* ✅ Réduction de la taille des icônes */
-        height: 11px;
+        height: 10px;
     }
 }
