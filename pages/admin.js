@@ -11,7 +11,7 @@ export default function Admin() {
   const [currentPage, setCurrentPage] = useState(1); // Stocke le numéro de la page actuelle pour la pagination
   const usersPerPage = 10; // Définit le nombre d'utilisateurs affichés par page
 
-  // ✅ Récupérer les utilisateurs depuis le backend lors du chargement du composant
+  //  Récupérer les utilisateurs depuis le backend lors du chargement du composant
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -43,7 +43,7 @@ export default function Admin() {
     fetchUsers(); // Appelle la fonction pour récupérer les utilisateurs
   }, []);
 
-  // ✅ Calculer et trier les utilisateurs à afficher
+  //  Calculer et trier les utilisateurs à afficher
   const indexOfLastUser = currentPage * usersPerPage; // Calcul de l'index du dernier utilisateur affiché
   const indexOfFirstUser = indexOfLastUser - usersPerPage; // Calcul de l'index du premier utilisateur affiché
   const currentUsers = users
@@ -51,21 +51,21 @@ export default function Admin() {
     .sort((a, b) => a.username.localeCompare(b.username)) // 🔥 Trie les utilisateurs par username (ordre alphabétique)
     .slice(indexOfFirstUser, indexOfLastUser); // Sélectionne uniquement les utilisateurs à afficher sur la page actuelle
 
-  // ✅ Changer de page (passer à la page suivante)
+  //  Changer de page (passer à la page suivante)
   const nextPage = () => {
     if (currentPage < Math.ceil(users.length / usersPerPage)) {
       setCurrentPage(currentPage + 1);
     }
   };
 
-  // ✅ Revenir à la page précédente
+  //  Revenir à la page précédente
   const prevPage = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
     }
   };
 
-  // ✅ Gérer le clic sur le bouton "Voir détails"
+  //  Gérer le clic sur le bouton "Voir détails"
   const handleDetailClick = (user) => {
     setSelectedUser(user); // Définit l'utilisateur sélectionné
   };
@@ -76,7 +76,7 @@ export default function Admin() {
       <div className={styles.pageContainer}>
         <div className={styles.container}>
           
-          {/* ✅ Barre de recherche pour filtrer les utilisateurs */}
+          {/*  Barre de recherche pour filtrer les utilisateurs */}
           <div className={styles.card}>
             <h2>Rechercher un utilisateur</h2>
             <div className={styles.searchContainer}>
@@ -89,7 +89,7 @@ export default function Admin() {
               />
             </div>
 
-            {/* ✅ Tableau affichant les utilisateurs */}
+            {/*  Tableau affichant les utilisateurs */}
             <table className={styles.userTable}>
               <thead>
                 <tr>
@@ -122,7 +122,7 @@ export default function Admin() {
               </tbody>
             </table>
 
-            {/* ✅ Boutons de pagination */}
+            {/*  Boutons de pagination */}
             <div className={styles.pagination}>
               <button
                 onClick={prevPage} // Passe à la page précédente
@@ -144,7 +144,7 @@ export default function Admin() {
             </div>
           </div>
 
-          {/* ✅ Gestion des utilisateurs (affichage des détails) */}
+          {/*  Gestion des utilisateurs (affichage des détails) */}
           <UserManagement selectedUser={selectedUser} />
 
         </div>

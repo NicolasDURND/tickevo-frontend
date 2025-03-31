@@ -1,7 +1,7 @@
-/* ✅ Importation de la police Roboto depuis Google Fonts */
+/*  Importation de la police Roboto depuis Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 
-/* ✅ Styles globaux pour le corps de la page */
+/*  Styles globaux pour le corps de la page */
 body {
   padding: 0;
   /* 🔹 Supprime les espaces internes par défaut */
@@ -12,14 +12,14 @@ body {
   /* 🔹 Définit une liste de polices de secours  */
 }
 
-/* ✅ Applique des styles globaux à tous les éléments */
+/*  Applique des styles globaux à tous les éléments */
 * {
   box-sizing: border-box;
   /* 🔹 Assure que width et height incluent le padding et border */
   font-family: "Roboto", Arial, Helvetica, sans-serif;
   /* 🔹 Définit la police par défaut */
 
-  /* ✅ Style spécifique pour les boutons */
+  /*  Style spécifique pour les boutons */
   button {
     cursor: pointer;
     /* 🔹 Change le curseur en mode "main" pour indiquer qu’il est cliquable */

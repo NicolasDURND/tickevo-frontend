@@ -10,7 +10,7 @@
   background-color: #ffffff;
 }
 
-/* ✅ Sélectionne le premier élément <div> à l'intérieur de .pageContainer */
+/*  Sélectionne le premier élément <div> à l'intérieur de .pageContainer */
 .pageContainer > div:first-child {
   width: 100%; /* 🔹 Assure que l'élément occupe toute la largeur */
 }

@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
 
-/* ✅ Conteneur principal */
+/*  Conteneur principal */
 .pageContainer {
   display: flex;
   flex-direction: column;
@@ -9,34 +9,34 @@
   height: 100vh;
 }
 
-/* ✅ Conteneur du contenu principal (Recherche + Modification) */
+/*  Conteneur du contenu principal (Recherche + Modification) */
 .container {
   display: flex;
-  /* ✅ Utilisation de flexbox pour l'alignement */
+  /*  Utilisation de flexbox pour l'alignement */
   justify-content: center;
-  /* ✅ Centre les éléments horizontalement */
+  /*  Centre les éléments horizontalement */
   align-items: flex-start;
-  /* ✅ Aligne les éléments en haut du conteneur */
+  /*  Aligne les éléments en haut du conteneur */
   width: 90%;
-  /* ✅ Le conteneur occupe 90% de la largeur de son parent */
+  /*  Le conteneur occupe 90% de la largeur de son parent */
   max-width: 1300px;
-  /* ✅ Largeur maximale fixée pour éviter un affichage trop étiré */
+  /*  Largeur maximale fixée pour éviter un affichage trop étiré */
   gap: 25px;
-  /* ✅ Espacement entre les éléments enfants */
+  /*  Espacement entre les éléments enfants */
   /* min-height: 500px; */
   /*  Commenté : Définir une hauteur minimale si nécessaire */
   flex: 1;
-  /* ✅ Permet au conteneur de prendre tout l'espace disponible */
+  /*  Permet au conteneur de prendre tout l'espace disponible */
   padding-top: 50px;
-  /* ✅ Ajoute un espace en haut pour l'aération */
+  /*  Ajoute un espace en haut pour l'aération */
 }
 
-/* ✅ Cartes (Recherche & Modification) */
+/*  Cartes (Recherche & Modification) */
 .card {
   width: 55%;
-  /* ✅ Augmenté pour occuper plus d'espace */
+  /*  Augmenté pour occuper plus d'espace */
   max-width: 600px;
-  /* ✅ Empêche une extension trop grande */
+  /*  Empêche une extension trop grande */
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -44,17 +44,17 @@
   text-align: center;
 }
 
-/* ✅ Responsive : Ajustement des cartes sur petits écrans */
+/*  Responsive : Ajustement des cartes sur petits écrans */
 @media (max-width: 768px) {
   .card {
     width: 90%;
-    /* ✅ Prend plus de place en mode mobile */
+    /*  Prend plus de place en mode mobile */
     max-width: 100%;
-    /* ✅ Empêche toute restriction excessive */
+    /*  Empêche toute restriction excessive */
   }
 }
 
-/* ✅ Barre de recherche */
+/*  Barre de recherche */
 .searchContainer {
   display: flex;
   align-items: center;
@@ -68,12 +68,12 @@
   outline: none;
   width: 700px;
   max-width: 100%;
-  /* ✅ Ajustement automatique */
+  /*  Ajustement automatique */
   font-size: 14px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
 }
 
-/* ✅ Bouton de recherche */
+/*  Bouton de recherche */
 .searchButton {
   background-color: #5474B4;
   border: none;
@@ -88,39 +88,39 @@
   background-color: #405a8d;
 }
 
-/* ✅ Wrapper pour éviter le débordement du tableau */
+/*  Wrapper pour éviter le débordement du tableau */
 .userTableWrapper {
   width: 100%;
   max-width: 1200px;
-  /* ✅ Garde une taille max pour éviter l'effet élastique */
+  /*  Garde une taille max pour éviter l'effet élastique */
   overflow-x: auto;
-  /* ✅ Ajoute un scroll horizontal si nécessaire */
+  /*  Ajoute un scroll horizontal si nécessaire */
 }
 
-/* ✅ Tableau des utilisateurs */
+/*  Tableau des utilisateurs */
 .userTable {
   width: 100%;
   max-width: 100%;
-  /* ✅ S'adapte parfaitement au composant parent */
+  /*  S'adapte parfaitement au composant parent */
   border-collapse: collapse;
   margin-top: 15px;
   table-layout: fixed;
-  /* ✅ Assure que les colonnes gardent une taille uniforme */
+  /*  Assure que les colonnes gardent une taille uniforme */
 }
 
-/* ✅ Styles des cellules du tableau */
+/*  Styles des cellules du tableau */
 .userTable th,
 .userTable td {
   padding: 10px;
   border: 1px solid #ddd;
   text-align: center;
   white-space: normal;
-  /* ✅ Permet au texte de passer à la ligne si nécessaire */
+  /*  Permet au texte de passer à la ligne si nécessaire */
   word-break: break-word;
-  /* ✅ Empêche le texte de forcer le débordement */
+  /*  Empêche le texte de forcer le débordement */
 }
 
-/* ✅ Adaptation du tableau sur mobile */
+/*  Adaptation du tableau sur mobile */
 @media (max-width: 768px) {
   .userTableWrapper {
     overflow-x: auto;
@@ -132,7 +132,7 @@
   }
 }
 
-/* ✅ Bouton Détail */
+/*  Bouton Détail */
 .detailButton {
   background: none;
   border: none;
@@ -145,7 +145,7 @@
   text-decoration: underline;
 }
 
-/* ✅ Formulaire de création et de modification */
+/*  Formulaire de création et de modification */
 .createBox,
 .modifierBox {
   display: flex;
@@ -154,7 +154,7 @@
   align-items: center;
 }
 
-/* ✅ Style général des inputs et selects */
+/*  Style général des inputs et selects */
 .createBox input,
 .modifierBox input,
 .createBox select,
@@ -165,7 +165,7 @@
   outline: none;
   width: 100%;
   max-width: 500px;
-  /* ✅ Empêche l'extension excessive */
+  /*  Empêche l'extension excessive */
   font-size: 14px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
   background-color: white;
@@ -173,51 +173,51 @@
   cursor: pointer;
 }
 
-/* ✅ Effet au focus */
+/*  Effet au focus */
 .createBox select:focus,
 .modifierBox select:focus {
   border-color: #5474B4;
   box-shadow: 0px 0px 8px rgba(84, 116, 180, 0.5);
 }
 
-/* ✅ Alignement des boutons dans Modifier */
+/*  Alignement des boutons dans Modifier */
 .buttonRow {
   display: flex;
   justify-content: space-between;
   width: 50%;
   max-width: 500px;
-  /* ✅ Empêche l'extension excessive */
+  /*  Empêche l'extension excessive */
   gap: 20px;
   margin-top: 10px;
 }
 
-/* ✅ Bouton général */
+/*  Bouton général */
 .button {
   width: 50%;
-  /* ✅ Définit une largeur de 50% pour le bouton */
+  /*  Définit une largeur de 50% pour le bouton */
   padding: 10px 15px;
-  /* ✅ Ajoute un espace intérieur : 10px en haut/bas, 15px gauche/droite */
+  /*  Ajoute un espace intérieur : 10px en haut/bas, 15px gauche/droite */
   border: none;
-  /* ✅ Supprime la bordure par défaut */
+  /*  Supprime la bordure par défaut */
   border-radius: 5px;
-  /* ✅ Arrondit légèrement les coins du bouton */
+  /*  Arrondit légèrement les coins du bouton */
   background-color: #5474B4;
-  /* ✅ Définit une couleur de fond bleu */
+  /*  Définit une couleur de fond bleu */
   color: white;
-  /* ✅ Définit la couleur du texte en blanc */
+  /*  Définit la couleur du texte en blanc */
   cursor: pointer;
-  /* ✅ Change le curseur en "main" au survol pour indiquer qu'il est cliquable */
+  /*  Change le curseur en "main" au survol pour indiquer qu'il est cliquable */
   font-size: 1rem;
-  /* ✅ Définit la taille du texte à 1rem (16px par défaut) */
+  /*  Définit la taille du texte à 1rem (16px par défaut) */
   transition: background 0.3s;
-  /* ✅ Ajoute une transition fluide lors du changement de couleur */
+  /*  Ajoute une transition fluide lors du changement de couleur */
 }
 
 .button:hover {
   background-color: #405a8d;
 }
 
-/* ✅ Bouton secondaire (Désactiver) */
+/*  Bouton secondaire (Désactiver) */
 .buttonSecondary {
   width: 60%;
   padding: 10px 15px;
@@ -234,14 +234,14 @@
   background-color: #cc0000;
 }
 
-/* ✅ Conteneur des onglets */
+/*  Conteneur des onglets */
 .tabs {
   display: flex;
   justify-content: center;
   margin-bottom: 15px;
 }
 
-/* ✅ Style des onglets */
+/*  Style des onglets */
 .tab {
   flex: 1;
   padding: 10px;
@@ -260,7 +260,7 @@
   color: #5474B4;
 }
 
-/* ✅ Pagination */
+/*  Pagination */
 .pagination {
   display: flex;
   justify-content: center;
@@ -282,9 +282,9 @@
 
 .pageButton:disabled {
   background-color: #ccc;
-  /* ✅ Change la couleur du bouton en gris pour indiquer qu'il est désactivé */
+  /*  Change la couleur du bouton en gris pour indiquer qu'il est désactivé */
   cursor: not-allowed;
-  /* ✅ Change le curseur en "interdit" pour montrer que l'action est impossible */
+  /*  Change le curseur en "interdit" pour montrer que l'action est impossible */
 }
 
 
@@ -292,7 +292,7 @@
   background-color: #405a8d;
 }
 
-/* ✅ Correction responsive : les inputs et tableaux ne dépassent plus */
+/*  Correction responsive : les inputs et tableaux ne dépassent plus */
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
@@ -326,7 +326,7 @@
     width: 100%;
   }
 
-  /* ✅ Adaptation du tableau */
+  /*  Adaptation du tableau */
   .userTableWrapper {
     overflow-x: auto;
     width: 100%;

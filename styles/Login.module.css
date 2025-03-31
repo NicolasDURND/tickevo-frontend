@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
 
-/* --- ✅ Conteneur global de la page --- */
+/* ---  Conteneur global de la page --- */
 .container {
   display: flex; /* 🔹 Active Flexbox pour gérer l'alignement */
   flex-direction: column; /* 🔹 Organise les éléments verticalement */

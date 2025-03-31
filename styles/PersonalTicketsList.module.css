@@ -27,7 +27,7 @@
   text-align: center;
 }
 
-/* ✅ Message lorsqu'il n'y a pas de tickets */
+/*  Message lorsqu'il n'y a pas de tickets */
 .noTickets {
   font-size: 16px;
   color: #777;
@@ -48,7 +48,7 @@
   width: 100%;
   border-collapse: collapse;
   min-width: 600px;
-  /* ✅ Taille normale en mode Windows */
+  /*  Taille normale en mode Windows */
 }
 
 .ticketsTable th {
@@ -58,7 +58,7 @@
   text-align: left;
   padding: 12px 15px;
   font-size: 14px;
-  /* ✅ Taille normale en mode Windows */
+  /*  Taille normale en mode Windows */
   white-space: nowrap;
 }
 
@@ -66,7 +66,7 @@
   padding: 12px 15px;
   border-bottom: 1px solid #eee;
   font-size: 14px;
-  /* ✅ Taille normale en mode Windows */
+  /*  Taille normale en mode Windows */
 }
 
 /* États des tickets */
@@ -116,7 +116,7 @@
 }
 
 /* ============================= */
-/* ✅ RÉDUCTION DES TAILLES UNIQUEMENT EN MODE MOBILE */
+/*  RÉDUCTION DES TAILLES UNIQUEMENT EN MODE MOBILE */
 /* ============================= */
 @media screen and (max-width: 768px) {
   .title {
@@ -127,7 +127,7 @@
 
   .ticketsTable {
     min-width: 450px;
-    /* ✅ Réduction de la largeur minimale */
+    /*  Réduction de la largeur minimale */
   }
 
   .ticketsTable th,
@@ -157,7 +157,7 @@
 @media screen and (max-width: 480px) {
   .ticketsTable {
     min-width: 380px;
-    /* ✅ Encore plus réduit */
+    /*  Encore plus réduit */
   }
 
   .ticketsTable th,
@@ -187,7 +187,7 @@
 @media screen and (max-width: 360px) {
   .ticketsTable {
     min-width: 320px;
-    /* ✅ Minimum possible */
+    /*  Minimum possible */
   }
 
   .ticketsTable th,

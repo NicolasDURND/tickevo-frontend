@@ -1,10 +1,10 @@
-// ✅ Importation du reducer et des actions Redux à tester
+//  Importation du reducer et des actions Redux à tester
 import authentificationReducer, {
   loginSuccess,
   logout,
 } from "../reducers/authentification";
 
-// ✅ Définition du bloc de test pour le reducer d'authentification
+//  Définition du bloc de test pour le reducer d'authentification
 describe("Authentification Reducer", () => {
   // 📌 État initial du reducer (correspond à l'état défini dans le fichier `authentification.js`)
   const initialState = {
@@ -14,7 +14,7 @@ describe("Authentification Reducer", () => {
     error: null, // Pas d'erreur
   };
 
-  // ✅ Test de l'action `loginSuccess`
+  //  Test de l'action `loginSuccess`
   test("Should set user and token on loginSuccess", () => {
     // 📌 Données fictives simulant un utilisateur connecté
     const fakeUser = { username: "testUser", role: "user" };
@@ -31,7 +31,7 @@ describe("Authentification Reducer", () => {
     expect(newState.token).toEqual(fakeToken); // Le token doit être enregistré
   });
 
-  // ✅ Test de l'action `logout`
+  //  Test de l'action `logout`
   test("Should clear user and token on logout", () => {
     // 📌 Simulation d'un état où l'utilisateur est connecté
     const loggedInState = {

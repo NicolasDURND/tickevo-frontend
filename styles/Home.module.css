@@ -28,7 +28,7 @@
   text-decoration: none;
 }
 
-/* ✅ Styles pour les liens à l'intérieur des éléments avec la classe .title */
+/*  Styles pour les liens à l'intérieur des éléments avec la classe .title */
 /* Ces styles s'appliquent lorsque l'utilisateur survole (hover), sélectionne (focus) ou clique (active) sur le lien */
 .title a:hover, /* 🔹 Quand la souris passe sur le lien */
 .title a:focus, /* 🔹 Quand l'utilisateur sélectionne le lien avec Tab */
@@ -42,10 +42,10 @@
   flex: 1;
   flex-wrap: nowrap;
   justify-content: center;
-  /* ✅ Centre les deux cartes */
+  /*  Centre les deux cartes */
   align-items: flex-start;
   gap: 50px;
-  /* ✅ Ajoute un espace entre les deux cards sans changer leurs dimensions */
+  /*  Ajoute un espace entre les deux cards sans changer leurs dimensions */
   width: 100%;
   padding: 40px;
   max-width: 1200px;

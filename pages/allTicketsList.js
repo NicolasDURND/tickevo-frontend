@@ -14,7 +14,7 @@ const allTicketsList = () => {
   const router = useRouter(); // Initialise le routeur pour la navigation
 
   useEffect(() => {
-    // ✅ Récupère le rôle de l'utilisateur stocké dans localStorage
+    //  Récupère le rôle de l'utilisateur stocké dans localStorage
     const storedRole = localStorage.getItem("role");
     const storedUser = localStorage.getItem("user");
     
@@ -27,14 +27,14 @@ const allTicketsList = () => {
       setUserId(user.id); // Met à jour l'état avec l'ID utilisateur
     }
 
-    // ✅ Requête fetch vers le backend pour récupérer la liste des tickets
+    //  Requête fetch vers le backend pour récupérer la liste des tickets
     const fetchTickets = async () => {
       try {
         const response = await fetch("https://tickevo-backend.vercel.app/tickets", {
           method: "GET", // Requête GET pour récupérer les tickets
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`, // ✅ Vérifie l'authentification
+            Authorization: `Bearer ${localStorage.getItem("token")}`, //  Vérifie l'authentification
           },
         });
 
@@ -54,7 +54,7 @@ const allTicketsList = () => {
     fetchTickets(); // Appelle la fonction pour récupérer les tickets
   }, []);
 
-  // ✅ Trie les tickets à chaque fois que la liste des tickets change
+  //  Trie les tickets à chaque fois que la liste des tickets change
   useEffect(() => {
     const sortTickets = () => {
       if (!tickets || tickets.length === 0) return [];
@@ -84,7 +84,7 @@ const allTicketsList = () => {
     setSortedTickets(sortTickets()); // Met à jour la liste triée
   }, [tickets]);
 
-  // ✅ Fonction pour assigner un ticket à l'utilisateur connecté
+  //  Fonction pour assigner un ticket à l'utilisateur connecté
   const handleAssignTicket = async (ticketId) => {
     try {
       // Vérifie si l'utilisateur est un technicien ou un administrateur
@@ -106,14 +106,14 @@ const allTicketsList = () => {
         throw new Error("Erreur lors de l'assignation du ticket");
       }
 
-      // ✅ Redirige vers la liste des tickets personnels après assignation
+      //  Redirige vers la liste des tickets personnels après assignation
       router.push(`/personalTicketsList`);
     } catch (err) {
       setError(err.message); // Stocke l'erreur en cas de problème
     }
   };
 
-  // ✅ Vérifie si un ticket peut être assigné par l'utilisateur
+  //  Vérifie si un ticket peut être assigné par l'utilisateur
   const canAssignTicket = (ticket) => {
     return (userRole === "Administrateur" || userRole === "Technicien") 
       && (ticket.status === "en attente" || ticket.status === "en cours" || !ticket.status);
@@ -124,7 +124,7 @@ const allTicketsList = () => {
 
   return (
     <div className={styles.container}>
-      {/* ✅ Affichage dynamique du bon Header selon le rôle */}
+      {/*  Affichage dynamique du bon Header selon le rôle */}
       {userRole === "Administrateur" ? (
         <HeaderAdministrateur />
       ) : userRole === "Technicien" ? (
@@ -133,7 +133,7 @@ const allTicketsList = () => {
         <p className={styles.error}>Accès refusé</p>
       )}
 
-      {/* ✅ Affichage du contenu principal */}
+      {/*  Affichage du contenu principal */}
       {userRole === "Administrateur" || userRole === "Technicien" ? (
         <div className={styles.content}>
           <h2 className={styles.title}>Liste des Tickets</h2>

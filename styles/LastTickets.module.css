@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
 
-/* ✅ Section historique des tickets */
+/*  Section historique des tickets */
 .lastTicketsContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: auto;
   max-width: 600px;
-  /* ✅ Réduction de la taille */
+  /*  Réduction de la taille */
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -28,7 +28,7 @@
 }
 
 
-/* ✅ Titre de la section */
+/*  Titre de la section */
 .title {
   font-size: 25px;
   font-family: 'Roboto', sans-serif;
@@ -36,7 +36,7 @@
   margin-bottom: 10px;
   color: #333;
 }
-/* ✅ Tableau responsive */
+/*  Tableau responsive */
 .table {
   width: 100%; /* 🔹 Le tableau prend toute la largeur du conteneur */
   border-collapse: collapse; /* 🔹 Supprime les espaces entre les bordures */
@@ -44,7 +44,7 @@
   margin-top: 10px; /* 🔹 Ajoute un petit espacement au-dessus du tableau */
 }
 
-/* ✅ Style général des cellules */
+/*  Style général des cellules */
 .table th,
 .table td {
   padding: 10px; /* 🔹 Ajoute un espacement intérieur */
@@ -52,13 +52,13 @@
   text-align: center; /* 🔹 Centre le texte dans toutes les cellules */
 }
 
-/* ✅ Style des en-têtes */
+/*  Style des en-têtes */
 .table th {
   background: #f1f1f1; /* 🔹 Fond gris clair pour différencier les en-têtes */
   font-weight: bold; /* 🔹 Met en gras les textes des en-têtes */
 }
 
-/* ✅ Largeur fixe des colonnes */
+/*  Largeur fixe des colonnes */
 
 /* 🔹 Première colonne (ex: ID) */
 .table th:nth-child(1),
@@ -97,7 +97,7 @@
   text-align: center; /* 🔹 Assure que le statut est bien centré */
 }
 
-/* ✅ Couleurs des statuts */
+/*  Couleurs des statuts */
 .en-cours {
   color: orange; /* 🔹 Statut "En cours" en orange */
   font-weight: bold;
@@ -113,7 +113,7 @@
   font-weight: bold;
 }
 
-/* ✅ Style du bouton "Détail" */
+/*  Style du bouton "Détail" */
 .detailButton {
   background-color: #5474B4; /* 🔹 Fond bleu */
   color: white; /* 🔹 Texte blanc */
@@ -126,12 +126,12 @@
   white-space: nowrap; /* 🔹 Empêche le texte de passer à la ligne */
 }
 
-/* ✅ Effet de survol du bouton */
+/*  Effet de survol du bouton */
 .detailButton:hover {
   background-color: #0056b3; /* 🔹 Assombrit la couleur au survol */
 }
 
-/* ✅ Conteneur de la pagination */
+/*  Conteneur de la pagination */
 .buttonContainer {
   display: flex; /* 🔹 Active Flexbox */
   justify-content: space-around; /* 🔹 Répartit les boutons de pagination équitablement */
@@ -139,7 +139,7 @@
   width: 100%;
 }
 
-/* ✅ Style des boutons de pagination */
+/*  Style des boutons de pagination */
 .button {
   padding: 8px 12px; /* 🔹 Ajoute un espacement intérieur */
   border: none; /* 🔹 Supprime la bordure */
@@ -151,12 +151,12 @@
   transition: background 0.3s; /* 🔹 Ajoute une transition fluide */
 }
 
-/* ✅ Effet de survol des boutons */
+/*  Effet de survol des boutons */
 .button:hover {
   background-color: #0056b3; /* 🔹 Assombrit la couleur au survol */
 }
 
-/* ✅ Style des boutons désactivés */
+/*  Style des boutons désactivés */
 .button:disabled {
   background-color: #ccc; /* 🔹 Grise le bouton */
   cursor: not-allowed; /* 🔹 Désactive le curseur */

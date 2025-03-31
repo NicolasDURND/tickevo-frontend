@@ -120,7 +120,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* ✅ Container pour les boutons d'action */
+/*  Container pour les boutons d'action */
 .actionButtons {
   display: flex;
   /* Utilisation de Flexbox pour aligner les boutons */
@@ -131,7 +131,7 @@
   align-items: center;
   /* Centre verticalement les boutons */
   gap: 6px;
-  /* ✅ Ajoute un espacement de 6px entre les boutons */
+  /*  Ajoute un espacement de 6px entre les boutons */
 }
 
 

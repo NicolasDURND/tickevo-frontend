@@ -62,13 +62,13 @@ const NewTicket = () => {
         incidentCategories
       )) {
         if (mainCategory === selectedCategory) {
-          foundCategory = "Incident"; // ✅ C'est un incident
-          foundSubCategory = ""; // ✅ Pas de sous-catégorie sélectionnée
+          foundCategory = "Incident"; //  C'est un incident
+          foundSubCategory = ""; //  Pas de sous-catégorie sélectionnée
           break;
         } else if (subCategories.includes(selectedCategory)) {
           foundCategory = "Incident";
-          foundSubCategory = selectedCategory; // ✅ Définit la sous-catégorie sélectionnée
-          setTicketType(mainCategory); // ✅ Définit `ticketType` comme la catégorie principale
+          foundSubCategory = selectedCategory; //  Définit la sous-catégorie sélectionnée
+          setTicketType(mainCategory); //  Définit `ticketType` comme la catégorie principale
           break;
         }
       }
@@ -77,7 +77,7 @@ const NewTicket = () => {
       setSubCategory(foundSubCategory);
 
       if (foundSubCategory === "") {
-        setTicketType(selectedCategory); // ✅ Si pas de sous-catégorie, `ticketType` reste inchangé
+        setTicketType(selectedCategory); //  Si pas de sous-catégorie, `ticketType` reste inchangé
       }
     }
   }, [router.query]);
@@ -86,7 +86,7 @@ const NewTicket = () => {
   const handleSubmit = async (e) => {
     e.preventDefault(); // Empêche le rechargement de la page
 
-    // ✅ Vérifie si l'utilisateur est authentifié
+    //  Vérifie si l'utilisateur est authentifié
     const storedUser = localStorage.getItem("user");
     const storedToken = localStorage.getItem("token");
 
@@ -108,15 +108,15 @@ const NewTicket = () => {
     const ticketData = {
       title: ticketType, // Définit le titre du ticket
       description, // Contenu de la demande
-      category, // ✅ "Demande" ou "Incident"
+      category, //  "Demande" ou "Incident"
       subcategories:
         category === "Incident"
           ? [{ subCategoryLevel: 1, subCategoryName: subCategory }] // Si incident, ajoute la sous-catégorie
           : [],
       createdBy: user.id, // ID de l'utilisateur
       userId: user.id, // ID de l'utilisateur
-      status: "en cours", // ✅ Définit le statut initial à "en cours"
-      ticketNumber: Math.floor(100000 + Math.random() * 900000), // ✅ Génère un numéro unique
+      status: "en cours", //  Définit le statut initial à "en cours"
+      ticketNumber: Math.floor(100000 + Math.random() * 900000), //  Génère un numéro unique
     };
 
     console.log("🚀 Envoi du ticket avec les données :", ticketData);
@@ -126,7 +126,7 @@ const NewTicket = () => {
         method: "POST", // Envoie une requête POST pour créer un nouveau ticket
         headers: {
           "Content-Type": "application/json", // Indique que les données sont en JSON
-          Authorization: `Bearer ${storedToken}`, // ✅ Ajoute le token pour l'authentification
+          Authorization: `Bearer ${storedToken}`, //  Ajoute le token pour l'authentification
         },
         body: JSON.stringify(ticketData), // Convertit les données en JSON avant l'envoi
       });
@@ -140,7 +140,7 @@ const NewTicket = () => {
         );
       }
 
-      console.log("✅ Ticket créé avec succès :", result);
+      console.log(" Ticket créé avec succès :", result);
       alert("Ticket créé avec succès !");
       router.push("/home"); // Redirige vers la page d'accueil
     } catch (error) {
